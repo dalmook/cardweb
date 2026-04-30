@@ -12,20 +12,7 @@ let firestore = null;
 let firebaseBookId = "im1-shared";
 let unsubscribeRealtime = null;
 const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyBjQidqO3JxfDAEI5uRxops16vzI3szmNI",
-  authDomain: "wordcard-319dd.firebaseapp.com",
-  projectId: "wordcard-319dd",
-  storageBucket: "wordcard-319dd.firebasestorage.app",
-  messagingSenderId: "77378884403",
-  appId: "1:77378884403:web:c56509464ae1cd0d4ba446",
-  measurementId: "G-4RP9PE5NGM"
-};
-
-let firestore = null;
-let firebaseBookId = "im1-shared";
-let unsubscribeRealtime = null;
-const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyBjQidqO3JxfDAEI5uRxops16vzI3szmNI",
+  apiKey: "YOUR_API_KEY",
   authDomain: "wordcard-319dd.firebaseapp.com",
   projectId: "wordcard-319dd",
   storageBucket: "wordcard-319dd.firebasestorage.app",
@@ -80,6 +67,14 @@ async function init() {
   refreshAll();
 }
 
+
+function getDefaultCategory() {
+  const manual = clean($("#defaultCategory")?.value);
+  if (manual) return manual;
+  const d = new Date();
+  const stamp = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}-${String(d.getHours()).padStart(2,"0")}${String(d.getMinutes()).padStart(2,"0")}`;
+  return `cat-${stamp}`;
+}
 function normalizeWords(rows) {
   return rows
     .map(row => ({
@@ -469,13 +464,13 @@ function addWordFromForm() {
     meaning: $("#inpMeaning").value,
     pronunciation: $("#inpPron").value,
     collection: $("#inpCollection").value || activeCollection || "기본세트",
-    category: $("#inpCategory").value || "직접입력",
+    category: getDefaultCategory(),
     example: $("#inpExample").value,
     audioSrc: $("#inpAudio").value
   }])[0];
   if (!row) return toast("단어와 뜻은 꼭 입력해야 해요.");
   mergeWords([row]);
-  ["#inpTerm", "#inpMeaning", "#inpPron", "#inpCollection", "#inpCategory", "#inpExample", "#inpAudio"].forEach(sel => $(sel).value = "");
+  ["#inpTerm", "#inpMeaning", "#inpPron", "#inpCollection", "#inpExample", "#inpAudio"].forEach(sel => $(sel).value = "");
 }
 
 function importBulk() {
@@ -483,7 +478,7 @@ function importBulk() {
   if (!text) return;
   const rows = text.split(/\r?\n/).map(line => {
     const [term, meaning, pronunciation, example, category, audioSrc, collection] = line.split("\t");
-    return { term, meaning, pronunciation, example, category, audioSrc, collection };
+    return { term, meaning, pronunciation, example, category: clean(category) || getDefaultCategory(), audioSrc, collection };
   });
   mergeWords(normalizeWords(rows));
   $("#bulkText").value = "";
