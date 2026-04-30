@@ -181,3 +181,12 @@ button:focus-visible, .flashcard:focus-visible, .match-card:focus-visible {
   border-radius: 16px;
   text-align: center;
 }
+.collection-picker {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-weight: 700;
+  min-width: 200px;
+}
+.collection-picker select { min-width: 220px; }
+#gistUrl { min-width: 260px; }

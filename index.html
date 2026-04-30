@@ -16,6 +16,9 @@
         <p class="hero-copy">엑셀로 한 번에 넣고, 카드로 넘기고, 퀴즈와 매칭으로 외우는 개인 단어장입니다.</p>
       </div>
       <div class="hero-actions">
+        <label class="collection-picker">학습세트
+          <select id="activeCollection"></select>
+        </label>
         <button class="ghost" id="btnExportJson">JSON 백업</button>
         <button class="primary" data-tab="manage">단어 추가</button>
       </div>
@@ -114,6 +117,10 @@
             <h2>엑셀/CSV/JSON 업로드</h2>
             <p>엑셀 첫 행은 <b>term, meaning</b>만 있어도 바로 동작합니다. 발음 듣기는 오디오가 없어도 브라우저 음성(TTS)으로 자동 읽어줍니다. 추가 열(pronunciation, example, category, audioSrc)은 선택입니다.</p>
             <input type="file" id="fileImport" accept=".xlsx,.xls,.csv,.json" />
+            <div class="inline-actions">
+              <input id="gistUrl" placeholder="GitHub Gist Raw JSON URL (선택)" />
+              <button id="importGist">Gist 가져오기</button>
+            </div>
             <div class="row-actions">
               <button id="downloadTemplate">엑셀 템플릿 다운로드</button>
               <button id="loadSample">예시 데이터 복구</button>
@@ -127,6 +134,7 @@
               <input id="inpTerm" placeholder="단어 / 표현" />
               <input id="inpMeaning" placeholder="뜻" />
               <input id="inpPron" placeholder="발음 힌트" />
+              <input id="inpCollection" placeholder="학습세트 예: 여행회화" />
               <input id="inpCategory" placeholder="카테고리 예: 베트남어 1일차" />
               <input id="inpExample" placeholder="예문" />
               <input id="inpAudio" placeholder="오디오 경로(선택) 예: audio/l1/word001.mp3" />
@@ -136,7 +144,7 @@
 
           <article class="box wide-box">
             <h2>대량 붙여넣기</h2>
-            <p>엑셀에서 복사한 표를 그대로 붙여넣어도 됩니다. 열 순서: 단어, 뜻, 발음, 예문, 카테고리, 오디오</p>
+            <p>엑셀에서 복사한 표를 그대로 붙여넣어도 됩니다. 열 순서: 단어, 뜻, 발음, 예문, 카테고리, 오디오, 학습세트</p>
             <textarea id="bulkText" rows="6" placeholder="xin chào\t안녕하세요\t씬 짜오\tXin chào anh.\t인사\t"></textarea>
             <button id="importBulk">붙여넣기 가져오기</button>
           </article>
