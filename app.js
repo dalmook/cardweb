@@ -84,6 +84,7 @@ function bindEvents() {
   $("#fileImport").addEventListener("change", importFile);
   $("#downloadTemplate").addEventListener("click", downloadTemplate);
   $("#loadSample").addEventListener("click", loadSample);
+  $("#loadIm1Required").addEventListener("click", loadIm1Required);
   $("#clearAll").addEventListener("click", clearAll);
   $("#addWord").addEventListener("click", addWordFromForm);
   $("#importBulk").addEventListener("click", importBulk);
@@ -511,6 +512,71 @@ function handleShortcuts(e) {
   if (e.key === "ArrowRight") nextCard();
   if (e.key === "ArrowLeft") prevCard();
   if (e.key === " ") { e.preventDefault(); flipCard(); }
+}
+
+
+
+async function loadIm1Required() {
+  try {
+    const res = await fetch("data/im1-required.json");
+    if (!res.ok) throw new Error(String(res.status));
+    const required = normalizeWords(await res.json());
+    if (!required.length) return toast("IM1 필수 단어 JSON이 비어 있어요.");
+
+    const existingTerms = new Set(words.map(w => clean(w.term).toLowerCase()));
+    const missing = required.filter(w => !existingTerms.has(clean(w.term).toLowerCase()));
+
+    words = [...words, ...missing];
+    save();
+    refreshAll();
+
+    if (!missing.length) {
+      renderIm1Missing([]);
+      return toast("이미 IM1 필수 단어가 모두 등록되어 있어요.");
+    }
+
+    renderIm1Missing(missing);
+    toast(`IM1 필수 ${missing.length}개를 추가했어요. 빈 뜻은 바로 입력해 주세요.`);
+  } catch (err) {
+    console.error(err);
+    toast("IM1 필수 JSON을 불러오지 못했어요.");
+  }
+}
+
+function renderIm1Missing(items) {
+  const box = $("#im1MissingBox");
+  if (!items.length) {
+    box.style.display = "none";
+    box.innerHTML = "";
+    return;
+  }
+
+  box.style.display = "block";
+  box.innerHTML = `
+    <h3 style="margin:0 0 8px;">IM1 추가 단어 빠른 보정</h3>
+    <p style="margin:0 0 8px;">뜻이 비어 있거나 수정이 필요한 단어는 아래에서 바로 입력하세요.</p>
+    <div class="form-grid">
+      ${items.map(item => `
+        <div>
+          <label>${escapeHtml(item.term)}</label>
+          <input data-im1-id="${item.id}" class="im1-meaning" placeholder="뜻 직접 입력" value="${escapeHtml(item.meaning)}" />
+        </div>
+      `).join("")}
+    </div>
+    <button id="saveIm1Meanings" class="primary">IM1 뜻 저장</button>
+  `;
+
+  $("#saveIm1Meanings").addEventListener("click", () => {
+    $$(".im1-meaning").forEach(inp => {
+      const target = words.find(w => w.id === inp.dataset.im1Id);
+      if (target) target.meaning = clean(inp.value);
+    });
+    words = words.filter(w => w.term && w.meaning);
+    save();
+    refreshAll();
+    renderIm1Missing([]);
+    toast("IM1 단어 뜻을 저장했어요.");
+  });
 }
 
 init();
