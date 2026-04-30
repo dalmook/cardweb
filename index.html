@@ -6,6 +6,8 @@
   <title>단어카드 스튜디오</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 </head>
 <body>
   <div class="app-shell">
@@ -128,6 +130,21 @@
               <button class="danger" id="clearAll">전체 삭제</button>
             </div>
             <div id="im1MissingBox" class="empty-state" style="margin-top:10px; display:none;"></div>
+          </article>
+
+          <article class="box">
+            <h2>공유용 Firebase 연동</h2>
+            <p>같은 Firebase 프로젝트 정보를 쓰면 여러 사용자가 같은 단어장을 함께 관리할 수 있습니다. 카테고리/학습세트 정보도 같이 저장됩니다.</p>
+            <div class="form-grid">
+              <input id="fbApiKey" placeholder="apiKey" />
+              <input id="fbAuthDomain" placeholder="authDomain" />
+              <input id="fbProjectId" placeholder="projectId" />
+              <input id="fbBookId" placeholder="공유 단어장 ID (예: im1-team)" />
+            </div>
+            <div class="row-actions">
+              <button id="connectFirebase">Firebase 연결</button>
+              <button id="syncFirebase">Firebase 동기화</button>
+            </div>
           </article>
 
           <article class="box">

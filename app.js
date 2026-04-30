@@ -7,6 +7,10 @@ let quizState = { items: [], index: 0, score: 0, wrong: [] };
 let matchState = { first: null, pairsLeft: 0, startedAt: null, timer: null };
 let activeCollection = "전체";
 
+const FIREBASE_CONFIG_KEY = "vocaStudioFirebaseConfig.v1";
+let firestore = null;
+let firebaseBookId = "";
+
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 const uid = () => `${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -24,6 +28,15 @@ function toast(message) {
 
 async function init() {
   bindEvents();
+  hydrateFirebaseInputs();
+  await tryInitFirebase(false);
+
+  if (firestore) {
+    await pullFromFirebase();
+    refreshAll();
+    return;
+  }
+
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
     words = normalizeWords(JSON.parse(saved));
@@ -63,6 +76,7 @@ function normalizeWords(rows) {
 
 function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(words));
+  if (firestore) pushToFirebase();
 }
 
 function bindEvents() {
@@ -92,6 +106,8 @@ function bindEvents() {
   $("#activeCollection").addEventListener("change", (e) => { activeCollection = e.target.value; refreshAll(); });
   $("#importGist").addEventListener("click", importFromGist);
   $("#btnExportJson").addEventListener("click", exportJson);
+  $("#connectFirebase").addEventListener("click", () => tryInitFirebase(true));
+  $("#syncFirebase").addEventListener("click", async () => { await pullFromFirebase(); refreshAll(); toast("Firebase에서 최신 단어장을 불러왔어요."); });
   document.addEventListener("keydown", handleShortcuts);
 }
 
@@ -577,6 +593,60 @@ function renderIm1Missing(items) {
     renderIm1Missing([]);
     toast("IM1 단어 뜻을 저장했어요.");
   });
+}
+
+
+
+function hydrateFirebaseInputs() {
+  const cfg = JSON.parse(localStorage.getItem(FIREBASE_CONFIG_KEY) || "null");
+  if (!cfg) return;
+  $("#fbApiKey").value = cfg.apiKey || "";
+  $("#fbAuthDomain").value = cfg.authDomain || "";
+  $("#fbProjectId").value = cfg.projectId || "";
+  $("#fbBookId").value = cfg.bookId || "";
+}
+
+async function tryInitFirebase(showToast = true) {
+  const config = {
+    apiKey: clean($("#fbApiKey")?.value),
+    authDomain: clean($("#fbAuthDomain")?.value),
+    projectId: clean($("#fbProjectId")?.value),
+    bookId: clean($("#fbBookId")?.value) || "public-im1"
+  };
+  if (!config.apiKey || !config.authDomain || !config.projectId) {
+    if (showToast) toast("Firebase 설정값(apiKey/authDomain/projectId)을 입력해 주세요.");
+    return false;
+  }
+  if (!window.firebase) {
+    if (showToast) toast("Firebase SDK를 불러오지 못했어요.");
+    return false;
+  }
+  localStorage.setItem(FIREBASE_CONFIG_KEY, JSON.stringify(config));
+  const appName = `voca-${config.projectId}`;
+  const app = firebase.apps.find(a => a.name === appName) || firebase.initializeApp({ apiKey: config.apiKey, authDomain: config.authDomain, projectId: config.projectId }, appName);
+  firestore = firebase.firestore(app);
+  firebaseBookId = config.bookId;
+  if (showToast) toast("Firebase 연결 완료. 이제 단어가 공유 저장됩니다.");
+  return true;
+}
+
+async function pullFromFirebase() {
+  if (!firestore || !firebaseBookId) return;
+  const snap = await firestore.collection("wordbooks").doc(firebaseBookId).collection("words").get();
+  words = normalizeWords(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(words));
+}
+
+async function pushToFirebase() {
+  if (!firestore || !firebaseBookId) return;
+  const colRef = firestore.collection("wordbooks").doc(firebaseBookId).collection("words");
+  const existing = await colRef.get();
+  const existingIds = new Set(existing.docs.map(d => d.id));
+  const currentIds = new Set(words.map(w => w.id));
+  const batch = firestore.batch();
+  words.forEach(w => batch.set(colRef.doc(w.id), w));
+  existingIds.forEach(id => { if (!currentIds.has(id)) batch.delete(colRef.doc(id)); });
+  await batch.commit();
 }
 
 init();
