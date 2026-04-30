@@ -21,6 +21,19 @@ const FIREBASE_CONFIG = {
   measurementId: "G-4RP9PE5NGM"
 };
 
+let firestore = null;
+let firebaseBookId = "im1-shared";
+let unsubscribeRealtime = null;
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyBjQidqO3JxfDAEI5uRxops16vzI3szmNI",
+  authDomain: "wordcard-319dd.firebaseapp.com",
+  projectId: "wordcard-319dd",
+  storageBucket: "wordcard-319dd.firebasestorage.app",
+  messagingSenderId: "77378884403",
+  appId: "1:77378884403:web:c56509464ae1cd0d4ba446",
+  measurementId: "G-4RP9PE5NGM"
+};
+
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 const uid = () => `${Date.now()}-${Math.random().toString(16).slice(2)}`;
