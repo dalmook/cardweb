@@ -9,7 +9,7 @@ let activeCollection = "전체";
 
 const FIREBASE_CONFIG_KEY = "vocaStudioFirebaseConfig.v1";
 let firestore = null;
-let firebaseBookId = "";
+let firebaseBookId = "AIzaSyBjQidqO3JxfDAEI5uRxops16vzI3szmNI";
 const FIREBASE_PRESET = {
   authDomain: "wordcard-319dd.firebaseapp.com",
   projectId: "wordcard-319dd",
