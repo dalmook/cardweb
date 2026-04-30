@@ -485,6 +485,7 @@ function renderWordList() {
     node.querySelector(".word-term").textContent = w.term;
     node.querySelector(".word-meaning").textContent = w.meaning;
     node.querySelector(".word-extra").textContent = `${w.collection || "기본세트"} / ${w.category || "기본"}${w.pronunciation ? " · " + w.pronunciation : ""}${w.example ? " · " + w.example : ""}`;
+    node.querySelector(".edit-word").addEventListener("click", () => editWord(w.id));
     const toggle = node.querySelector(".toggle-status");
     toggle.textContent = w.status === "known" ? "알고 있음" : "학습 중";
     toggle.addEventListener("click", () => {
@@ -497,6 +498,43 @@ function renderWordList() {
     });
     list.appendChild(node);
   });
+}
+
+
+function editWord(id) {
+  const target = words.find(w => w.id === id);
+  if (!target) return;
+  const term = prompt("단어/표현 수정", target.term);
+  if (term === null) return;
+  const meaning = prompt("뜻 수정", target.meaning);
+  if (meaning === null) return;
+  const category = prompt("카테고리 수정", target.category || "기본");
+  if (category === null) return;
+  const collection = prompt("학습세트 수정", target.collection || "기본세트");
+  if (collection === null) return;
+  const pronunciation = prompt("발음 힌트 수정", target.pronunciation || "");
+  if (pronunciation === null) return;
+  const example = prompt("예문 수정", target.example || "");
+  if (example === null) return;
+
+  const updated = normalizeWords([{
+    ...target,
+    term,
+    meaning,
+    category,
+    collection,
+    pronunciation,
+    example,
+    audioSrc: target.audioSrc,
+    status: target.status,
+    id: target.id
+  }])[0];
+
+  if (!updated) return toast("단어와 뜻은 비워둘 수 없어요.");
+  Object.assign(target, updated);
+  save();
+  refreshAll();
+  toast("단어 정보를 수정했어요.");
 }
 
 function exportJson() {
