@@ -112,7 +112,7 @@
         <div class="manage-grid">
           <article class="box">
             <h2>엑셀/CSV/JSON 업로드</h2>
-            <p>엑셀 첫 행은 <b>term, meaning, pronunciation, example, category, audioSrc</b> 형태를 권장합니다. 한글 헤더도 자동 인식합니다.</p>
+            <p>엑셀 첫 행은 <b>term, meaning</b>만 있어도 바로 동작합니다. 발음 듣기는 오디오가 없어도 브라우저 음성(TTS)으로 자동 읽어줍니다. 추가 열(pronunciation, example, category, audioSrc)은 선택입니다.</p>
             <input type="file" id="fileImport" accept=".xlsx,.xls,.csv,.json" />
             <div class="row-actions">
               <button id="downloadTemplate">엑셀 템플릿 다운로드</button>
@@ -129,9 +129,9 @@
               <input id="inpPron" placeholder="발음 힌트" />
               <input id="inpCategory" placeholder="카테고리 예: 베트남어 1일차" />
               <input id="inpExample" placeholder="예문" />
-              <input id="inpAudio" placeholder="오디오 경로 예: audio/l1/word001.mp3" />
+              <input id="inpAudio" placeholder="오디오 경로(선택) 예: audio/l1/word001.mp3" />
             </div>
-            <button class="primary wide" id="addWord">단어 추가</button>
+            <button class="primary wide" id="addWord" type="button">단어 추가</button>
           </article>
 
           <article class="box wide-box">
