@@ -5,6 +5,7 @@ let currentIndex = 0;
 let onlyLearning = false;
 let quizState = { items: [], index: 0, score: 0, wrong: [] };
 let matchState = { first: null, pairsLeft: 0, startedAt: null, timer: null };
+let activeCollection = "전체";
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
@@ -22,15 +23,25 @@ function toast(message) {
 }
 
 async function init() {
+  bindEvents();
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
     words = normalizeWords(JSON.parse(saved));
-  } else {
+    refreshAll();
+    return;
+  }
+
+  try {
     const res = await fetch("data/words.json");
+    if (!res.ok) throw new Error(`sample data not found: ${res.status}`);
     words = normalizeWords(await res.json());
     save();
+  } catch (err) {
+    console.warn("초기 샘플 데이터를 불러오지 못했습니다.", err);
+    words = [];
+    toast("샘플 파일 없이 시작합니다. 바로 단어를 추가해 주세요.");
   }
-  bindEvents();
+
   refreshAll();
 }
 
@@ -42,6 +53,7 @@ function normalizeWords(rows) {
       meaning: clean(row.meaning || row["뜻"] || row["의미"] || row["definition"] || row["mean"]),
       pronunciation: clean(row.pronunciation || row["발음"] || row["발음힌트"] || row["pron"]),
       example: clean(row.example || row["예문"] || row["문장"] || row["sentence"]),
+      collection: clean(row.collection || row["학습세트"] || row["세트"] || row["묶음"] || "기본세트"),
       category: clean(row.category || row["카테고리"] || row["분류"] || row["deck"] || "기본"),
       audioSrc: clean(row.audioSrc || row.audio || row["오디오"] || row["음성"]),
       status: row.status === "known" || row["상태"] === "known" || row["상태"] === "알고있음" ? "known" : "learning"
@@ -76,6 +88,8 @@ function bindEvents() {
   $("#addWord").addEventListener("click", addWordFromForm);
   $("#importBulk").addEventListener("click", importBulk);
   $("#searchWords").addEventListener("input", renderWordList);
+  $("#activeCollection").addEventListener("change", (e) => { activeCollection = e.target.value; refreshAll(); });
+  $("#importGist").addEventListener("click", importFromGist);
   $("#btnExportJson").addEventListener("click", exportJson);
   document.addEventListener("keydown", handleShortcuts);
 }
@@ -87,14 +101,31 @@ function openTab(tabName) {
 }
 
 function refreshAll() {
+  renderCollectionOptions();
   renderStats();
   renderCategoryOptions();
   refreshCardFilter();
   renderWordList();
 }
 
+function collections() {
+  return ["전체", ...new Set(words.map(w => w.collection || "기본세트"))];
+}
+
+function currentWords() {
+  return words.filter(w => activeCollection === "전체" || w.collection === activeCollection);
+}
+
 function categories() {
-  return ["전체", ...new Set(words.map(w => w.category || "기본"))];
+  return ["전체", ...new Set(currentWords().map(w => w.category || "기본"))];
+}
+
+function renderCollectionOptions() {
+  const sel = $("#activeCollection");
+  const opts = collections().map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
+  sel.innerHTML = opts;
+  if (!collections().includes(activeCollection)) activeCollection = "전체";
+  sel.value = activeCollection;
 }
 
 function renderCategoryOptions() {
@@ -103,14 +134,15 @@ function renderCategoryOptions() {
 }
 
 function renderStats() {
-  $("#statTotal").textContent = words.length;
-  $("#statKnown").textContent = words.filter(w => w.status === "known").length;
-  $("#statLearning").textContent = words.filter(w => w.status !== "known").length;
-  $("#statCategories").textContent = new Set(words.map(w => w.category || "기본")).size;
+  const pool = currentWords();
+  $("#statTotal").textContent = pool.length;
+  $("#statKnown").textContent = pool.filter(w => w.status === "known").length;
+  $("#statLearning").textContent = pool.filter(w => w.status !== "known").length;
+  $("#statCategories").textContent = new Set(pool.map(w => w.category || "기본")).size;
 }
 
 function getByCategory(category) {
-  return words.filter(w => category === "전체" || w.category === category);
+  return currentWords().filter(w => category === "전체" || w.category === category);
 }
 
 function refreshCardFilter() {
@@ -169,10 +201,18 @@ function playCurrentAudio() {
   }
 }
 
+function detectSpeechLang(text) {
+  if (/[가-힣]/.test(text)) return "ko-KR";
+  if (/[぀-ヿ]/.test(text)) return "ja-JP";
+  if (/[一-鿿]/.test(text)) return "zh-CN";
+  if (/[a-zA-Z]/.test(text)) return "en-US";
+  return "ko-KR";
+}
+
 function fallbackSpeak(item) {
   if (!window.speechSynthesis) return toast("이 브라우저는 음성 읽기를 지원하지 않아요.");
   const utter = new SpeechSynthesisUtterance(item.term);
-  utter.lang = /[가-힣]/.test(item.term) ? "ko-KR" : "vi-VN";
+  utter.lang = detectSpeechLang(item.term);
   speechSynthesis.cancel();
   speechSynthesis.speak(utter);
 }
@@ -202,7 +242,8 @@ function renderQuizQuestion() {
     return;
   }
   const item = quizState.items[quizState.index];
-  const options = shuffle([item, ...shuffle(words.filter(w => w.id !== item.id)).slice(0, 3)]);
+  const pool = currentWords();
+  const options = shuffle([item, ...shuffle(pool.filter(w => w.id !== item.id)).slice(0, 3)]);
   box.innerHTML = `
     <div class="quiz-question">
       <p class="pill">${quizState.index + 1} / ${quizState.items.length}</p>
@@ -341,7 +382,9 @@ function mergeWords(newRows) {
   if (!newRows.length) return toast("가져올 단어가 없습니다.");
   const key = row => `${row.term}|||${row.meaning}`.toLowerCase();
   const existing = new Set(words.map(key));
-  const unique = newRows.filter(row => !existing.has(key(row)));
+  const unique = newRows
+    .filter(row => !existing.has(key(row)))
+    .map(row => ({ ...row, collection: row.collection || (activeCollection === "전체" ? "기본세트" : activeCollection) }));
   words = [...words, ...unique];
   save();
   refreshAll();
@@ -364,7 +407,10 @@ function downloadTemplate() {
 }
 
 function loadSample() {
-  fetch("data/words.json").then(r => r.json()).then(rows => mergeWords(normalizeWords(rows)));
+  fetch("data/words.json")
+    .then(r => { if (!r.ok) throw new Error("sample data missing"); return r.json(); })
+    .then(rows => mergeWords(normalizeWords(rows)))
+    .catch(() => toast("예시 데이터를 찾지 못했어요. 파일 경로를 확인해 주세요."));
 }
 
 function clearAll() {
@@ -379,21 +425,22 @@ function addWordFromForm() {
     term: $("#inpTerm").value,
     meaning: $("#inpMeaning").value,
     pronunciation: $("#inpPron").value,
+    collection: $("#inpCollection").value || activeCollection || "기본세트",
     category: $("#inpCategory").value || "직접입력",
     example: $("#inpExample").value,
     audioSrc: $("#inpAudio").value
   }])[0];
   if (!row) return toast("단어와 뜻은 꼭 입력해야 해요.");
   mergeWords([row]);
-  ["#inpTerm", "#inpMeaning", "#inpPron", "#inpCategory", "#inpExample", "#inpAudio"].forEach(sel => $(sel).value = "");
+  ["#inpTerm", "#inpMeaning", "#inpPron", "#inpCollection", "#inpCategory", "#inpExample", "#inpAudio"].forEach(sel => $(sel).value = "");
 }
 
 function importBulk() {
   const text = $("#bulkText").value.trim();
   if (!text) return;
   const rows = text.split(/\r?\n/).map(line => {
-    const [term, meaning, pronunciation, example, category, audioSrc] = line.split("\t");
-    return { term, meaning, pronunciation, example, category, audioSrc };
+    const [term, meaning, pronunciation, example, category, audioSrc, collection] = line.split("\t");
+    return { term, meaning, pronunciation, example, category, audioSrc, collection };
   });
   mergeWords(normalizeWords(rows));
   $("#bulkText").value = "";
@@ -401,7 +448,7 @@ function importBulk() {
 
 function renderWordList() {
   const q = clean($("#searchWords")?.value).toLowerCase();
-  const rows = words.filter(w => !q || [w.term, w.meaning, w.category, w.example].join(" ").toLowerCase().includes(q));
+  const rows = currentWords().filter(w => !q || [w.term, w.meaning, w.category, w.collection, w.example].join(" ").toLowerCase().includes(q));
   const list = $("#wordList");
   list.innerHTML = "";
   if (!rows.length) {
@@ -413,7 +460,7 @@ function renderWordList() {
     const node = tpl.content.cloneNode(true);
     node.querySelector(".word-term").textContent = w.term;
     node.querySelector(".word-meaning").textContent = w.meaning;
-    node.querySelector(".word-extra").textContent = `${w.category || "기본"}${w.pronunciation ? " · " + w.pronunciation : ""}${w.example ? " · " + w.example : ""}`;
+    node.querySelector(".word-extra").textContent = `${w.collection || "기본세트"} / ${w.category || "기본"}${w.pronunciation ? " · " + w.pronunciation : ""}${w.example ? " · " + w.example : ""}`;
     const toggle = node.querySelector(".toggle-status");
     toggle.textContent = w.status === "known" ? "알고 있음" : "학습 중";
     toggle.addEventListener("click", () => {
@@ -442,6 +489,20 @@ function downloadBlob(content, filename, type) {
   a.click();
   a.remove();
   URL.revokeObjectURL(url);
+}
+
+async function importFromGist() {
+  const url = clean($("#gistUrl").value);
+  if (!url) return toast("Gist Raw URL을 입력해 주세요.");
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("failed");
+    const rows = normalizeWords(JSON.parse(await res.text()));
+    mergeWords(rows);
+    toast("Gist 데이터를 가져왔어요.");
+  } catch (e) {
+    toast("Gist JSON을 읽지 못했어요. Raw URL인지 확인해 주세요.");
+  }
 }
 
 function handleShortcuts(e) {

@@ -8,7 +8,8 @@ Quizlet 스타일의 개인 단어 학습용 정적 웹앱입니다. GitHub Page
 - 학습 상태: 알고 있음 / 학습 중 표시
 - 퀴즈: 객관식 + 직접 입력, 오답만 다시 풀기
 - 매칭게임: 단어와 뜻 짝 맞추기, 기록 타이머
-- 단어관리: 직접 입력, 대량 붙여넣기, Excel/CSV/JSON 업로드
+- 단어관리: 직접 입력, 대량 붙여넣기, Excel/CSV/JSON 업로드, GitHub Gist Raw JSON 가져오기
+- 학습세트 분리: 세트별로 필터링해서 누적 단어를 분리 학습
 - 저장: 브라우저 localStorage 저장, JSON 백업 다운로드
 - 모바일 대응: 스마트폰 카드형 UI
 
@@ -21,7 +22,10 @@ Quizlet 스타일의 개인 단어 학습용 정적 웹앱입니다. GitHub Page
 
 ## 엑셀 업로드 형식
 
-첫 번째 시트의 첫 행을 아래 헤더로 구성하는 것을 권장합니다.
+첫 번째 시트의 첫 행은 최소 `term`, `meaning`만 있어도 됩니다.
+
+- `audioSrc`가 비어 있으면 앱이 브라우저 TTS로 단어를 자동 발음합니다.
+- 아래는 확장 열까지 포함한 권장 예시입니다.
 
 | term | meaning | pronunciation | example | category | audioSrc |
 |---|---|---|---|---|---|
