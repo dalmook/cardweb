@@ -190,3 +190,7 @@ button:focus-visible, .flashcard:focus-visible, .match-card:focus-visible {
 }
 .collection-picker select { min-width: 220px; }
 #gistUrl { min-width: 260px; }
+
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: none; align-items: center; justify-content: center; z-index: 1000; }
+.modal.open { display: flex; }
+.modal-card { width: min(680px, 95vw); max-height: 88vh; overflow: auto; background: #fff; border-radius: 18px; padding: 18px; display: grid; gap: 8px; }

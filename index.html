@@ -6,6 +6,8 @@
   <title>단어카드 스튜디오</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 </head>
 <body>
   <div class="app-shell">
@@ -124,8 +126,25 @@
             <div class="row-actions">
               <button id="downloadTemplate">엑셀 템플릿 다운로드</button>
               <button id="loadSample">예시 데이터 복구</button>
+              <button id="loadIm1Required">IM1 필수 JSON 불러오기</button>
               <button class="danger" id="clearAll">전체 삭제</button>
             </div>
+            <div id="im1MissingBox" class="empty-state" style="margin-top:10px; display:none;"></div>
+          </article>
+
+          <article class="box">
+            <h2>공유용 Firebase 연동</h2>
+            <p>웹에서 별도 입력 없이 바로 동작하도록 앱에 Firebase 설정을 고정했습니다. 연결되면 여러 사용자의 변경이 실시간 반영됩니다.</p>
+            <div class="row-actions">
+              <button id="syncFirebase">Firebase 다시 불러오기</button>
+              <span id="firebaseState" class="pill muted">연결 대기</span>
+            </div>
+          </article>
+
+          <article class="box">
+            <h2>기본 카테고리</h2>
+            <p>여기에서 카테고리를 한 번 지정하면 이후 추가되는 단어에 자동 적용됩니다. 비워두면 현재 날짜시간으로 자동 생성됩니다.</p>
+            <input id="defaultCategory" placeholder="예: IM1-1일차" />
           </article>
 
           <article class="box">
@@ -135,8 +154,7 @@
               <input id="inpMeaning" placeholder="뜻" />
               <input id="inpPron" placeholder="발음 힌트" />
               <input id="inpCollection" placeholder="학습세트 예: 여행회화" />
-              <input id="inpCategory" placeholder="카테고리 예: 베트남어 1일차" />
-              <input id="inpExample" placeholder="예문" />
+                            <input id="inpExample" placeholder="예문" />
               <input id="inpAudio" placeholder="오디오 경로(선택) 예: audio/l1/word001.mp3" />
             </div>
             <button class="primary wide" id="addWord" type="button">단어 추가</button>
@@ -167,11 +185,39 @@
         <small class="word-extra"></small>
       </div>
       <div class="row-actions compact">
+        <button class="mini edit-word">수정</button>
         <button class="mini toggle-status"></button>
         <button class="mini delete-word">삭제</button>
       </div>
     </div>
   </template>
+
+
+  <div id="editModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <h3>단어 수정/카테고리 작업</h3>
+      <p class="hero-copy" style="margin-top:0;">수정할 항목만 체크해서 저장하세요.</p>
+      <label><input type="checkbox" id="chkTerm" /> 단어/표현</label>
+      <input id="editTerm" placeholder="단어/표현" />
+      <label><input type="checkbox" id="chkMeaning" /> 뜻</label>
+      <input id="editMeaning" placeholder="뜻" />
+      <label><input type="checkbox" id="chkPron" /> 발음 힌트</label>
+      <input id="editPron" placeholder="발음 힌트" />
+      <label><input type="checkbox" id="chkExample" /> 예문</label>
+      <input id="editExample" placeholder="예문" />
+      <label><input type="checkbox" id="chkCollection" /> 학습세트</label>
+      <input id="editCollection" placeholder="학습세트" />
+      <label><input type="checkbox" id="chkCategory" /> 카테고리</label>
+      <input id="editCategory" placeholder="카테고리" />
+      <div class="row-actions">
+        <button id="saveWordEdit" class="primary">선택 항목 저장</button>
+        <button id="copyToCategory">카테고리로 복사</button>
+        <button id="moveToCategory">카테고리로 이동</button>
+        <button id="deleteWordInModal" class="danger">단어 삭제</button>
+        <button id="closeEditModal">닫기</button>
+      </div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
