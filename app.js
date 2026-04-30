@@ -11,7 +11,7 @@ let firestore = null;
 let firebaseBookId = "im1-shared";
 let unsubscribeRealtime = null;
 const FIREBASE_CONFIG = {
-  apiKey: "YOUR_API_KEY",
+  apiKey: "AIzaSyBjQidqO3JxfDAEI5uRxops16vzI3szmNI",
   authDomain: "wordcard-319dd.firebaseapp.com",
   projectId: "wordcard-319dd",
   storageBucket: "wordcard-319dd.firebasestorage.app",
