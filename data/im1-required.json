@@ -1,12 +1,6146 @@
 [
-  {"term":"introduce","meaning":"소개하다","category":"IM1 필수","collection":"IM1"},
-  {"term":"hobby","meaning":"취미","category":"IM1 필수","collection":"IM1"},
-  {"term":"colleague","meaning":"동료","category":"IM1 필수","collection":"IM1"},
-  {"term":"appointment","meaning":"약속","category":"IM1 필수","collection":"IM1"},
-  {"term":"reservation","meaning":"예약","category":"IM1 필수","collection":"IM1"},
-  {"term":"commute","meaning":"통근하다","category":"IM1 필수","collection":"IM1"},
-  {"term":"neighborhood","meaning":"동네","category":"IM1 필수","collection":"IM1"},
-  {"term":"groceries","meaning":"식료품","category":"IM1 필수","collection":"IM1"},
-  {"term":"routine","meaning":"일상","category":"IM1 필수","collection":"IM1"},
-  {"term":"schedule","meaning":"일정","category":"IM1 필수","collection":"IM1"}
+  {
+    "term": "tôi",
+    "meaning": "나, 저",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "mình",
+    "meaning": "나, 자기",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "bạn",
+    "meaning": "너, 친구",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "anh",
+    "meaning": "형/오빠/남자에게 부르는 말",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "chị",
+    "meaning": "누나/언니/여자에게 부르는 말",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "em",
+    "meaning": "동생/어린 사람",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "ông",
+    "meaning": "할아버지/남성 존칭",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "bà",
+    "meaning": "할머니/여성 존칭",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "cô",
+    "meaning": "아주머니/여성 선생님",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "chú",
+    "meaning": "아저씨",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "bác",
+    "meaning": "어른 존칭",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "họ",
+    "meaning": "그들",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "chúng tôi",
+    "meaning": "우리, 저희",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "chúng ta",
+    "meaning": "우리 모두",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "các bạn",
+    "meaning": "여러분",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "mọi người",
+    "meaning": "모든 사람, 여러분",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "người này",
+    "meaning": "이 사람",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "người đó",
+    "meaning": "그 사람",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "người kia",
+    "meaning": "저 사람",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "ai",
+    "meaning": "누구",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "cái này",
+    "meaning": "이것",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "cái đó",
+    "meaning": "그것",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "cái kia",
+    "meaning": "저것",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "gì",
+    "meaning": "무엇",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "đây",
+    "meaning": "여기, 이것",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "đó",
+    "meaning": "거기, 그것",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "kia",
+    "meaning": "저기, 저것",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "này",
+    "meaning": "이",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "của tôi",
+    "meaning": "나의",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "của bạn",
+    "meaning": "너의",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "của chúng tôi",
+    "meaning": "우리의",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "tất cả",
+    "meaning": "모두",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "mỗi người",
+    "meaning": "각자, 각 사람",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "bản thân",
+    "meaning": "자신",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "một mình",
+    "meaning": "혼자",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "nhau",
+    "meaning": "서로",
+    "category": "A1 인칭·대명사",
+    "collection": "A1"
+  },
+  {
+    "term": "cái gì",
+    "meaning": "무엇",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "là gì",
+    "meaning": "무엇이다",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "ở đâu",
+    "meaning": "어디에",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "đi đâu",
+    "meaning": "어디 가다",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "từ đâu",
+    "meaning": "어디에서",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "khi nào",
+    "meaning": "언제",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "bao giờ",
+    "meaning": "언제",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "bao lâu",
+    "meaning": "얼마나 오래",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "bao nhiêu",
+    "meaning": "얼마나, 얼마",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "mấy",
+    "meaning": "몇",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "mấy giờ",
+    "meaning": "몇 시",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "tại sao",
+    "meaning": "왜",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "vì sao",
+    "meaning": "왜",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "vì",
+    "meaning": "왜냐하면, 때문에",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "bởi vì",
+    "meaning": "왜냐하면",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "như thế nào",
+    "meaning": "어떻게",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "thế nào",
+    "meaning": "어때",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "làm sao",
+    "meaning": "어떻게",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "có phải không",
+    "meaning": "맞나요?",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "đúng không",
+    "meaning": "맞지요?",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "phải không",
+    "meaning": "그렇죠?",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "được không",
+    "meaning": "돼요? 가능해요?",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "có thể",
+    "meaning": "할 수 있다",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "không thể",
+    "meaning": "할 수 없다",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "xin chào",
+    "meaning": "안녕하세요",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "chào bạn",
+    "meaning": "안녕",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "tạm biệt",
+    "meaning": "안녕히 가세요",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "hẹn gặp lại",
+    "meaning": "다시 만나요",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "cảm ơn",
+    "meaning": "감사합니다",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "xin lỗi",
+    "meaning": "미안합니다",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "không sao",
+    "meaning": "괜찮아요",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "vâng",
+    "meaning": "네",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "dạ",
+    "meaning": "네, 공손한 대답",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "không",
+    "meaning": "아니요, 아니다",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "có",
+    "meaning": "있다, 네",
+    "category": "A1 의문사·기본표현",
+    "collection": "A1"
+  },
+  {
+    "term": "rồi",
+    "meaning": "이미, ~했다",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "chưa",
+    "meaning": "아직, ~했나요?",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "đã",
+    "meaning": "이미, 과거 표시",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "đang",
+    "meaning": "~하는 중",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "sẽ",
+    "meaning": "~할 것이다",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "vẫn",
+    "meaning": "여전히",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "còn",
+    "meaning": "아직, 남아 있다",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "cũng",
+    "meaning": "또한",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "chỉ",
+    "meaning": "단지",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "rất",
+    "meaning": "매우",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "quá",
+    "meaning": "너무",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "hơi",
+    "meaning": "조금",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "khá",
+    "meaning": "꽤",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "thật",
+    "meaning": "정말",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "nữa",
+    "meaning": "더, 또",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "lại",
+    "meaning": "다시",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "luôn",
+    "meaning": "항상",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "thường",
+    "meaning": "자주, 보통",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "thỉnh thoảng",
+    "meaning": "가끔",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "hiếm khi",
+    "meaning": "드물게",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "không bao giờ",
+    "meaning": "전혀 ~하지 않다",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "ngay bây giờ",
+    "meaning": "지금 바로",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "bây giờ",
+    "meaning": "지금",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "sau đó",
+    "meaning": "그 후에",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "trước đó",
+    "meaning": "그 전에",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "đầu tiên",
+    "meaning": "먼저",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "cuối cùng",
+    "meaning": "마지막으로",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "ví dụ",
+    "meaning": "예를 들면",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "thật ra",
+    "meaning": "사실은",
+    "category": "A1 부사·빈도",
+    "collection": "A1"
+  },
+  {
+    "term": "là",
+    "meaning": "~이다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "ở",
+    "meaning": "있다, 살다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "đi",
+    "meaning": "가다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "đến",
+    "meaning": "오다, 도착하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "về",
+    "meaning": "돌아가다, ~에 대해",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "ra",
+    "meaning": "나가다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "vào",
+    "meaning": "들어가다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "lên",
+    "meaning": "올라가다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "xuống",
+    "meaning": "내려가다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "ăn",
+    "meaning": "먹다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "uống",
+    "meaning": "마시다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "ngủ",
+    "meaning": "자다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "thức dậy",
+    "meaning": "일어나다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "nghỉ",
+    "meaning": "쉬다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "làm",
+    "meaning": "하다, 만들다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "học",
+    "meaning": "공부하다, 배우다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "dạy",
+    "meaning": "가르치다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "đọc",
+    "meaning": "읽다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "viết",
+    "meaning": "쓰다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "nghe",
+    "meaning": "듣다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "nói",
+    "meaning": "말하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "hỏi",
+    "meaning": "묻다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "trả lời",
+    "meaning": "대답하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "xem",
+    "meaning": "보다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "nhìn",
+    "meaning": "바라보다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "thấy",
+    "meaning": "보다, 느끼다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "biết",
+    "meaning": "알다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "hiểu",
+    "meaning": "이해하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "nhớ",
+    "meaning": "기억하다, 그리워하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "quên",
+    "meaning": "잊다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "thích",
+    "meaning": "좋아하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "yêu",
+    "meaning": "사랑하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "ghét",
+    "meaning": "싫어하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "muốn",
+    "meaning": "원하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "cần",
+    "meaning": "필요하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "phải",
+    "meaning": "~해야 한다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "nên",
+    "meaning": "~하는 것이 좋다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "mua",
+    "meaning": "사다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "bán",
+    "meaning": "팔다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "trả tiền",
+    "meaning": "돈을 내다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "gọi",
+    "meaning": "부르다, 전화하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "nhắn tin",
+    "meaning": "문자하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "gửi",
+    "meaning": "보내다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "nhận",
+    "meaning": "받다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "mở",
+    "meaning": "열다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "đóng",
+    "meaning": "닫다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "bật",
+    "meaning": "켜다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "tắt",
+    "meaning": "끄다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "dùng",
+    "meaning": "사용하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "sử dụng",
+    "meaning": "사용하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "mang",
+    "meaning": "가지고 가다, 입다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "đeo",
+    "meaning": "착용하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "mặc",
+    "meaning": "입다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "cởi",
+    "meaning": "벗다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "rửa",
+    "meaning": "씻다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "tắm",
+    "meaning": "샤워하다, 목욕하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "giặt",
+    "meaning": "빨래하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "dọn dẹp",
+    "meaning": "청소하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "nấu",
+    "meaning": "요리하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "lái",
+    "meaning": "운전하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "đợi",
+    "meaning": "기다리다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "chờ",
+    "meaning": "기다리다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "gặp",
+    "meaning": "만나다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "giúp",
+    "meaning": "돕다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "cho",
+    "meaning": "주다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "lấy",
+    "meaning": "가져가다, 집다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "đặt",
+    "meaning": "놓다, 예약하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "để",
+    "meaning": "두다, ~하기 위해",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "chọn",
+    "meaning": "고르다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "đổi",
+    "meaning": "바꾸다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "sửa",
+    "meaning": "고치다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "bắt đầu",
+    "meaning": "시작하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "kết thúc",
+    "meaning": "끝나다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "tiếp tục",
+    "meaning": "계속하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "dừng",
+    "meaning": "멈추다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "chạy",
+    "meaning": "달리다, 작동하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "đi bộ",
+    "meaning": "걷다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "bơi",
+    "meaning": "수영하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "chơi",
+    "meaning": "놀다, 치다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "tập",
+    "meaning": "연습하다, 운동하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "luyện tập",
+    "meaning": "연습하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "làm việc",
+    "meaning": "일하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "nghỉ làm",
+    "meaning": "일을 쉬다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "đi làm",
+    "meaning": "출근하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "tan làm",
+    "meaning": "퇴근하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "đi học",
+    "meaning": "등교하다, 배우러 가다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "về nhà",
+    "meaning": "집에 가다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "sống",
+    "meaning": "살다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "xảy ra",
+    "meaning": "발생하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "cảm thấy",
+    "meaning": "느끼다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "nghĩ",
+    "meaning": "생각하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "tin",
+    "meaning": "믿다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "thử",
+    "meaning": "시도하다",
+    "category": "A1 기본동사",
+    "collection": "A1"
+  },
+  {
+    "term": "tốt",
+    "meaning": "좋은",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "xấu",
+    "meaning": "나쁜, 못생긴",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "đẹp",
+    "meaning": "아름다운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "dễ thương",
+    "meaning": "귀여운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "đẹp trai",
+    "meaning": "잘생긴",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "xinh",
+    "meaning": "예쁜",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "lớn",
+    "meaning": "큰",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "to",
+    "meaning": "큰",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "nhỏ",
+    "meaning": "작은",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "cao",
+    "meaning": "높은, 키 큰",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "thấp",
+    "meaning": "낮은, 키 작은",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "dài",
+    "meaning": "긴",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "ngắn",
+    "meaning": "짧은",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "rộng",
+    "meaning": "넓은",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "hẹp",
+    "meaning": "좁은",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "mới",
+    "meaning": "새로운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "cũ",
+    "meaning": "오래된",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "trẻ",
+    "meaning": "젊은",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "già",
+    "meaning": "늙은",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "nhanh",
+    "meaning": "빠른",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "chậm",
+    "meaning": "느린",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "dễ",
+    "meaning": "쉬운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "khó",
+    "meaning": "어려운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "đắt",
+    "meaning": "비싼",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "rẻ",
+    "meaning": "싼",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "nóng",
+    "meaning": "더운, 뜨거운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "lạnh",
+    "meaning": "추운, 차가운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "ấm",
+    "meaning": "따뜻한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "mát",
+    "meaning": "시원한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "khỏe",
+    "meaning": "건강한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "mệt",
+    "meaning": "피곤한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "bận",
+    "meaning": "바쁜",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "rảnh",
+    "meaning": "한가한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "vui",
+    "meaning": "즐거운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "buồn",
+    "meaning": "슬픈",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "giận",
+    "meaning": "화난",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "lo",
+    "meaning": "걱정하는",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "sợ",
+    "meaning": "무서워하는",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "ngạc nhiên",
+    "meaning": "놀란",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "hạnh phúc",
+    "meaning": "행복한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "cô đơn",
+    "meaning": "외로운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "thú vị",
+    "meaning": "재미있는",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "chán",
+    "meaning": "지루한, 싫증난",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "ngon",
+    "meaning": "맛있는",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "dở",
+    "meaning": "맛없는, 서툰",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "ngọt",
+    "meaning": "단",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "mặn",
+    "meaning": "짠",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "chua",
+    "meaning": "신",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "cay",
+    "meaning": "매운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "đắng",
+    "meaning": "쓴",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "no",
+    "meaning": "배부른",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "đói",
+    "meaning": "배고픈",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "khát",
+    "meaning": "목마른",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "sạch",
+    "meaning": "깨끗한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "bẩn",
+    "meaning": "더러운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "ồn",
+    "meaning": "시끄러운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "yên tĩnh",
+    "meaning": "조용한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "an toàn",
+    "meaning": "안전한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "nguy hiểm",
+    "meaning": "위험한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "quan trọng",
+    "meaning": "중요한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "cần thiết",
+    "meaning": "필요한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "đặc biệt",
+    "meaning": "특별한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "bình thường",
+    "meaning": "보통의",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "khác",
+    "meaning": "다른",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "giống",
+    "meaning": "같은, 닮은",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "đúng",
+    "meaning": "맞는",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "sai",
+    "meaning": "틀린",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "đầy",
+    "meaning": "가득 찬",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "trống",
+    "meaning": "빈",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "sáng",
+    "meaning": "밝은, 아침",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "tối",
+    "meaning": "어두운, 저녁",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "sớm",
+    "meaning": "이른",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "muộn",
+    "meaning": "늦은",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "gần",
+    "meaning": "가까운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "xa",
+    "meaning": "먼",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "nhiều",
+    "meaning": "많은",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "ít",
+    "meaning": "적은",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "đủ",
+    "meaning": "충분한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "thiếu",
+    "meaning": "부족한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "nặng",
+    "meaning": "무거운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "nhẹ",
+    "meaning": "가벼운",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "mạnh",
+    "meaning": "강한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "yếu",
+    "meaning": "약한",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "khô",
+    "meaning": "건조한, 마른",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "ướt",
+    "meaning": "젖은",
+    "category": "A1 형용사·상태",
+    "collection": "A1"
+  },
+  {
+    "term": "một",
+    "meaning": "1",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "hai",
+    "meaning": "2",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "ba",
+    "meaning": "3",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "bốn",
+    "meaning": "4",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "năm",
+    "meaning": "5, 해",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "sáu",
+    "meaning": "6",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "bảy",
+    "meaning": "7",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "tám",
+    "meaning": "8",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "chín",
+    "meaning": "9",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "mười",
+    "meaning": "10",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "mười một",
+    "meaning": "11",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "mười hai",
+    "meaning": "12",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "mười lăm",
+    "meaning": "15",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "hai mươi",
+    "meaning": "20",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "ba mươi",
+    "meaning": "30",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "một trăm",
+    "meaning": "100",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "một nghìn",
+    "meaning": "1,000",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "một triệu",
+    "meaning": "1,000,000",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "hôm nay",
+    "meaning": "오늘",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "hôm qua",
+    "meaning": "어제",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "ngày mai",
+    "meaning": "내일",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "ngày kia",
+    "meaning": "모레",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "hôm kia",
+    "meaning": "그저께",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "sáng nay",
+    "meaning": "오늘 아침",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "trưa nay",
+    "meaning": "오늘 점심때",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "chiều nay",
+    "meaning": "오늘 오후",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "tối nay",
+    "meaning": "오늘 밤",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "trưa",
+    "meaning": "점심",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "chiều",
+    "meaning": "오후",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "đêm",
+    "meaning": "밤",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "tuần",
+    "meaning": "주",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "tuần này",
+    "meaning": "이번 주",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "tuần trước",
+    "meaning": "지난주",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "tuần sau",
+    "meaning": "다음 주",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "tháng",
+    "meaning": "월, 달",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "tháng này",
+    "meaning": "이번 달",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "tháng trước",
+    "meaning": "지난달",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "tháng sau",
+    "meaning": "다음 달",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "năm nay",
+    "meaning": "올해",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "năm ngoái",
+    "meaning": "작년",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "năm sau",
+    "meaning": "내년",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "thứ hai",
+    "meaning": "월요일",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "thứ ba",
+    "meaning": "화요일",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "thứ tư",
+    "meaning": "수요일",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "thứ năm",
+    "meaning": "목요일",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "thứ sáu",
+    "meaning": "금요일",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "thứ bảy",
+    "meaning": "토요일",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "chủ nhật",
+    "meaning": "일요일",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "cuối tuần",
+    "meaning": "주말",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "giờ",
+    "meaning": "시, 시간",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "phút",
+    "meaning": "분",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "giây",
+    "meaning": "초",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "nửa tiếng",
+    "meaning": "30분",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "một tiếng",
+    "meaning": "한 시간",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "đúng giờ",
+    "meaning": "정시에",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "ngày nghỉ",
+    "meaning": "휴일",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "ngày lễ",
+    "meaning": "공휴일, 명절",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "mùa xuân",
+    "meaning": "봄",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "mùa hè",
+    "meaning": "여름",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "mùa thu",
+    "meaning": "가을",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "mùa đông",
+    "meaning": "겨울",
+    "category": "A1 숫자·시간·날짜",
+    "collection": "A1"
+  },
+  {
+    "term": "gia đình",
+    "meaning": "가족",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "bố",
+    "meaning": "아빠",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "mẹ",
+    "meaning": "엄마",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "cha mẹ",
+    "meaning": "부모님",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "con",
+    "meaning": "자식, 아이",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "con trai",
+    "meaning": "아들, 남자아이",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "con gái",
+    "meaning": "딸, 여자아이",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "anh trai",
+    "meaning": "형, 오빠",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "chị gái",
+    "meaning": "누나, 언니",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "em trai",
+    "meaning": "남동생",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "em gái",
+    "meaning": "여동생",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "ông nội",
+    "meaning": "친할아버지",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "bà nội",
+    "meaning": "친할머니",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "ông ngoại",
+    "meaning": "외할아버지",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "bà ngoại",
+    "meaning": "외할머니",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "chồng",
+    "meaning": "남편",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "vợ",
+    "meaning": "아내",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "bạn trai",
+    "meaning": "남자친구",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "bạn gái",
+    "meaning": "여자친구",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "bạn bè",
+    "meaning": "친구들",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "người yêu",
+    "meaning": "연인",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "hàng xóm",
+    "meaning": "이웃",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "đồng nghiệp",
+    "meaning": "동료",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "sếp",
+    "meaning": "상사",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "nhân viên",
+    "meaning": "직원",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "giáo viên",
+    "meaning": "선생님",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "học sinh",
+    "meaning": "학생",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "sinh viên",
+    "meaning": "대학생",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "bác sĩ",
+    "meaning": "의사",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "y tá",
+    "meaning": "간호사",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "kỹ sư",
+    "meaning": "엔지니어",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "công nhân",
+    "meaning": "노동자",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "tài xế",
+    "meaning": "운전기사",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "đầu bếp",
+    "meaning": "요리사",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "người Hàn Quốc",
+    "meaning": "한국 사람",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "người Việt Nam",
+    "meaning": "베트남 사람",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "người nước ngoài",
+    "meaning": "외국인",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "khách",
+    "meaning": "손님",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "du khách",
+    "meaning": "관광객",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "trẻ em",
+    "meaning": "어린이",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "người lớn",
+    "meaning": "어른",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "đàn ông",
+    "meaning": "남자",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "phụ nữ",
+    "meaning": "여자, 여성",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "người già",
+    "meaning": "노인",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "người trẻ",
+    "meaning": "젊은 사람",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "bạn thân",
+    "meaning": "친한 친구",
+    "category": "A1 가족·사람·직업",
+    "collection": "A1"
+  },
+  {
+    "term": "cơm",
+    "meaning": "밥",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "phở",
+    "meaning": "쌀국수",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "bún",
+    "meaning": "쌀국수 면",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "mì",
+    "meaning": "면",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "bánh mì",
+    "meaning": "베트남식 바게트 샌드위치",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "thịt",
+    "meaning": "고기",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "thịt bò",
+    "meaning": "소고기",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "thịt gà",
+    "meaning": "닭고기",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "thịt heo",
+    "meaning": "돼지고기",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "thịt lợn",
+    "meaning": "돼지고기",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "cá",
+    "meaning": "생선",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "tôm",
+    "meaning": "새우",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "mực",
+    "meaning": "오징어",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "trứng",
+    "meaning": "계란",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "rau",
+    "meaning": "채소",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "rau củ",
+    "meaning": "야채",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "trái cây",
+    "meaning": "과일",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "hoa quả",
+    "meaning": "과일",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "chuối",
+    "meaning": "바나나",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "táo",
+    "meaning": "사과",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "cam",
+    "meaning": "오렌지",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "xoài",
+    "meaning": "망고",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "dưa hấu",
+    "meaning": "수박",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "dứa",
+    "meaning": "파인애플",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "nho",
+    "meaning": "포도",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "dâu",
+    "meaning": "딸기",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "chanh",
+    "meaning": "레몬, 라임",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "ớt",
+    "meaning": "고추",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "hành",
+    "meaning": "파, 양파",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "tỏi",
+    "meaning": "마늘",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "gừng",
+    "meaning": "생강",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "cà chua",
+    "meaning": "토마토",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "dưa leo",
+    "meaning": "오이",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "khoai tây",
+    "meaning": "감자",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "cà rốt",
+    "meaning": "당근",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "nấm",
+    "meaning": "버섯",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "đậu",
+    "meaning": "콩",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "đậu phụ",
+    "meaning": "두부",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "canh",
+    "meaning": "국",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "súp",
+    "meaning": "수프",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "món ăn",
+    "meaning": "음식, 요리",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "đồ ăn",
+    "meaning": "먹을 것",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "bữa sáng",
+    "meaning": "아침식사",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "bữa trưa",
+    "meaning": "점심식사",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "bữa tối",
+    "meaning": "저녁식사",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "ăn sáng",
+    "meaning": "아침을 먹다",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "ăn trưa",
+    "meaning": "점심을 먹다",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "ăn tối",
+    "meaning": "저녁을 먹다",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "nhà hàng",
+    "meaning": "식당",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "quán ăn",
+    "meaning": "음식점",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "cà phê",
+    "meaning": "커피",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "trà",
+    "meaning": "차",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "trà sữa",
+    "meaning": "밀크티",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "nước",
+    "meaning": "물",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "nước lọc",
+    "meaning": "생수",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "nước ngọt",
+    "meaning": "탄산음료",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "nước ép",
+    "meaning": "주스",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "bia",
+    "meaning": "맥주",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "sữa",
+    "meaning": "우유",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "đá",
+    "meaning": "얼음",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "đường",
+    "meaning": "설탕",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "muối",
+    "meaning": "소금",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "tiêu",
+    "meaning": "후추",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "nước mắm",
+    "meaning": "피시소스",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "xì dầu",
+    "meaning": "간장",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "dầu ăn",
+    "meaning": "식용유",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "đặc sản",
+    "meaning": "특산물",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "gọi món",
+    "meaning": "주문하다",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "thực đơn",
+    "meaning": "메뉴",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "hóa đơn",
+    "meaning": "계산서",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "thanh toán",
+    "meaning": "계산하다",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "mang về",
+    "meaning": "포장하다",
+    "category": "A1 음식·음료",
+    "collection": "A1"
+  },
+  {
+    "term": "nhà",
+    "meaning": "집",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "phòng",
+    "meaning": "방",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "phòng ngủ",
+    "meaning": "침실",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "phòng khách",
+    "meaning": "거실",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "phòng tắm",
+    "meaning": "욕실",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "nhà vệ sinh",
+    "meaning": "화장실",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "bếp",
+    "meaning": "주방",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "cửa",
+    "meaning": "문",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "cửa sổ",
+    "meaning": "창문",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "bàn",
+    "meaning": "책상, 테이블",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "ghế",
+    "meaning": "의자",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "giường",
+    "meaning": "침대",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "tủ",
+    "meaning": "장, 옷장",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "đèn",
+    "meaning": "등",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "gương",
+    "meaning": "거울",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "điện thoại",
+    "meaning": "전화기, 휴대폰",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "máy tính",
+    "meaning": "컴퓨터",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "máy tính xách tay",
+    "meaning": "노트북",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "tivi",
+    "meaning": "텔레비전",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "tủ lạnh",
+    "meaning": "냉장고",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "máy giặt",
+    "meaning": "세탁기",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "điều hòa",
+    "meaning": "에어컨",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "quạt",
+    "meaning": "선풍기",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "đồng hồ",
+    "meaning": "시계",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "chìa khóa",
+    "meaning": "열쇠",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "ví",
+    "meaning": "지갑",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "túi",
+    "meaning": "가방",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "ba lô",
+    "meaning": "배낭",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "sách",
+    "meaning": "책",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "vở",
+    "meaning": "공책",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "bút",
+    "meaning": "펜",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "giấy",
+    "meaning": "종이",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "ảnh",
+    "meaning": "사진",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "quần áo",
+    "meaning": "옷",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "áo",
+    "meaning": "상의",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "quần",
+    "meaning": "바지",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "váy",
+    "meaning": "치마, 드레스",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "giày",
+    "meaning": "신발",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "dép",
+    "meaning": "샌들, 슬리퍼",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "mũ",
+    "meaning": "모자",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "kính",
+    "meaning": "안경",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "khẩu trang",
+    "meaning": "마스크",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "ô",
+    "meaning": "우산",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "tiền",
+    "meaning": "돈",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "thẻ",
+    "meaning": "카드",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "hộ chiếu",
+    "meaning": "여권",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "vé",
+    "meaning": "표, 티켓",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "đồ",
+    "meaning": "물건",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "đồ dùng",
+    "meaning": "용품",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "xà phòng",
+    "meaning": "비누",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "dầu gội",
+    "meaning": "샴푸",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "khăn",
+    "meaning": "수건",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "bàn chải",
+    "meaning": "칫솔",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "kem đánh răng",
+    "meaning": "치약",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "rác",
+    "meaning": "쓰레기",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "thùng rác",
+    "meaning": "쓰레기통",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "sàn nhà",
+    "meaning": "바닥",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "tường",
+    "meaning": "벽",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "trần nhà",
+    "meaning": "천장",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "ban công",
+    "meaning": "베란다",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "cầu thang",
+    "meaning": "계단",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "thang máy",
+    "meaning": "엘리베이터",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "địa chỉ",
+    "meaning": "주소",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "mật khẩu",
+    "meaning": "비밀번호",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "wifi",
+    "meaning": "와이파이",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "pin",
+    "meaning": "배터리",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "sạc",
+    "meaning": "충전기",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "ổ cắm",
+    "meaning": "콘센트",
+    "category": "A1 집·물건·일상",
+    "collection": "A1"
+  },
+  {
+    "term": "công ty",
+    "meaning": "회사",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "văn phòng",
+    "meaning": "사무실",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "nhà máy",
+    "meaning": "공장",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "phòng họp",
+    "meaning": "회의실",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "cuộc họp",
+    "meaning": "회의",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "họp",
+    "meaning": "회의하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "lịch họp",
+    "meaning": "회의 일정",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "báo cáo",
+    "meaning": "보고서, 보고하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "tài liệu",
+    "meaning": "자료, 문서",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "email",
+    "meaning": "이메일",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "tin nhắn",
+    "meaning": "메시지",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "dự án",
+    "meaning": "프로젝트",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "kế hoạch",
+    "meaning": "계획",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "mục tiêu",
+    "meaning": "목표",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "kết quả",
+    "meaning": "결과",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "vấn đề",
+    "meaning": "문제",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "giải pháp",
+    "meaning": "해결책",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "tiến độ",
+    "meaning": "진행 상황",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "hạn chót",
+    "meaning": "마감일",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "nhiệm vụ",
+    "meaning": "업무, 임무",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "trách nhiệm",
+    "meaning": "책임",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "kinh nghiệm",
+    "meaning": "경험",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "kỹ năng",
+    "meaning": "기술, 스킬",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "lương",
+    "meaning": "월급",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "thưởng",
+    "meaning": "보너스",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "hợp đồng",
+    "meaning": "계약",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "khách hàng",
+    "meaning": "고객",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "đối tác",
+    "meaning": "파트너",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "sản phẩm",
+    "meaning": "제품",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "dịch vụ",
+    "meaning": "서비스",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "chất lượng",
+    "meaning": "품질",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "số lượng",
+    "meaning": "수량",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "dữ liệu",
+    "meaning": "데이터",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "hệ thống",
+    "meaning": "시스템",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "máy chủ",
+    "meaning": "서버",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "mạng",
+    "meaning": "네트워크",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "lỗi",
+    "meaning": "오류",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "kiểm tra",
+    "meaning": "확인하다, 검사하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "xác nhận",
+    "meaning": "확인하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "chuẩn bị",
+    "meaning": "준비하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "hoàn thành",
+    "meaning": "완료하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "cập nhật",
+    "meaning": "업데이트하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "gửi báo cáo",
+    "meaning": "보고서를 보내다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "nhận email",
+    "meaning": "이메일을 받다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "trả lời email",
+    "meaning": "이메일에 답하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "làm thêm giờ",
+    "meaning": "야근하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "nghỉ phép",
+    "meaning": "휴가를 내다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "đi công tác",
+    "meaning": "출장 가다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "đồng ý",
+    "meaning": "동의하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "từ chối",
+    "meaning": "거절하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "thảo luận",
+    "meaning": "논의하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "giải thích",
+    "meaning": "설명하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "đề xuất",
+    "meaning": "제안하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "quyết định",
+    "meaning": "결정하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "trường học",
+    "meaning": "학교",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "lớp học",
+    "meaning": "수업, 교실",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "bài học",
+    "meaning": "수업, lesson",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "bài tập",
+    "meaning": "숙제, 과제",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "bài kiểm tra",
+    "meaning": "시험",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "điểm",
+    "meaning": "점수",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "kỳ thi",
+    "meaning": "시험",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "giáo trình",
+    "meaning": "교재",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "từ vựng",
+    "meaning": "어휘",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "ngữ pháp",
+    "meaning": "문법",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "phát âm",
+    "meaning": "발음",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "luyện nghe",
+    "meaning": "듣기 연습",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "luyện nói",
+    "meaning": "말하기 연습",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "luyện đọc",
+    "meaning": "읽기 연습",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "luyện viết",
+    "meaning": "쓰기 연습",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "ghi nhớ",
+    "meaning": "암기하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "ôn tập",
+    "meaning": "복습하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "đăng ký",
+    "meaning": "등록하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "tham gia",
+    "meaning": "참여하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "vắng mặt",
+    "meaning": "결석하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "có mặt",
+    "meaning": "출석하다",
+    "category": "A2 회사·학교·업무",
+    "collection": "A2"
+  },
+  {
+    "term": "xe",
+    "meaning": "차",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "xe máy",
+    "meaning": "오토바이",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "ô tô",
+    "meaning": "자동차",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "xe buýt",
+    "meaning": "버스",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "tàu điện",
+    "meaning": "전철",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "tàu hỏa",
+    "meaning": "기차",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "máy bay",
+    "meaning": "비행기",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "taxi",
+    "meaning": "택시",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "sân bay",
+    "meaning": "공항",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "ga",
+    "meaning": "역",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "bến xe",
+    "meaning": "버스터미널",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "trạm xe buýt",
+    "meaning": "버스정류장",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "ngã tư",
+    "meaning": "사거리",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "cầu",
+    "meaning": "다리",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "bản đồ",
+    "meaning": "지도",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "địa điểm",
+    "meaning": "장소",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "vị trí",
+    "meaning": "위치",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "khoảng cách",
+    "meaning": "거리",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "gần đây",
+    "meaning": "근처",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "bên trái",
+    "meaning": "왼쪽",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "bên phải",
+    "meaning": "오른쪽",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "phía trước",
+    "meaning": "앞쪽",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "phía sau",
+    "meaning": "뒤쪽",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "ở giữa",
+    "meaning": "가운데",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "bên cạnh",
+    "meaning": "옆에",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "đối diện",
+    "meaning": "맞은편",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "trên",
+    "meaning": "위에",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "dưới",
+    "meaning": "아래에",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "trong",
+    "meaning": "안에",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "ngoài",
+    "meaning": "밖에",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "quay lại",
+    "meaning": "돌아가다",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "rẽ trái",
+    "meaning": "좌회전하다",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "rẽ phải",
+    "meaning": "우회전하다",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "đi thẳng",
+    "meaning": "직진하다",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "dừng lại",
+    "meaning": "멈추다",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "đón xe",
+    "meaning": "차를 타다",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "xuống xe",
+    "meaning": "차에서 내리다",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "lên xe",
+    "meaning": "차에 타다",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "đặt xe",
+    "meaning": "차를 예약하다",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "vé máy bay",
+    "meaning": "항공권",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "hành lý",
+    "meaning": "짐, 수하물",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "va li",
+    "meaning": "캐리어",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "chuyến bay",
+    "meaning": "항공편",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "kẹt xe",
+    "meaning": "교통 체증",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "tai nạn",
+    "meaning": "사고",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "đèn đỏ",
+    "meaning": "빨간불",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "đèn xanh",
+    "meaning": "초록불",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "bãi đỗ xe",
+    "meaning": "주차장",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "lái xe",
+    "meaning": "운전하다",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "mất bao lâu",
+    "meaning": "얼마나 걸리나요",
+    "category": "A2 이동·방향·교통",
+    "collection": "A2"
+  },
+  {
+    "term": "cửa hàng",
+    "meaning": "가게",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "siêu thị",
+    "meaning": "슈퍼마켓",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "chợ",
+    "meaning": "시장",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "trung tâm thương mại",
+    "meaning": "쇼핑몰",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "hiệu thuốc",
+    "meaning": "약국",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "ngân hàng",
+    "meaning": "은행",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "bưu điện",
+    "meaning": "우체국",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "tiệm cà phê",
+    "meaning": "카페",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "giá",
+    "meaning": "가격",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "giá bao nhiêu",
+    "meaning": "가격이 얼마예요",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "mắc",
+    "meaning": "비싼",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "rẻ hơn",
+    "meaning": "더 싼",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "giảm giá",
+    "meaning": "할인",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "khuyến mãi",
+    "meaning": "프로모션",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "mua sắm",
+    "meaning": "쇼핑하다",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "đổi hàng",
+    "meaning": "교환하다",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "trả hàng",
+    "meaning": "반품하다",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "hàng hóa",
+    "meaning": "상품",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "kích cỡ",
+    "meaning": "사이즈",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "màu sắc",
+    "meaning": "색상",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "màu đỏ",
+    "meaning": "빨간색",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "màu xanh",
+    "meaning": "파란색/초록색",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "màu đen",
+    "meaning": "검은색",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "màu trắng",
+    "meaning": "흰색",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "màu vàng",
+    "meaning": "노란색",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "màu hồng",
+    "meaning": "분홍색",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "màu tím",
+    "meaning": "보라색",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "màu nâu",
+    "meaning": "갈색",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "mua online",
+    "meaning": "온라인으로 사다",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "đặt hàng",
+    "meaning": "주문하다",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "giao hàng",
+    "meaning": "배송하다",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "phí giao hàng",
+    "meaning": "배송비",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "địa chỉ giao hàng",
+    "meaning": "배송 주소",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "biên lai",
+    "meaning": "영수증",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "tiền mặt",
+    "meaning": "현금",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "thẻ tín dụng",
+    "meaning": "신용카드",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "chuyển khoản",
+    "meaning": "계좌이체",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "mã QR",
+    "meaning": "QR 코드",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "tổng cộng",
+    "meaning": "총합",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "còn lại",
+    "meaning": "남은 것",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "đủ tiền",
+    "meaning": "돈이 충분하다",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "thiếu tiền",
+    "meaning": "돈이 부족하다",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "đắt quá",
+    "meaning": "너무 비싸요",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "bớt được không",
+    "meaning": "깎아줄 수 있나요",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "cho tôi xem",
+    "meaning": "보여주세요",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "tôi lấy cái này",
+    "meaning": "이걸로 할게요",
+    "category": "A2 쇼핑·돈·서비스",
+    "collection": "A2"
+  },
+  {
+    "term": "cơ thể",
+    "meaning": "몸",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "đầu",
+    "meaning": "머리",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "mặt",
+    "meaning": "얼굴",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "mắt",
+    "meaning": "눈",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "mũi",
+    "meaning": "코",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "miệng",
+    "meaning": "입",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "răng",
+    "meaning": "치아",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "tai",
+    "meaning": "귀",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "tóc",
+    "meaning": "머리카락",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "cổ",
+    "meaning": "목",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "vai",
+    "meaning": "어깨",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "tay",
+    "meaning": "손, 팔",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "chân",
+    "meaning": "발, 다리",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "bụng",
+    "meaning": "배",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "lưng",
+    "meaning": "등, 허리",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "tim",
+    "meaning": "심장",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "da",
+    "meaning": "피부",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "đau",
+    "meaning": "아프다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "đau đầu",
+    "meaning": "머리가 아프다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "đau bụng",
+    "meaning": "배가 아프다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "đau họng",
+    "meaning": "목이 아프다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "sốt",
+    "meaning": "열이 나다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "ho",
+    "meaning": "기침하다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "cảm cúm",
+    "meaning": "감기",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "dị ứng",
+    "meaning": "알레르기",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "bệnh",
+    "meaning": "병",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "bệnh viện",
+    "meaning": "병원",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "phòng khám",
+    "meaning": "의원, 진료소",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "thuốc",
+    "meaning": "약",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "uống thuốc",
+    "meaning": "약을 먹다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "khám bệnh",
+    "meaning": "진료를 받다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "bảo hiểm",
+    "meaning": "보험",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "sức khỏe",
+    "meaning": "건강",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "tập thể dục",
+    "meaning": "운동하다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "ngủ đủ",
+    "meaning": "충분히 자다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "ăn kiêng",
+    "meaning": "다이어트하다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "giảm cân",
+    "meaning": "살을 빼다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "tăng cân",
+    "meaning": "살이 찌다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "mệt mỏi",
+    "meaning": "피곤함",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "căng thẳng",
+    "meaning": "스트레스 받은",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "thư giãn",
+    "meaning": "휴식하다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "thời tiết",
+    "meaning": "날씨",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "trời nắng",
+    "meaning": "날씨가 맑다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "trời mưa",
+    "meaning": "비가 오다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "trời nhiều mây",
+    "meaning": "구름이 많다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "mưa to",
+    "meaning": "비가 많이 오다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "mưa nhỏ",
+    "meaning": "비가 조금 오다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "gió",
+    "meaning": "바람",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "có gió",
+    "meaning": "바람이 불다",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "bão",
+    "meaning": "태풍, 폭풍",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "tuyết",
+    "meaning": "눈",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "nhiệt độ",
+    "meaning": "기온",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "ẩm",
+    "meaning": "습한",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "khí hậu",
+    "meaning": "기후",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "mùa mưa",
+    "meaning": "우기",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "mùa khô",
+    "meaning": "건기",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "ô nhiễm",
+    "meaning": "오염",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "khói bụi",
+    "meaning": "미세먼지, 먼지",
+    "category": "A2 건강·몸·날씨",
+    "collection": "A2"
+  },
+  {
+    "term": "sở thích",
+    "meaning": "취미",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "âm nhạc",
+    "meaning": "음악",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "bài hát",
+    "meaning": "노래",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "hát",
+    "meaning": "노래하다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "nghe nhạc",
+    "meaning": "음악을 듣다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "phim",
+    "meaning": "영화",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "xem phim",
+    "meaning": "영화를 보다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "rạp chiếu phim",
+    "meaning": "영화관",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "truyện",
+    "meaning": "이야기, 만화/소설",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "đọc sách",
+    "meaning": "책을 읽다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "chụp ảnh",
+    "meaning": "사진 찍다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "vẽ",
+    "meaning": "그리다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "nhảy",
+    "meaning": "춤추다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "chơi game",
+    "meaning": "게임하다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "du lịch",
+    "meaning": "여행하다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "chuyến đi",
+    "meaning": "여행",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "kỳ nghỉ",
+    "meaning": "휴가",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "khách sạn",
+    "meaning": "호텔",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "đặt phòng",
+    "meaning": "방을 예약하다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "nhận phòng",
+    "meaning": "체크인하다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "trả phòng",
+    "meaning": "체크아웃하다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "phòng đơn",
+    "meaning": "싱글룸",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "phòng đôi",
+    "meaning": "더블룸",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "bãi biển",
+    "meaning": "해변",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "núi",
+    "meaning": "산",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "sông",
+    "meaning": "강",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "hồ",
+    "meaning": "호수",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "công viên",
+    "meaning": "공원",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "bảo tàng",
+    "meaning": "박물관",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "đền",
+    "meaning": "사원",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "chùa",
+    "meaning": "절",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "nhà thờ",
+    "meaning": "성당, 교회",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "phố cổ",
+    "meaning": "구시가지",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "đi dạo",
+    "meaning": "산책하다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "tham quan",
+    "meaning": "관광하다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "mua quà",
+    "meaning": "선물을 사다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "quà lưu niệm",
+    "meaning": "기념품",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "lịch sử",
+    "meaning": "역사",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "văn hóa",
+    "meaning": "문화",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "ngôn ngữ",
+    "meaning": "언어",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "thể thao",
+    "meaning": "스포츠",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "bóng đá",
+    "meaning": "축구",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "bóng rổ",
+    "meaning": "농구",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "cầu lông",
+    "meaning": "배드민턴",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "tennis",
+    "meaning": "테니스",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "bơi lội",
+    "meaning": "수영",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "leo núi",
+    "meaning": "등산",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "chạy bộ",
+    "meaning": "조깅하다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "đạp xe",
+    "meaning": "자전거 타다",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "yoga",
+    "meaning": "요가",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "câu cá",
+    "meaning": "낚시",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "nấu ăn",
+    "meaning": "요리하기",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "làm bánh",
+    "meaning": "빵/케이크 만들기",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "trồng cây",
+    "meaning": "식물 키우기",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "nuôi thú cưng",
+    "meaning": "반려동물 키우기",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "mèo",
+    "meaning": "고양이",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "chó",
+    "meaning": "개",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "chim",
+    "meaning": "새",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "cá cảnh",
+    "meaning": "관상어",
+    "category": "A2 취미·여가·여행",
+    "collection": "A2"
+  },
+  {
+    "term": "cảm xúc",
+    "meaning": "감정",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "tâm trạng",
+    "meaning": "기분",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "vui vẻ",
+    "meaning": "즐거운",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "buồn bã",
+    "meaning": "슬픈",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "tức giận",
+    "meaning": "화난",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "lo lắng",
+    "meaning": "걱정되는",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "thất vọng",
+    "meaning": "실망한",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "ngượng",
+    "meaning": "쑥스러운",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "xấu hổ",
+    "meaning": "부끄러운",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "tự hào",
+    "meaning": "자랑스러운",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "thoải mái",
+    "meaning": "편안한",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "không thoải mái",
+    "meaning": "불편한",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "hài lòng",
+    "meaning": "만족한",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "không hài lòng",
+    "meaning": "불만족한",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "thích hơn",
+    "meaning": "더 좋아하다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "ưa thích",
+    "meaning": "선호하다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "quan tâm",
+    "meaning": "관심을 가지다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "chăm sóc",
+    "meaning": "돌보다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "giận nhau",
+    "meaning": "서로 화내다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "làm hòa",
+    "meaning": "화해하다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "cãi nhau",
+    "meaning": "싸우다, 말다툼하다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "kết bạn",
+    "meaning": "친구가 되다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "hẹn hò",
+    "meaning": "데이트하다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "chia tay",
+    "meaning": "헤어지다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "kết hôn",
+    "meaning": "결혼하다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "ý kiến",
+    "meaning": "의견",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "theo tôi",
+    "meaning": "내 생각에는",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "tôi nghĩ rằng",
+    "meaning": "나는 ~라고 생각한다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "không đồng ý",
+    "meaning": "동의하지 않다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "phản đối",
+    "meaning": "반대하다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "ủng hộ",
+    "meaning": "지지하다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "lý do",
+    "meaning": "이유",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "nguyên nhân",
+    "meaning": "원인",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "kết luận",
+    "meaning": "결론",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "so sánh",
+    "meaning": "비교하다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "khác nhau",
+    "meaning": "서로 다르다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "giống nhau",
+    "meaning": "서로 같다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "tốt hơn",
+    "meaning": "더 좋다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "tệ hơn",
+    "meaning": "더 나쁘다",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "phù hợp",
+    "meaning": "적합한",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "tiện",
+    "meaning": "편리한",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "bất tiện",
+    "meaning": "불편한",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "có ích",
+    "meaning": "유용한",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "nổi tiếng",
+    "meaning": "유명한",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "phổ biến",
+    "meaning": "흔한, 인기 있는",
+    "category": "A2 감정·의견·관계",
+    "collection": "A2"
+  },
+  {
+    "term": "thường ngày",
+    "meaning": "평소에",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "mỗi ngày",
+    "meaning": "매일",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "mỗi sáng",
+    "meaning": "매일 아침",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "mỗi tối",
+    "meaning": "매일 저녁",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "sau khi thức dậy",
+    "meaning": "일어난 후에",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "trước khi đi ngủ",
+    "meaning": "자기 전에",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "chuẩn bị đi làm",
+    "meaning": "출근 준비하다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "ăn sáng nhanh",
+    "meaning": "아침을 빨리 먹다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "uống cà phê",
+    "meaning": "커피를 마시다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "đi làm bằng xe buýt",
+    "meaning": "버스로 출근하다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "đi làm bằng xe máy",
+    "meaning": "오토바이로 출근하다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "mất khoảng ba mươi phút",
+    "meaning": "약 30분 걸리다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "bắt đầu làm việc",
+    "meaning": "일을 시작하다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "kiểm tra email",
+    "meaning": "이메일을 확인하다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tham gia cuộc họp",
+    "meaning": "회의에 참석하다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "ăn trưa với đồng nghiệp",
+    "meaning": "동료와 점심을 먹다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tan làm lúc sáu giờ",
+    "meaning": "6시에 퇴근하다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "về nhà nghỉ ngơi",
+    "meaning": "집에 돌아가 쉬다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "xem YouTube",
+    "meaning": "유튜브를 보다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "học tiếng Việt",
+    "meaning": "베트남어를 공부하다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "ôn từ vựng",
+    "meaning": "단어를 복습하다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "nghe nhạc trước khi ngủ",
+    "meaning": "자기 전에 음악을 듣다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "cuối tuần tôi thường",
+    "meaning": "주말에 나는 보통",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "gặp bạn bè",
+    "meaning": "친구들을 만나다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "dọn dẹp nhà cửa",
+    "meaning": "집안 청소를 하다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "đi siêu thị",
+    "meaning": "마트에 가다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "nấu ăn ở nhà",
+    "meaning": "집에서 요리하다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "nghỉ ngơi cả ngày",
+    "meaning": "하루 종일 쉬다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tập thể dục nhẹ",
+    "meaning": "가볍게 운동하다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "đi dạo gần nhà",
+    "meaning": "집 근처를 산책하다",
+    "category": "IM1 일상 루틴 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "giới thiệu bản thân",
+    "meaning": "자기소개하다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi tên là",
+    "meaning": "제 이름은 ~입니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi là người Hàn Quốc",
+    "meaning": "저는 한국 사람입니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi sống ở Seoul",
+    "meaning": "저는 서울에 삽니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi làm việc ở Samsung",
+    "meaning": "저는 삼성에서 일합니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi là nhân viên công ty",
+    "meaning": "저는 회사원입니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi làm ở bộ phận",
+    "meaning": "저는 ~부서에서 일합니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "công việc của tôi là",
+    "meaning": "제 일은 ~입니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi phụ trách",
+    "meaning": "저는 ~을 담당합니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi làm việc với đồng nghiệp",
+    "meaning": "저는 동료와 일합니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "công việc khá bận",
+    "meaning": "일이 꽤 바쁩니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "nhưng rất thú vị",
+    "meaning": "하지만 아주 재미있습니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi thường họp vào buổi sáng",
+    "meaning": "저는 보통 오전에 회의합니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi viết báo cáo",
+    "meaning": "저는 보고서를 씁니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi kiểm tra dữ liệu",
+    "meaning": "저는 데이터를 확인합니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi gửi email cho đồng nghiệp",
+    "meaning": "저는 동료에게 이메일을 보냅니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi thích công việc này",
+    "meaning": "저는 이 일을 좋아합니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "đồng nghiệp của tôi rất tốt",
+    "meaning": "제 동료들은 아주 좋습니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "sếp của tôi thân thiện",
+    "meaning": "제 상사는 친절합니다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "môi trường làm việc",
+    "meaning": "근무 환경",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "áp lực công việc",
+    "meaning": "업무 압박",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "kinh nghiệm làm việc",
+    "meaning": "업무 경험",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "kỹ năng giao tiếp",
+    "meaning": "소통 능력",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "làm việc nhóm",
+    "meaning": "팀워크, 협업하다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "giải quyết vấn đề",
+    "meaning": "문제를 해결하다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "học hỏi nhiều điều",
+    "meaning": "많은 것을 배우다",
+    "category": "IM1 자기소개·회사 표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "cuộc hẹn",
+    "meaning": "약속",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "đặt lịch hẹn",
+    "meaning": "약속을 잡다",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "hẹn gặp bạn",
+    "meaning": "친구와 만나기로 하다",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "đến muộn",
+    "meaning": "늦게 도착하다",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "hủy cuộc hẹn",
+    "meaning": "약속을 취소하다",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "đổi lịch",
+    "meaning": "일정을 바꾸다",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "rảnh vào cuối tuần",
+    "meaning": "주말에 시간이 있다",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "bạn có rảnh không",
+    "meaning": "시간 있어요?",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "chúng ta gặp lúc mấy giờ",
+    "meaning": "우리 몇 시에 만날까요",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "gặp ở đâu",
+    "meaning": "어디에서 만날까요",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "đặt bàn",
+    "meaning": "테이블을 예약하다",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "xác nhận đặt chỗ",
+    "meaning": "예약을 확인하다",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "tên đặt chỗ",
+    "meaning": "예약자 이름",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "cho hai người",
+    "meaning": "두 명이요",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "còn bàn không",
+    "meaning": "자리 있나요",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi muốn gọi món",
+    "meaning": "주문하고 싶어요",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "món này là gì",
+    "meaning": "이 요리는 뭐예요",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "món nào ngon",
+    "meaning": "어떤 음식이 맛있나요",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "ít cay",
+    "meaning": "덜 맵게",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "không cay",
+    "meaning": "맵지 않게",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "cho thêm đá",
+    "meaning": "얼음 더 주세요",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "tính tiền giúp tôi",
+    "meaning": "계산해 주세요",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "chia tiền",
+    "meaning": "돈을 나눠 내다",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "mời bạn ăn",
+    "meaning": "밥을 사다, 대접하다",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "ăn ở ngoài",
+    "meaning": "외식하다",
+    "category": "IM1 약속·예약·외식",
+    "collection": "IM1"
+  },
+  {
+    "term": "khu phố",
+    "meaning": "동네",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "khu vực tôi sống",
+    "meaning": "제가 사는 지역",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "gần nhà tôi",
+    "meaning": "우리 집 근처에",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "cách nhà tôi không xa",
+    "meaning": "우리 집에서 멀지 않은",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "căn hộ",
+    "meaning": "아파트",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "chung cư",
+    "meaning": "아파트 단지",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "nhà riêng",
+    "meaning": "단독주택",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "tiền thuê nhà",
+    "meaning": "월세",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "phí quản lý",
+    "meaning": "관리비",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "hàng xóm thân thiện",
+    "meaning": "친절한 이웃",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "giao thông thuận tiện",
+    "meaning": "교통이 편리하다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "gần ga tàu điện",
+    "meaning": "전철역과 가깝다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "gần siêu thị",
+    "meaning": "마트와 가깝다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "có nhiều quán ăn",
+    "meaning": "음식점이 많다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "khu yên tĩnh",
+    "meaning": "조용한 지역",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "khu đông đúc",
+    "meaning": "복잡한 지역",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "không khí trong lành",
+    "meaning": "공기가 맑다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "an ninh tốt",
+    "meaning": "치안이 좋다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "bất tiện một chút",
+    "meaning": "조금 불편하다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "giá nhà đắt",
+    "meaning": "집값이 비싸다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "phòng rộng rãi",
+    "meaning": "방이 넓다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "phòng hơi nhỏ",
+    "meaning": "방이 조금 작다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "dọn nhà",
+    "meaning": "이사하다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "chuyển đến",
+    "meaning": "이사 오다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "sống một mình",
+    "meaning": "혼자 살다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "sống với gia đình",
+    "meaning": "가족과 살다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "trang trí phòng",
+    "meaning": "방을 꾸미다",
+    "category": "IM1 집·동네·생활환경",
+    "collection": "IM1"
+  },
+  {
+    "term": "chuyến du lịch đáng nhớ",
+    "meaning": "기억에 남는 여행",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "lần đầu tiên",
+    "meaning": "처음으로",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "đi du lịch nước ngoài",
+    "meaning": "해외여행을 가다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "đi cùng gia đình",
+    "meaning": "가족과 함께 가다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "đi cùng bạn bè",
+    "meaning": "친구들과 함께 가다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "chuẩn bị hành lý",
+    "meaning": "짐을 준비하다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "đặt vé máy bay",
+    "meaning": "항공권을 예약하다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "đặt khách sạn",
+    "meaning": "호텔을 예약하다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "lên kế hoạch du lịch",
+    "meaning": "여행 계획을 세우다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tìm thông tin trên mạng",
+    "meaning": "인터넷에서 정보를 찾다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "tham quan địa điểm nổi tiếng",
+    "meaning": "유명한 장소를 관광하다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "thử món ăn địa phương",
+    "meaning": "현지 음식을 먹어보다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "chụp nhiều ảnh",
+    "meaning": "사진을 많이 찍다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "mua quà lưu niệm",
+    "meaning": "기념품을 사다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "gặp người địa phương",
+    "meaning": "현지인을 만나다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "trải nghiệm văn hóa mới",
+    "meaning": "새로운 문화를 경험하다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "bị lạc đường",
+    "meaning": "길을 잃다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "hỏi đường",
+    "meaning": "길을 묻다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "thời tiết không tốt",
+    "meaning": "날씨가 좋지 않다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "nhưng vẫn vui",
+    "meaning": "하지만 그래도 즐거웠다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "kỷ niệm đẹp",
+    "meaning": "좋은 추억",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "muốn quay lại",
+    "meaning": "다시 가고 싶다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "ấn tượng nhất",
+    "meaning": "가장 인상적인",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "phong cảnh đẹp",
+    "meaning": "풍경이 아름답다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "dịch vụ tốt",
+    "meaning": "서비스가 좋다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "giá cả hợp lý",
+    "meaning": "가격이 합리적이다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "lịch trình bận rộn",
+    "meaning": "일정이 빡빡하다",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "nghỉ dưỡng",
+    "meaning": "휴양",
+    "category": "IM1 여행·경험표현",
+    "collection": "IM1"
+  },
+  {
+    "term": "nói thật là",
+    "meaning": "솔직히 말하면",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "theo tôi nghĩ",
+    "meaning": "제 생각에는",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "đối với tôi",
+    "meaning": "저에게는",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "ví dụ như",
+    "meaning": "예를 들면",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "nói chung",
+    "meaning": "일반적으로, 대체로",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "đặc biệt là",
+    "meaning": "특히",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "ngoài ra",
+    "meaning": "게다가",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "bên cạnh đó",
+    "meaning": "그 외에도",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "vì vậy",
+    "meaning": "그래서",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "vì thế",
+    "meaning": "그래서",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "tuy nhiên",
+    "meaning": "하지만, 그러나",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "nhưng mà",
+    "meaning": "그런데, 하지만",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "mặc dù",
+    "meaning": "비록 ~하지만",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "nếu",
+    "meaning": "만약",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "khi",
+    "meaning": "~할 때",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "sau khi",
+    "meaning": "~한 후에",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "trước khi",
+    "meaning": "~하기 전에",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "trong khi",
+    "meaning": "~하는 동안",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "từ khi",
+    "meaning": "~한 이후로",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "cho đến khi",
+    "meaning": "~할 때까지",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "càng ngày càng",
+    "meaning": "점점 더",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "hơn nữa",
+    "meaning": "게다가",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "một mặt",
+    "meaning": "한편으로는",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "mặt khác",
+    "meaning": "다른 한편으로는",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi không chắc",
+    "meaning": "확실하지 않아요",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "để tôi nghĩ một chút",
+    "meaning": "잠깐 생각해볼게요",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "câu hỏi này hơi khó",
+    "meaning": "이 질문은 조금 어렵네요",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "tôi sẽ nói về",
+    "meaning": "저는 ~에 대해 말하겠습니다",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "đó là lý do tại sao",
+    "meaning": "그것이 ~한 이유입니다",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  },
+  {
+    "term": "nói cách khác",
+    "meaning": "다시 말해서",
+    "category": "IM1 연결어·말하기필러",
+    "collection": "IM1"
+  }
 ]
