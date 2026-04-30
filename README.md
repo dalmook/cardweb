@@ -21,7 +21,10 @@ Quizlet 스타일의 개인 단어 학습용 정적 웹앱입니다. GitHub Page
 
 ## 엑셀 업로드 형식
 
-첫 번째 시트의 첫 행을 아래 헤더로 구성하는 것을 권장합니다.
+첫 번째 시트의 첫 행은 최소 `term`, `meaning`만 있어도 됩니다.
+
+- `audioSrc`가 비어 있으면 앱이 브라우저 TTS로 단어를 자동 발음합니다.
+- 아래는 확장 열까지 포함한 권장 예시입니다.
 
 | term | meaning | pronunciation | example | category | audioSrc |
 |---|---|---|---|---|---|

@@ -22,15 +22,25 @@ function toast(message) {
 }
 
 async function init() {
+  bindEvents();
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
     words = normalizeWords(JSON.parse(saved));
-  } else {
+    refreshAll();
+    return;
+  }
+
+  try {
     const res = await fetch("data/words.json");
+    if (!res.ok) throw new Error(`sample data not found: ${res.status}`);
     words = normalizeWords(await res.json());
     save();
+  } catch (err) {
+    console.warn("초기 샘플 데이터를 불러오지 못했습니다.", err);
+    words = [];
+    toast("샘플 파일 없이 시작합니다. 바로 단어를 추가해 주세요.");
   }
-  bindEvents();
+
   refreshAll();
 }
 
@@ -169,10 +179,18 @@ function playCurrentAudio() {
   }
 }
 
+function detectSpeechLang(text) {
+  if (/[가-힣]/.test(text)) return "ko-KR";
+  if (/[぀-ヿ]/.test(text)) return "ja-JP";
+  if (/[一-鿿]/.test(text)) return "zh-CN";
+  if (/[a-zA-Z]/.test(text)) return "en-US";
+  return "ko-KR";
+}
+
 function fallbackSpeak(item) {
   if (!window.speechSynthesis) return toast("이 브라우저는 음성 읽기를 지원하지 않아요.");
   const utter = new SpeechSynthesisUtterance(item.term);
-  utter.lang = /[가-힣]/.test(item.term) ? "ko-KR" : "vi-VN";
+  utter.lang = detectSpeechLang(item.term);
   speechSynthesis.cancel();
   speechSynthesis.speak(utter);
 }
@@ -364,7 +382,10 @@ function downloadTemplate() {
 }
 
 function loadSample() {
-  fetch("data/words.json").then(r => r.json()).then(rows => mergeWords(normalizeWords(rows)));
+  fetch("data/words.json")
+    .then(r => { if (!r.ok) throw new Error("sample data missing"); return r.json(); })
+    .then(rows => mergeWords(normalizeWords(rows)))
+    .catch(() => toast("예시 데이터를 찾지 못했어요. 파일 경로를 확인해 주세요."));
 }
 
 function clearAll() {

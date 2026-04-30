@@ -159,3 +159,25 @@ select:focus, input:focus, textarea:focus { border-color: var(--brand); box-shad
   .word-row { align-items: flex-start; flex-direction: column; }
   .word-list-head input { max-width: none; }
 }
+
+/* UX polish */
+button:focus-visible, .flashcard:focus-visible, .match-card:focus-visible {
+  outline: 3px solid rgba(66,85,255,.45);
+  outline-offset: 2px;
+}
+
+.box h2 { margin-bottom: 8px; }
+.box p { margin-top: 0; line-height: 1.55; }
+
+#addWord {
+  font-size: 17px;
+  font-weight: 800;
+  padding-block: 14px;
+}
+
+#wordList .empty-state {
+  background: #fff;
+  border: 1px dashed #cfd5e6;
+  border-radius: 16px;
+  text-align: center;
+}
