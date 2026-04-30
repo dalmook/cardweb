@@ -7,10 +7,11 @@ let quizState = { items: [], index: 0, score: 0, wrong: [] };
 let matchState = { first: null, pairsLeft: 0, startedAt: null, timer: null };
 let activeCollection = "전체";
 
-const FIREBASE_CONFIG_KEY = "vocaStudioFirebaseConfig.v1";
 let firestore = null;
-let firebaseBookId = "AIzaSyBjQidqO3JxfDAEI5uRxops16vzI3szmNI";
-const FIREBASE_PRESET = {
+let firebaseBookId = "im1-shared";
+let unsubscribeRealtime = null;
+const FIREBASE_CONFIG = {
+  apiKey: "YOUR_API_KEY",
   authDomain: "wordcard-319dd.firebaseapp.com",
   projectId: "wordcard-319dd",
   storageBucket: "wordcard-319dd.firebasestorage.app",
@@ -36,7 +37,6 @@ function toast(message) {
 
 async function init() {
   bindEvents();
-  hydrateFirebaseInputs();
   await tryInitFirebase(false);
 
   if (firestore) {
@@ -114,8 +114,6 @@ function bindEvents() {
   $("#activeCollection").addEventListener("change", (e) => { activeCollection = e.target.value; refreshAll(); });
   $("#importGist").addEventListener("click", importFromGist);
   $("#btnExportJson").addEventListener("click", exportJson);
-  $("#useFirebasePreset").addEventListener("click", fillFirebasePreset);
-  $("#connectFirebase").addEventListener("click", () => tryInitFirebase(true));
   $("#syncFirebase").addEventListener("click", async () => { await pullFromFirebase(); refreshAll(); toast("Firebase에서 최신 단어장을 불러왔어요."); });
   document.addEventListener("keydown", handleShortcuts);
 }
@@ -607,57 +605,37 @@ function renderIm1Missing(items) {
 
 
 
-function fillFirebasePreset() {
-  $("#fbAuthDomain").value = FIREBASE_PRESET.authDomain;
-  $("#fbProjectId").value = FIREBASE_PRESET.projectId;
-  if (!$("#fbBookId").value) $("#fbBookId").value = "im1-shared";
-  toast("기본 Firebase 설정을 채웠어요. apiKey만 입력 후 연결하세요.");
-}
 
-function hydrateFirebaseInputs() {
-  const cfg = JSON.parse(localStorage.getItem(FIREBASE_CONFIG_KEY) || "null");
-  if (!cfg) return;
-  $("#fbApiKey").value = cfg.apiKey || "";
-  $("#fbAuthDomain").value = cfg.authDomain || "";
-  $("#fbProjectId").value = cfg.projectId || "";
-  $("#fbBookId").value = cfg.bookId || "";
-}
 
 async function tryInitFirebase(showToast = true) {
-  const config = {
-    apiKey: clean($("#fbApiKey")?.value),
-    authDomain: clean($("#fbAuthDomain")?.value),
-    projectId: clean($("#fbProjectId")?.value),
-    storageBucket: FIREBASE_PRESET.storageBucket,
-    messagingSenderId: FIREBASE_PRESET.messagingSenderId,
-    appId: FIREBASE_PRESET.appId,
-    measurementId: FIREBASE_PRESET.measurementId,
-    bookId: clean($("#fbBookId")?.value) || "public-im1"
-  };
-  if (!config.apiKey || !config.authDomain || !config.projectId) {
-    if (showToast) toast("Firebase 설정값(apiKey/authDomain/projectId)을 입력해 주세요.");
-    return false;
-  }
   if (!window.firebase) {
     if (showToast) toast("Firebase SDK를 불러오지 못했어요.");
     return false;
   }
-  localStorage.setItem(FIREBASE_CONFIG_KEY, JSON.stringify(config));
-  const appName = `voca-${config.projectId}`;
-  const app = firebase.apps.find(a => a.name === appName) || firebase.initializeApp({
-    apiKey: config.apiKey,
-    authDomain: config.authDomain,
-    projectId: config.projectId,
-    storageBucket: config.storageBucket,
-    messagingSenderId: config.messagingSenderId,
-    appId: config.appId,
-    measurementId: config.measurementId
-  }, appName);
+  if (!FIREBASE_CONFIG.apiKey || FIREBASE_CONFIG.apiKey === "YOUR_API_KEY") {
+    $("#firebaseState").textContent = "apiKey 필요";
+    if (showToast) toast("app.js의 FIREBASE_CONFIG.apiKey를 입력해 주세요.");
+    return false;
+  }
+  const appName = `voca-${FIREBASE_CONFIG.projectId}`;
+  const app = firebase.apps.find(a => a.name === appName) || firebase.initializeApp(FIREBASE_CONFIG, appName);
   firestore = firebase.firestore(app);
-  firebaseBookId = config.bookId;
-  if (showToast) toast("Firebase 연결 완료. 이제 단어가 공유 저장됩니다.");
+  $("#firebaseState").textContent = "실시간 연결됨";
+  bindRealtimeSync();
+  if (showToast) toast("Firebase 자동 연결 완료");
   return true;
 }
+
+function bindRealtimeSync() {
+  if (!firestore || unsubscribeRealtime) return;
+  unsubscribeRealtime = firestore.collection("wordbooks").doc(firebaseBookId).collection("words")
+    .onSnapshot((snap) => {
+      words = normalizeWords(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(words));
+      refreshAll();
+    }, () => toast("Firebase 실시간 수신에 실패했어요."));
+}
+
 
 async function pullFromFirebase() {
   if (!firestore || !firebaseBookId) return;
