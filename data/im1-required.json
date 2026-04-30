@@ -1,0 +1,12 @@
+[
+  {"term":"introduce","meaning":"소개하다","category":"IM1 필수","collection":"IM1"},
+  {"term":"hobby","meaning":"취미","category":"IM1 필수","collection":"IM1"},
+  {"term":"colleague","meaning":"동료","category":"IM1 필수","collection":"IM1"},
+  {"term":"appointment","meaning":"약속","category":"IM1 필수","collection":"IM1"},
+  {"term":"reservation","meaning":"예약","category":"IM1 필수","collection":"IM1"},
+  {"term":"commute","meaning":"통근하다","category":"IM1 필수","collection":"IM1"},
+  {"term":"neighborhood","meaning":"동네","category":"IM1 필수","collection":"IM1"},
+  {"term":"groceries","meaning":"식료품","category":"IM1 필수","collection":"IM1"},
+  {"term":"routine","meaning":"일상","category":"IM1 필수","collection":"IM1"},
+  {"term":"schedule","meaning":"일정","category":"IM1 필수","collection":"IM1"}
+]

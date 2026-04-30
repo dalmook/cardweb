@@ -6,6 +6,20 @@ let onlyLearning = false;
 let quizState = { items: [], index: 0, score: 0, wrong: [] };
 let matchState = { first: null, pairsLeft: 0, startedAt: null, timer: null };
 let activeCollection = "전체";
+let editingWordId = null;
+
+let firestore = null;
+let firebaseBookId = "im1-shared";
+let unsubscribeRealtime = null;
+const FIREBASE_CONFIG = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "wordcard-319dd.firebaseapp.com",
+  projectId: "wordcard-319dd",
+  storageBucket: "wordcard-319dd.firebasestorage.app",
+  messagingSenderId: "77378884403",
+  appId: "1:77378884403:web:c56509464ae1cd0d4ba446",
+  measurementId: "G-4RP9PE5NGM"
+};
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
@@ -24,6 +38,14 @@ function toast(message) {
 
 async function init() {
   bindEvents();
+  await tryInitFirebase(false);
+
+  if (firestore) {
+    await pullFromFirebase();
+    refreshAll();
+    return;
+  }
+
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
     words = normalizeWords(JSON.parse(saved));
@@ -63,6 +85,7 @@ function normalizeWords(rows) {
 
 function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(words));
+  if (firestore) pushToFirebase();
 }
 
 function bindEvents() {
@@ -84,6 +107,7 @@ function bindEvents() {
   $("#fileImport").addEventListener("change", importFile);
   $("#downloadTemplate").addEventListener("click", downloadTemplate);
   $("#loadSample").addEventListener("click", loadSample);
+  $("#loadIm1Required").addEventListener("click", loadIm1Required);
   $("#clearAll").addEventListener("click", clearAll);
   $("#addWord").addEventListener("click", addWordFromForm);
   $("#importBulk").addEventListener("click", importBulk);
@@ -91,6 +115,12 @@ function bindEvents() {
   $("#activeCollection").addEventListener("change", (e) => { activeCollection = e.target.value; refreshAll(); });
   $("#importGist").addEventListener("click", importFromGist);
   $("#btnExportJson").addEventListener("click", exportJson);
+  $("#syncFirebase").addEventListener("click", async () => { await pullFromFirebase(); refreshAll(); toast("Firebase에서 최신 단어장을 불러왔어요."); });
+  $("#closeEditModal").addEventListener("click", closeEditModal);
+  $("#saveWordEdit").addEventListener("click", saveWordEdit);
+  $("#copyToCategory").addEventListener("click", copyWordToCategory);
+  $("#moveToCategory").addEventListener("click", moveWordToCategory);
+  $("#deleteWordInModal").addEventListener("click", deleteWordInModal);
   document.addEventListener("keydown", handleShortcuts);
 }
 
@@ -461,6 +491,7 @@ function renderWordList() {
     node.querySelector(".word-term").textContent = w.term;
     node.querySelector(".word-meaning").textContent = w.meaning;
     node.querySelector(".word-extra").textContent = `${w.collection || "기본세트"} / ${w.category || "기본"}${w.pronunciation ? " · " + w.pronunciation : ""}${w.example ? " · " + w.example : ""}`;
+    node.querySelector(".edit-word").addEventListener("click", () => editWord(w.id));
     const toggle = node.querySelector(".toggle-status");
     toggle.textContent = w.status === "known" ? "알고 있음" : "학습 중";
     toggle.addEventListener("click", () => {
@@ -473,6 +504,72 @@ function renderWordList() {
     });
     list.appendChild(node);
   });
+}
+
+
+function editWord(id) {
+  const target = words.find(w => w.id === id);
+  if (!target) return;
+  editingWordId = id;
+  $("#editTerm").value = target.term;
+  $("#editMeaning").value = target.meaning;
+  $("#editPron").value = target.pronunciation || "";
+  $("#editExample").value = target.example || "";
+  $("#editCollection").value = target.collection || "기본세트";
+  $("#editCategory").value = target.category || "기본";
+  ["#chkTerm", "#chkMeaning", "#chkPron", "#chkExample", "#chkCollection", "#chkCategory"].forEach(sel => $(sel).checked = false);
+  $("#editModal").classList.add("open");
+  $("#editModal").setAttribute("aria-hidden", "false");
+}
+
+function closeEditModal() {
+  editingWordId = null;
+  $("#editModal").classList.remove("open");
+  $("#editModal").setAttribute("aria-hidden", "true");
+}
+
+function getEditingWord() {
+  return words.find(w => w.id === editingWordId);
+}
+
+function saveWordEdit() {
+  const target = getEditingWord();
+  if (!target) return;
+  if ($("#chkTerm").checked) target.term = clean($("#editTerm").value);
+  if ($("#chkMeaning").checked) target.meaning = clean($("#editMeaning").value);
+  if ($("#chkPron").checked) target.pronunciation = clean($("#editPron").value);
+  if ($("#chkExample").checked) target.example = clean($("#editExample").value);
+  if ($("#chkCollection").checked) target.collection = clean($("#editCollection").value) || "기본세트";
+  if ($("#chkCategory").checked) target.category = clean($("#editCategory").value) || "기본";
+  if (!target.term || !target.meaning) return toast("단어와 뜻은 비워둘 수 없어요.");
+  save(); refreshAll(); toast("선택 항목만 수정했어요.");
+}
+
+function copyWordToCategory() {
+  const target = getEditingWord();
+  if (!target) return;
+  const category = clean($("#editCategory").value);
+  if (!category) return toast("복사할 카테고리를 입력해 주세요.");
+  const copied = { ...target, id: uid(), category, status: "learning" };
+  words.push(copied);
+  save(); refreshAll(); toast(`${target.term} 단어를 ${category} 카테고리로 복사했어요.`);
+}
+
+function moveWordToCategory() {
+  const target = getEditingWord();
+  if (!target) return;
+  const category = clean($("#editCategory").value);
+  if (!category) return toast("이동할 카테고리를 입력해 주세요.");
+  target.category = category;
+  save(); refreshAll(); toast(`${target.term} 단어를 ${category}로 이동했어요.`);
+}
+
+function deleteWordInModal() {
+  const target = getEditingWord();
+  if (!target) return;
+  if (!confirm(`'${target.term}' 단어를 삭제할까요?`)) return;
+  words = words.filter(w => w.id !== target.id);
+  save(); refreshAll(); closeEditModal(); toast("단어를 삭제했어요.");
 }
 
 function exportJson() {
@@ -511,6 +608,125 @@ function handleShortcuts(e) {
   if (e.key === "ArrowRight") nextCard();
   if (e.key === "ArrowLeft") prevCard();
   if (e.key === " ") { e.preventDefault(); flipCard(); }
+}
+
+
+
+async function loadIm1Required() {
+  try {
+    const res = await fetch("data/im1-required.json");
+    if (!res.ok) throw new Error(String(res.status));
+    const required = normalizeWords(await res.json());
+    if (!required.length) return toast("IM1 필수 단어 JSON이 비어 있어요.");
+
+    const existingTerms = new Set(words.map(w => clean(w.term).toLowerCase()));
+    const missing = required.filter(w => !existingTerms.has(clean(w.term).toLowerCase()));
+
+    words = [...words, ...missing];
+    save();
+    refreshAll();
+
+    if (!missing.length) {
+      renderIm1Missing([]);
+      return toast("이미 IM1 필수 단어가 모두 등록되어 있어요.");
+    }
+
+    renderIm1Missing(missing);
+    toast(`IM1 필수 ${missing.length}개를 추가했어요. 빈 뜻은 바로 입력해 주세요.`);
+  } catch (err) {
+    console.error(err);
+    toast("IM1 필수 JSON을 불러오지 못했어요.");
+  }
+}
+
+function renderIm1Missing(items) {
+  const box = $("#im1MissingBox");
+  if (!items.length) {
+    box.style.display = "none";
+    box.innerHTML = "";
+    return;
+  }
+
+  box.style.display = "block";
+  box.innerHTML = `
+    <h3 style="margin:0 0 8px;">IM1 추가 단어 빠른 보정</h3>
+    <p style="margin:0 0 8px;">뜻이 비어 있거나 수정이 필요한 단어는 아래에서 바로 입력하세요.</p>
+    <div class="form-grid">
+      ${items.map(item => `
+        <div>
+          <label>${escapeHtml(item.term)}</label>
+          <input data-im1-id="${item.id}" class="im1-meaning" placeholder="뜻 직접 입력" value="${escapeHtml(item.meaning)}" />
+        </div>
+      `).join("")}
+    </div>
+    <button id="saveIm1Meanings" class="primary">IM1 뜻 저장</button>
+  `;
+
+  $("#saveIm1Meanings").addEventListener("click", () => {
+    $$(".im1-meaning").forEach(inp => {
+      const target = words.find(w => w.id === inp.dataset.im1Id);
+      if (target) target.meaning = clean(inp.value);
+    });
+    words = words.filter(w => w.term && w.meaning);
+    save();
+    refreshAll();
+    renderIm1Missing([]);
+    toast("IM1 단어 뜻을 저장했어요.");
+  });
+}
+
+
+
+
+
+
+async function tryInitFirebase(showToast = true) {
+  if (!window.firebase) {
+    if (showToast) toast("Firebase SDK를 불러오지 못했어요.");
+    return false;
+  }
+  if (!FIREBASE_CONFIG.apiKey || FIREBASE_CONFIG.apiKey === "YOUR_API_KEY") {
+    $("#firebaseState").textContent = "apiKey 필요";
+    if (showToast) toast("app.js의 FIREBASE_CONFIG.apiKey를 입력해 주세요.");
+    return false;
+  }
+  const appName = `voca-${FIREBASE_CONFIG.projectId}`;
+  const app = firebase.apps.find(a => a.name === appName) || firebase.initializeApp(FIREBASE_CONFIG, appName);
+  firestore = firebase.firestore(app);
+  $("#firebaseState").textContent = "실시간 연결됨";
+  bindRealtimeSync();
+  if (showToast) toast("Firebase 자동 연결 완료");
+  return true;
+}
+
+function bindRealtimeSync() {
+  if (!firestore || unsubscribeRealtime) return;
+  unsubscribeRealtime = firestore.collection("wordbooks").doc(firebaseBookId).collection("words")
+    .onSnapshot((snap) => {
+      words = normalizeWords(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(words));
+      refreshAll();
+    }, () => toast("Firebase 실시간 수신에 실패했어요."));
+}
+
+
+async function pullFromFirebase() {
+  if (!firestore || !firebaseBookId) return;
+  const snap = await firestore.collection("wordbooks").doc(firebaseBookId).collection("words").get();
+  words = normalizeWords(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(words));
+}
+
+async function pushToFirebase() {
+  if (!firestore || !firebaseBookId) return;
+  const colRef = firestore.collection("wordbooks").doc(firebaseBookId).collection("words");
+  const existing = await colRef.get();
+  const existingIds = new Set(existing.docs.map(d => d.id));
+  const currentIds = new Set(words.map(w => w.id));
+  const batch = firestore.batch();
+  words.forEach(w => batch.set(colRef.doc(w.id), w));
+  existingIds.forEach(id => { if (!currentIds.has(id)) batch.delete(colRef.doc(id)); });
+  await batch.commit();
 }
 
 init();
