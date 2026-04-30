@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>단어카드 스튜디오</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">GitHub Pages · Excel Import · Flashcards</p>
+        <h1>단어카드 스튜디오</h1>
+        <p class="hero-copy">엑셀로 한 번에 넣고, 카드로 넘기고, 퀴즈와 매칭으로 외우는 개인 단어장입니다.</p>
+      </div>
+      <div class="hero-actions">
+        <button class="ghost" id="btnExportJson">JSON 백업</button>
+        <button class="primary" data-tab="manage">단어 추가</button>
+      </div>
+    </header>
+
+    <section class="stats-grid" aria-label="학습 현황">
+      <article class="stat-card"><span>전체 단어</span><strong id="statTotal">0</strong></article>
+      <article class="stat-card"><span>알고 있음</span><strong id="statKnown">0</strong></article>
+      <article class="stat-card"><span>학습 중</span><strong id="statLearning">0</strong></article>
+      <article class="stat-card"><span>카테고리</span><strong id="statCategories">0</strong></article>
+    </section>
+
+    <nav class="tabs" aria-label="학습 메뉴">
+      <button class="tab active" data-tab="cards">카드학습</button>
+      <button class="tab" data-tab="quiz">퀴즈</button>
+      <button class="tab" data-tab="match">매칭게임</button>
+      <button class="tab" data-tab="manage">단어관리</button>
+    </nav>
+
+    <main>
+      <section class="panel active" id="panel-cards">
+        <div class="toolbar">
+          <label>카테고리
+            <select id="cardCategory"></select>
+          </label>
+          <label>출제 방향
+            <select id="studyDirection">
+              <option value="term">단어 → 뜻</option>
+              <option value="meaning">뜻 → 단어</option>
+            </select>
+          </label>
+          <button id="btnShuffle">섞기</button>
+          <button id="btnOnlyLearning">학습 중만</button>
+        </div>
+
+        <div class="flashcard-wrap">
+          <button class="nav-btn" id="prevCard" aria-label="이전 카드">‹</button>
+          <article class="flashcard" id="flashcard" tabindex="0" role="button" aria-label="카드를 눌러 뒤집기">
+            <div class="card-face card-front">
+              <span class="pill" id="cardMeta">카드</span>
+              <h2 id="cardFront">단어가 없습니다</h2>
+              <p id="cardHint">단어를 추가하거나 예시 데이터를 불러오세요.</p>
+            </div>
+            <div class="card-face card-back">
+              <span class="pill muted">뜻</span>
+              <h2 id="cardBack">-</h2>
+              <p id="cardExample">-</p>
+            </div>
+          </article>
+          <button class="nav-btn" id="nextCard" aria-label="다음 카드">›</button>
+        </div>
+
+        <div class="card-controls">
+          <button class="danger" id="markLearning">아직 몰라요</button>
+          <button id="btnSpeak">발음 듣기</button>
+          <button class="success" id="markKnown">알고 있어요</button>
+        </div>
+        <div class="progress-line"><div id="cardProgress"></div></div>
+      </section>
+
+      <section class="panel" id="panel-quiz">
+        <div class="section-head">
+          <div>
+            <h2>퀴즈 모드</h2>
+            <p>객관식과 직접 입력으로 단어를 확인합니다.</p>
+          </div>
+          <div class="inline-actions">
+            <select id="quizCategory"></select>
+            <button class="primary" id="startQuiz">퀴즈 시작</button>
+          </div>
+        </div>
+        <div id="quizBox" class="quiz-box empty-state">퀴즈 시작 버튼을 누르면 문제가 생성됩니다.</div>
+      </section>
+
+      <section class="panel" id="panel-match">
+        <div class="section-head">
+          <div>
+            <h2>매칭게임</h2>
+            <p>단어와 뜻을 빠르게 짝지어 보세요.</p>
+          </div>
+          <div class="inline-actions">
+            <select id="matchCategory"></select>
+            <button class="primary" id="startMatch">게임 시작</button>
+          </div>
+        </div>
+        <div class="match-status">
+          <span id="matchTimer">00:00</span>
+          <span id="matchResult">6쌍까지 자동 출제됩니다.</span>
+        </div>
+        <div class="match-grid" id="matchGrid"></div>
+      </section>
+
+      <section class="panel" id="panel-manage">
+        <div class="manage-grid">
+          <article class="box">
+            <h2>엑셀/CSV/JSON 업로드</h2>
+            <p>엑셀 첫 행은 <b>term, meaning, pronunciation, example, category, audioSrc</b> 형태를 권장합니다. 한글 헤더도 자동 인식합니다.</p>
+            <input type="file" id="fileImport" accept=".xlsx,.xls,.csv,.json" />
+            <div class="row-actions">
+              <button id="downloadTemplate">엑셀 템플릿 다운로드</button>
+              <button id="loadSample">예시 데이터 복구</button>
+              <button class="danger" id="clearAll">전체 삭제</button>
+            </div>
+          </article>
+
+          <article class="box">
+            <h2>사이트에서 바로 입력</h2>
+            <div class="form-grid">
+              <input id="inpTerm" placeholder="단어 / 표현" />
+              <input id="inpMeaning" placeholder="뜻" />
+              <input id="inpPron" placeholder="발음 힌트" />
+              <input id="inpCategory" placeholder="카테고리 예: 베트남어 1일차" />
+              <input id="inpExample" placeholder="예문" />
+              <input id="inpAudio" placeholder="오디오 경로 예: audio/l1/word001.mp3" />
+            </div>
+            <button class="primary wide" id="addWord">단어 추가</button>
+          </article>
+
+          <article class="box wide-box">
+            <h2>대량 붙여넣기</h2>
+            <p>엑셀에서 복사한 표를 그대로 붙여넣어도 됩니다. 열 순서: 단어, 뜻, 발음, 예문, 카테고리, 오디오</p>
+            <textarea id="bulkText" rows="6" placeholder="xin chào\t안녕하세요\t씬 짜오\tXin chào anh.\t인사\t"></textarea>
+            <button id="importBulk">붙여넣기 가져오기</button>
+          </article>
+        </div>
+
+        <div class="word-list-head">
+          <h2>내 단어 목록</h2>
+          <input id="searchWords" placeholder="단어/뜻/카테고리 검색" />
+        </div>
+        <div class="word-list" id="wordList"></div>
+      </section>
+    </main>
+  </div>
+
+  <template id="wordRowTemplate">
+    <div class="word-row">
+      <div>
+        <strong class="word-term"></strong>
+        <p class="word-meaning"></p>
+        <small class="word-extra"></small>
+      </div>
+      <div class="row-actions compact">
+        <button class="mini toggle-status"></button>
+        <button class="mini delete-word">삭제</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
