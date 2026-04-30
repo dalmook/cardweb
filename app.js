@@ -10,6 +10,14 @@ let activeCollection = "전체";
 const FIREBASE_CONFIG_KEY = "vocaStudioFirebaseConfig.v1";
 let firestore = null;
 let firebaseBookId = "";
+const FIREBASE_PRESET = {
+  authDomain: "wordcard-319dd.firebaseapp.com",
+  projectId: "wordcard-319dd",
+  storageBucket: "wordcard-319dd.firebasestorage.app",
+  messagingSenderId: "77378884403",
+  appId: "1:77378884403:web:c56509464ae1cd0d4ba446",
+  measurementId: "G-4RP9PE5NGM"
+};
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
@@ -106,6 +114,7 @@ function bindEvents() {
   $("#activeCollection").addEventListener("change", (e) => { activeCollection = e.target.value; refreshAll(); });
   $("#importGist").addEventListener("click", importFromGist);
   $("#btnExportJson").addEventListener("click", exportJson);
+  $("#useFirebasePreset").addEventListener("click", fillFirebasePreset);
   $("#connectFirebase").addEventListener("click", () => tryInitFirebase(true));
   $("#syncFirebase").addEventListener("click", async () => { await pullFromFirebase(); refreshAll(); toast("Firebase에서 최신 단어장을 불러왔어요."); });
   document.addEventListener("keydown", handleShortcuts);
@@ -597,6 +606,14 @@ function renderIm1Missing(items) {
 
 
 
+
+function fillFirebasePreset() {
+  $("#fbAuthDomain").value = FIREBASE_PRESET.authDomain;
+  $("#fbProjectId").value = FIREBASE_PRESET.projectId;
+  if (!$("#fbBookId").value) $("#fbBookId").value = "im1-shared";
+  toast("기본 Firebase 설정을 채웠어요. apiKey만 입력 후 연결하세요.");
+}
+
 function hydrateFirebaseInputs() {
   const cfg = JSON.parse(localStorage.getItem(FIREBASE_CONFIG_KEY) || "null");
   if (!cfg) return;
@@ -611,6 +628,10 @@ async function tryInitFirebase(showToast = true) {
     apiKey: clean($("#fbApiKey")?.value),
     authDomain: clean($("#fbAuthDomain")?.value),
     projectId: clean($("#fbProjectId")?.value),
+    storageBucket: FIREBASE_PRESET.storageBucket,
+    messagingSenderId: FIREBASE_PRESET.messagingSenderId,
+    appId: FIREBASE_PRESET.appId,
+    measurementId: FIREBASE_PRESET.measurementId,
     bookId: clean($("#fbBookId")?.value) || "public-im1"
   };
   if (!config.apiKey || !config.authDomain || !config.projectId) {
@@ -623,7 +644,15 @@ async function tryInitFirebase(showToast = true) {
   }
   localStorage.setItem(FIREBASE_CONFIG_KEY, JSON.stringify(config));
   const appName = `voca-${config.projectId}`;
-  const app = firebase.apps.find(a => a.name === appName) || firebase.initializeApp({ apiKey: config.apiKey, authDomain: config.authDomain, projectId: config.projectId }, appName);
+  const app = firebase.apps.find(a => a.name === appName) || firebase.initializeApp({
+    apiKey: config.apiKey,
+    authDomain: config.authDomain,
+    projectId: config.projectId,
+    storageBucket: config.storageBucket,
+    messagingSenderId: config.messagingSenderId,
+    appId: config.appId,
+    measurementId: config.measurementId
+  }, appName);
   firestore = firebase.firestore(app);
   firebaseBookId = config.bookId;
   if (showToast) toast("Firebase 연결 완료. 이제 단어가 공유 저장됩니다.");
