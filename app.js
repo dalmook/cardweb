@@ -6,6 +6,20 @@ let onlyLearning = false;
 let quizState = { items: [], index: 0, score: 0, wrong: [] };
 let matchState = { first: null, pairsLeft: 0, startedAt: null, timer: null };
 let activeCollection = "전체";
+let editingWordId = null;
+
+let firestore = null;
+let firebaseBookId = "im1-shared";
+let unsubscribeRealtime = null;
+const FIREBASE_CONFIG = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "wordcard-319dd.firebaseapp.com",
+  projectId: "wordcard-319dd",
+  storageBucket: "wordcard-319dd.firebasestorage.app",
+  messagingSenderId: "77378884403",
+  appId: "1:77378884403:web:c56509464ae1cd0d4ba446",
+  measurementId: "G-4RP9PE5NGM"
+};
 
 let firestore = null;
 let firebaseBookId = "im1-shared";
@@ -115,6 +129,11 @@ function bindEvents() {
   $("#importGist").addEventListener("click", importFromGist);
   $("#btnExportJson").addEventListener("click", exportJson);
   $("#syncFirebase").addEventListener("click", async () => { await pullFromFirebase(); refreshAll(); toast("Firebase에서 최신 단어장을 불러왔어요."); });
+  $("#closeEditModal").addEventListener("click", closeEditModal);
+  $("#saveWordEdit").addEventListener("click", saveWordEdit);
+  $("#copyToCategory").addEventListener("click", copyWordToCategory);
+  $("#moveToCategory").addEventListener("click", moveWordToCategory);
+  $("#deleteWordInModal").addEventListener("click", deleteWordInModal);
   document.addEventListener("keydown", handleShortcuts);
 }
 
@@ -504,37 +523,66 @@ function renderWordList() {
 function editWord(id) {
   const target = words.find(w => w.id === id);
   if (!target) return;
-  const term = prompt("단어/표현 수정", target.term);
-  if (term === null) return;
-  const meaning = prompt("뜻 수정", target.meaning);
-  if (meaning === null) return;
-  const category = prompt("카테고리 수정", target.category || "기본");
-  if (category === null) return;
-  const collection = prompt("학습세트 수정", target.collection || "기본세트");
-  if (collection === null) return;
-  const pronunciation = prompt("발음 힌트 수정", target.pronunciation || "");
-  if (pronunciation === null) return;
-  const example = prompt("예문 수정", target.example || "");
-  if (example === null) return;
+  editingWordId = id;
+  $("#editTerm").value = target.term;
+  $("#editMeaning").value = target.meaning;
+  $("#editPron").value = target.pronunciation || "";
+  $("#editExample").value = target.example || "";
+  $("#editCollection").value = target.collection || "기본세트";
+  $("#editCategory").value = target.category || "기본";
+  ["#chkTerm", "#chkMeaning", "#chkPron", "#chkExample", "#chkCollection", "#chkCategory"].forEach(sel => $(sel).checked = false);
+  $("#editModal").classList.add("open");
+  $("#editModal").setAttribute("aria-hidden", "false");
+}
 
-  const updated = normalizeWords([{
-    ...target,
-    term,
-    meaning,
-    category,
-    collection,
-    pronunciation,
-    example,
-    audioSrc: target.audioSrc,
-    status: target.status,
-    id: target.id
-  }])[0];
+function closeEditModal() {
+  editingWordId = null;
+  $("#editModal").classList.remove("open");
+  $("#editModal").setAttribute("aria-hidden", "true");
+}
 
-  if (!updated) return toast("단어와 뜻은 비워둘 수 없어요.");
-  Object.assign(target, updated);
-  save();
-  refreshAll();
-  toast("단어 정보를 수정했어요.");
+function getEditingWord() {
+  return words.find(w => w.id === editingWordId);
+}
+
+function saveWordEdit() {
+  const target = getEditingWord();
+  if (!target) return;
+  if ($("#chkTerm").checked) target.term = clean($("#editTerm").value);
+  if ($("#chkMeaning").checked) target.meaning = clean($("#editMeaning").value);
+  if ($("#chkPron").checked) target.pronunciation = clean($("#editPron").value);
+  if ($("#chkExample").checked) target.example = clean($("#editExample").value);
+  if ($("#chkCollection").checked) target.collection = clean($("#editCollection").value) || "기본세트";
+  if ($("#chkCategory").checked) target.category = clean($("#editCategory").value) || "기본";
+  if (!target.term || !target.meaning) return toast("단어와 뜻은 비워둘 수 없어요.");
+  save(); refreshAll(); toast("선택 항목만 수정했어요.");
+}
+
+function copyWordToCategory() {
+  const target = getEditingWord();
+  if (!target) return;
+  const category = clean($("#editCategory").value);
+  if (!category) return toast("복사할 카테고리를 입력해 주세요.");
+  const copied = { ...target, id: uid(), category, status: "learning" };
+  words.push(copied);
+  save(); refreshAll(); toast(`${target.term} 단어를 ${category} 카테고리로 복사했어요.`);
+}
+
+function moveWordToCategory() {
+  const target = getEditingWord();
+  if (!target) return;
+  const category = clean($("#editCategory").value);
+  if (!category) return toast("이동할 카테고리를 입력해 주세요.");
+  target.category = category;
+  save(); refreshAll(); toast(`${target.term} 단어를 ${category}로 이동했어요.`);
+}
+
+function deleteWordInModal() {
+  const target = getEditingWord();
+  if (!target) return;
+  if (!confirm(`'${target.term}' 단어를 삭제할까요?`)) return;
+  words = words.filter(w => w.id !== target.id);
+  save(); refreshAll(); closeEditModal(); toast("단어를 삭제했어요.");
 }
 
 function exportJson() {

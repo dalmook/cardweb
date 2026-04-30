@@ -187,6 +187,33 @@
     </div>
   </template>
 
+
+  <div id="editModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <h3>단어 수정/카테고리 작업</h3>
+      <p class="hero-copy" style="margin-top:0;">수정할 항목만 체크해서 저장하세요.</p>
+      <label><input type="checkbox" id="chkTerm" /> 단어/표현</label>
+      <input id="editTerm" placeholder="단어/표현" />
+      <label><input type="checkbox" id="chkMeaning" /> 뜻</label>
+      <input id="editMeaning" placeholder="뜻" />
+      <label><input type="checkbox" id="chkPron" /> 발음 힌트</label>
+      <input id="editPron" placeholder="발음 힌트" />
+      <label><input type="checkbox" id="chkExample" /> 예문</label>
+      <input id="editExample" placeholder="예문" />
+      <label><input type="checkbox" id="chkCollection" /> 학습세트</label>
+      <input id="editCollection" placeholder="학습세트" />
+      <label><input type="checkbox" id="chkCategory" /> 카테고리</label>
+      <input id="editCategory" placeholder="카테고리" />
+      <div class="row-actions">
+        <button id="saveWordEdit" class="primary">선택 항목 저장</button>
+        <button id="copyToCategory">카테고리로 복사</button>
+        <button id="moveToCategory">카테고리로 이동</button>
+        <button id="deleteWordInModal" class="danger">단어 삭제</button>
+        <button id="closeEditModal">닫기</button>
+      </div>
+    </div>
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>
