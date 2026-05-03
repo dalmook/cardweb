@@ -241,6 +241,7 @@ function playCurrentAudio() {
 
 function detectSpeechLang(text) {
   if (/[가-힣]/.test(text)) return "ko-KR";
+  if (/[ăâđêôơưĂÂĐÊÔƠƯàáảãạằắẳẵặầấẩẫậèéẻẽẹềếểễệìíỉĩịòóỏõọồốổỗộờớởỡợùúủũụừứửữựỳýỷỹỵ]/.test(text)) return "vi-VN";
   if (/[぀-ヿ]/.test(text)) return "ja-JP";
   if (/[一-鿿]/.test(text)) return "zh-CN";
   if (/[a-zA-Z]/.test(text)) return "en-US";
