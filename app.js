@@ -315,9 +315,6 @@ async function fallbackSpeak(item) {
   speechSynthesis.cancel();
   try {
     await speakWithEngine(item.term, termLang, rate);
-    if (item.meaning) {
-      await speakWithEngine(item.meaning, "ko-KR", rate);
-    }
   } catch (err) {
     console.warn("TTS 재생 실패", err);
     toast("음성 재생에 실패했어요. 브라우저 음성 설정을 확인해 주세요.");
