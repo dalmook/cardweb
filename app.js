@@ -65,6 +65,7 @@ async function init() {
   }
 
   refreshAll();
+  updateTtsRateLabel();
 }
 
 
@@ -109,6 +110,7 @@ function bindEvents() {
   $("#markKnown").addEventListener("click", () => setStatus("known"));
   $("#markLearning").addEventListener("click", () => setStatus("learning"));
   $("#btnSpeak").addEventListener("click", playCurrentAudio);
+  $("#ttsRate").addEventListener("input", updateTtsRateLabel);
   $("#startQuiz").addEventListener("click", startQuiz);
   $("#quizCategory").addEventListener("change", () => $("#quizBox").textContent = "퀴즈 시작 버튼을 누르면 문제가 생성됩니다.");
   $("#startMatch").addEventListener("click", startMatch);
@@ -248,12 +250,78 @@ function detectSpeechLang(text) {
   return "ko-KR";
 }
 
-function fallbackSpeak(item) {
+function getTtsRate() {
+  const value = Number($("#ttsRate")?.value || 0.85);
+  return Number.isFinite(value) ? value : 0.85;
+}
+
+function updateTtsRateLabel() {
+  const rate = getTtsRate();
+  const label = $("#ttsRateLabel");
+  if (label) label.textContent = `${Math.round(rate * 100)}%`;
+}
+
+function getTermSpeechLang(text) {
+  const selected = $("#ttsTermLang")?.value || "vi-VN";
+  if (selected === "auto") return detectSpeechLang(text);
+  return selected;
+}
+
+
+function findVoiceByLang(lang) {
+  if (!window.speechSynthesis) return null;
+  const voices = speechSynthesis.getVoices();
+  if (!voices.length) return null;
+  return voices.find(v => v.lang === lang)
+    || voices.find(v => v.lang?.toLowerCase().startsWith(lang.slice(0,2).toLowerCase()))
+    || null;
+}
+
+function playGoogleTts(text, lang) {
+  return new Promise((resolve, reject) => {
+    const q = encodeURIComponent(text || "");
+    const url = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${encodeURIComponent(lang)}&q=${q}`;
+    const audio = new Audio(url);
+    audio.onended = resolve;
+    audio.onerror = reject;
+    audio.play().catch(reject);
+  });
+}
+
+function speakWithEngine(text, lang, rate) {
+  if (!text) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = lang;
+    utter.rate = rate;
+    const voice = findVoiceByLang(lang);
+    if (voice) utter.voice = voice;
+    utter.onend = resolve;
+    utter.onerror = () => {
+      if (lang.startsWith("vi")) {
+        playGoogleTts(text, "vi").then(resolve).catch(reject);
+      } else {
+        reject(new Error("speech synthesis failed"));
+      }
+    };
+    speechSynthesis.speak(utter);
+  });
+}
+
+async function fallbackSpeak(item) {
   if (!window.speechSynthesis) return toast("이 브라우저는 음성 읽기를 지원하지 않아요.");
-  const utter = new SpeechSynthesisUtterance(item.term);
-  utter.lang = detectSpeechLang(item.term);
+  const rate = getTtsRate();
+  const termLang = getTermSpeechLang(item.term);
   speechSynthesis.cancel();
-  speechSynthesis.speak(utter);
+  try {
+    await speakWithEngine(item.term, termLang, rate);
+    if (item.meaning) {
+      await speakWithEngine(item.meaning, "ko-KR", rate);
+    }
+  } catch (err) {
+    console.warn("TTS 재생 실패", err);
+    toast("음성 재생에 실패했어요. 브라우저 음성 설정을 확인해 주세요.");
+  }
 }
 
 function startQuiz() {
@@ -457,6 +525,7 @@ function clearAll() {
   words = [];
   save();
   refreshAll();
+  updateTtsRateLabel();
 }
 
 function addWordFromForm() {

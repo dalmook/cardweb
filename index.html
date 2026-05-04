@@ -78,6 +78,19 @@
           <button id="btnSpeak">발음 듣기</button>
           <button class="success" id="markKnown">알고 있어요</button>
         </div>
+        <div class="tts-controls" aria-label="음성 읽기 설정">
+          <label>단어 읽기 언어
+            <select id="ttsTermLang">
+              <option value="vi-VN" selected>베트남어 (기본)</option>
+              <option value="en-US">영어</option>
+              <option value="ko-KR">한국어</option>
+              <option value="auto">자동 감지</option>
+            </select>
+          </label>
+          <label>읽기 속도 <span id="ttsRateLabel">85%</span>
+            <input id="ttsRate" type="range" min="0.5" max="1.2" step="0.05" value="0.85" />
+          </label>
+        </div>
         <div class="progress-line"><div id="cardProgress"></div></div>
       </section>
 
