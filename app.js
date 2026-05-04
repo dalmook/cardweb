@@ -65,6 +65,7 @@ async function init() {
   }
 
   refreshAll();
+  updateTtsRateLabel();
 }
 
 
@@ -109,6 +110,7 @@ function bindEvents() {
   $("#markKnown").addEventListener("click", () => setStatus("known"));
   $("#markLearning").addEventListener("click", () => setStatus("learning"));
   $("#btnSpeak").addEventListener("click", playCurrentAudio);
+  $("#ttsRate").addEventListener("input", updateTtsRateLabel);
   $("#startQuiz").addEventListener("click", startQuiz);
   $("#quizCategory").addEventListener("change", () => $("#quizBox").textContent = "퀴즈 시작 버튼을 누르면 문제가 생성됩니다.");
   $("#startMatch").addEventListener("click", startMatch);
@@ -248,12 +250,39 @@ function detectSpeechLang(text) {
   return "ko-KR";
 }
 
+function getTtsRate() {
+  const value = Number($("#ttsRate")?.value || 0.85);
+  return Number.isFinite(value) ? value : 0.85;
+}
+
+function updateTtsRateLabel() {
+  const rate = getTtsRate();
+  const label = $("#ttsRateLabel");
+  if (label) label.textContent = `${Math.round(rate * 100)}%`;
+}
+
+function getTermSpeechLang(text) {
+  const selected = $("#ttsTermLang")?.value || "vi-VN";
+  if (selected === "auto") return detectSpeechLang(text);
+  return selected;
+}
+
 function fallbackSpeak(item) {
   if (!window.speechSynthesis) return toast("이 브라우저는 음성 읽기를 지원하지 않아요.");
-  const utter = new SpeechSynthesisUtterance(item.term);
-  utter.lang = detectSpeechLang(item.term);
+  const rate = getTtsRate();
+  const termUtter = new SpeechSynthesisUtterance(item.term);
+  termUtter.lang = getTermSpeechLang(item.term);
+  termUtter.rate = rate;
+
+  const meaningUtter = new SpeechSynthesisUtterance(item.meaning || "");
+  meaningUtter.lang = "ko-KR";
+  meaningUtter.rate = rate;
+
   speechSynthesis.cancel();
-  speechSynthesis.speak(utter);
+  speechSynthesis.speak(termUtter);
+  if (item.meaning) {
+    termUtter.onend = () => speechSynthesis.speak(meaningUtter);
+  }
 }
 
 function startQuiz() {
@@ -457,6 +486,7 @@ function clearAll() {
   words = [];
   save();
   refreshAll();
+  updateTtsRateLabel();
 }
 
 function addWordFromForm() {
