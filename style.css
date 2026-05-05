@@ -160,6 +160,86 @@ select:focus, input:focus, textarea:focus { border-color: var(--brand); box-shad
   .word-list-head input { max-width: none; }
 }
 
+
+@media (max-width: 760px) {
+  body {
+    background: var(--bg);
+  }
+  .hero-actions,
+  .toolbar,
+  .card-controls,
+  .inline-actions,
+  .row-actions {
+    width: 100%;
+  }
+  .hero-actions > *,
+  .toolbar > *,
+  .card-controls > *,
+  .inline-actions > *,
+  .row-actions > * {
+    flex: 1 1 100%;
+  }
+  .collection-picker,
+  .collection-picker select,
+  .inline-actions select,
+  #gistUrl,
+  #ttsRate {
+    min-width: 0;
+    width: 100%;
+  }
+  .card-face h2 {
+    font-size: clamp(26px, 9vw, 38px);
+  }
+  .card-face p {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .tts-controls {
+    align-items: stretch;
+  }
+  .tts-controls label {
+    width: 100%;
+  }
+  .match-status {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 420px) {
+  .app-shell {
+    padding: 10px;
+  }
+  .hero,
+  .panel,
+  .stat-card,
+  .box,
+  .word-row,
+  .quiz-box,
+  .empty-state {
+    border-radius: 16px;
+  }
+  .tabs {
+    padding: 6px;
+    gap: 6px;
+  }
+  .tab {
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+  .flashcard {
+    min-height: 300px;
+  }
+  .card-face {
+    padding: 18px;
+  }
+  .mini {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
+
 /* UX polish */
 button:focus-visible, .flashcard:focus-visible, .match-card:focus-visible {
   outline: 3px solid rgba(66,85,255,.45);
