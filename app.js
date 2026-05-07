@@ -13,7 +13,14 @@ let problemAudioState = {
   paused: false,
   stopRequested: false,
   audio: null,
-  gapTimer: null
+  gapTimer: null,
+  gapResolve: null,
+  answerTimer: null,
+  answerTimerRunning: false,
+  answerTimerPaused: false,
+  answerEndAt: null,
+  answerRemainingMs: 0,
+  answerResolve: null
 };
 let opicTimerState = {
   duration: 120,
@@ -1180,9 +1187,14 @@ function bindProblemAudioEvents() {
   $("#problemTopic")?.addEventListener("change", renderProblemAudioList);
   $("#problemMode")?.addEventListener("change", renderProblemAudioList);
   $("#problemCount")?.addEventListener("input", renderProblemAudioList);
+  $("#problemAnswerMinutes")?.addEventListener("input", () => {
+    resetProblemAnswerTimerDisplay();
+  });
   $("#problemPlay")?.addEventListener("click", startProblemAudio);
   $("#problemPause")?.addEventListener("click", toggleProblemPause);
   $("#problemStop")?.addEventListener("click", stopProblemAudio);
+
+  resetProblemAnswerTimerDisplay();
 }
 
 async function loadProblemAudioTopics() {
@@ -1371,10 +1383,22 @@ async function playProblemQueue(queue) {
 
       updateProblemNow(
         `${item.topicTitle} · ${item.title}`,
-        `${i + 1} / ${queue.length} · 반복 ${r} / ${repeat}`
+        `${i + 1} / ${queue.length} · 반복 ${r} / ${repeat} · 문제 재생 중`
       );
 
+      resetProblemAnswerTimerDisplay();
       await playProblemItem(item);
+
+      if (problemAudioState.stopRequested) break;
+
+      const answerMs = getProblemAnswerMs();
+      if (answerMs > 0) {
+        updateProblemNow(
+          `${item.topicTitle} · ${item.title}`,
+          `답변시간 ${formatProblemTime(answerMs)} 시작`
+        );
+        await runProblemAnswerTimer(answerMs);
+      }
 
       if (problemAudioState.stopRequested) break;
 
@@ -1391,12 +1415,15 @@ async function playProblemQueue(queue) {
 
   if (!problemAudioState.stopRequested) {
     updateProblemNow("재생 완료", "수고했어요. 이제 들은 문제를 직접 답변해보면 좋습니다.");
+    updateProblemAnswerTimer(0, 1, "완료");
     toast("문제재생이 끝났어요.");
   }
 
   problemAudioState.playing = false;
   problemAudioState.paused = false;
   problemAudioState.audio = null;
+  problemAudioState.answerTimerRunning = false;
+  problemAudioState.answerTimerPaused = false;
   $("#problemPause").textContent = "일시정지";
 }
 
@@ -1426,28 +1453,60 @@ function playProblemItem(item) {
 function waitProblemGap(ms) {
   return new Promise(resolve => {
     clearTimeout(problemAudioState.gapTimer);
-    problemAudioState.gapTimer = setTimeout(resolve, ms);
+    problemAudioState.gapResolve = resolve;
+    problemAudioState.gapTimer = setTimeout(() => {
+      problemAudioState.gapResolve = null;
+      resolve();
+    }, ms);
   });
 }
 
 function toggleProblemPause() {
   const audio = problemAudioState.audio;
-  if (!audio || !problemAudioState.playing) return;
 
-  if (problemAudioState.paused) {
-    audio.play();
-    problemAudioState.paused = false;
-    $("#problemPause").textContent = "일시정지";
-  } else {
-    audio.pause();
-    problemAudioState.paused = true;
-    $("#problemPause").textContent = "다시재생";
+  if (audio && problemAudioState.playing && !problemAudioState.answerTimerRunning) {
+    if (problemAudioState.paused) {
+      audio.play();
+      problemAudioState.paused = false;
+      $("#problemPause").textContent = "일시정지";
+    } else {
+      audio.pause();
+      problemAudioState.paused = true;
+      $("#problemPause").textContent = "다시재생";
+    }
+    return;
+  }
+
+  if (problemAudioState.answerTimerRunning) {
+    if (problemAudioState.answerTimerPaused) {
+      problemAudioState.answerEndAt = Date.now() + problemAudioState.answerRemainingMs;
+      problemAudioState.answerTimerPaused = false;
+      $("#problemPause").textContent = "일시정지";
+      $("#problemAnswerStatus").textContent = "답변시간 진행 중";
+    } else {
+      problemAudioState.answerRemainingMs = Math.max(0, problemAudioState.answerEndAt - Date.now());
+      problemAudioState.answerTimerPaused = true;
+      $("#problemPause").textContent = "다시재생";
+      $("#problemAnswerStatus").textContent = "답변시간 일시정지";
+    }
   }
 }
 
 function stopProblemAudio(showMessage = true) {
   problemAudioState.stopRequested = true;
+
   clearTimeout(problemAudioState.gapTimer);
+  clearInterval(problemAudioState.answerTimer);
+
+  if (problemAudioState.gapResolve) {
+    problemAudioState.gapResolve();
+    problemAudioState.gapResolve = null;
+  }
+
+  if (problemAudioState.answerResolve) {
+    problemAudioState.answerResolve();
+    problemAudioState.answerResolve = null;
+  }
 
   if (problemAudioState.audio) {
     problemAudioState.audio.pause();
@@ -1457,12 +1516,90 @@ function stopProblemAudio(showMessage = true) {
   problemAudioState.playing = false;
   problemAudioState.paused = false;
   problemAudioState.audio = null;
+  problemAudioState.answerTimerRunning = false;
+  problemAudioState.answerTimerPaused = false;
+  problemAudioState.answerEndAt = null;
+  problemAudioState.answerRemainingMs = 0;
 
   $("#problemPause") && ($("#problemPause").textContent = "일시정지");
 
   if (showMessage) {
     updateProblemNow("재생 정지", "다시 시작하려면 재생 시작을 누르세요.");
+    resetProblemAnswerTimerDisplay();
   }
+}
+
+function getProblemAnswerMs() {
+  const value = Number($("#problemAnswerMinutes")?.value || 2);
+  const minutes = Math.max(0, Math.min(10, Number.isFinite(value) ? value : 2));
+  return minutes * 60 * 1000;
+}
+
+function formatProblemTime(ms) {
+  const totalSeconds = Math.max(0, Math.ceil(ms / 1000));
+  const m = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+  const s = String(totalSeconds % 60).padStart(2, "0");
+  return `${m}:${s}`;
+}
+
+function resetProblemAnswerTimerDisplay() {
+  const answerMs = getProblemAnswerMs();
+  updateProblemAnswerTimer(answerMs, 0, "문제 재생 후 자동 시작");
+}
+
+function updateProblemAnswerTimer(remainingMs, progressRate, status) {
+  const display = $("#problemAnswerDisplay");
+  const circle = $("#problemAnswerCircle");
+  const statusEl = $("#problemAnswerStatus");
+
+  if (display) display.textContent = formatProblemTime(remainingMs);
+  if (circle) {
+    circle.style.setProperty("--answer-progress", `${Math.min(1, Math.max(0, progressRate)) * 360}deg`);
+    circle.classList.toggle("warning", remainingMs > 0 && remainingMs <= 10000);
+    circle.classList.toggle("ended", remainingMs <= 0 && progressRate >= 1);
+  }
+  if (statusEl) statusEl.textContent = status;
+}
+
+function runProblemAnswerTimer(durationMs) {
+  return new Promise(resolve => {
+    clearInterval(problemAudioState.answerTimer);
+
+    problemAudioState.answerTimerRunning = true;
+    problemAudioState.answerTimerPaused = false;
+    problemAudioState.answerResolve = resolve;
+    problemAudioState.answerEndAt = Date.now() + durationMs;
+    problemAudioState.answerRemainingMs = durationMs;
+
+    $("#problemPause").textContent = "일시정지";
+    updateProblemAnswerTimer(durationMs, 0, "답변시간 진행 중");
+
+    problemAudioState.answerTimer = setInterval(() => {
+      if (problemAudioState.stopRequested) {
+        clearInterval(problemAudioState.answerTimer);
+        problemAudioState.answerTimerRunning = false;
+        problemAudioState.answerResolve = null;
+        resolve();
+        return;
+      }
+
+      if (problemAudioState.answerTimerPaused) return;
+
+      const remaining = Math.max(0, problemAudioState.answerEndAt - Date.now());
+      const progress = durationMs ? (durationMs - remaining) / durationMs : 1;
+
+      problemAudioState.answerRemainingMs = remaining;
+      updateProblemAnswerTimer(remaining, progress, "답변시간 진행 중");
+
+      if (remaining <= 0) {
+        clearInterval(problemAudioState.answerTimer);
+        problemAudioState.answerTimerRunning = false;
+        problemAudioState.answerResolve = null;
+        updateProblemAnswerTimer(0, 1, "답변시간 종료");
+        resolve();
+      }
+    }, 200);
+  });
 }
 
 function updateProblemNow(title, meta) {

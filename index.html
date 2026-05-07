@@ -136,6 +136,11 @@
               재생 간격(초)
               <input id="problemGap" type="number" min="0" max="30" step="0.5" value="2" />
             </label>
+
+            <label>
+              답변시간(분)
+              <input id="problemAnswerMinutes" type="number" min="0" max="10" step="0.5" value="2" />
+            </label>
           </div>
 
           <div class="problem-actions">
@@ -144,6 +149,14 @@
             <button class="danger" id="problemStop">정지</button>
           </div>
 
+          <div class="problem-answer-timer">
+            <div class="problem-answer-circle" id="problemAnswerCircle">
+              <span>답변시간</span>
+              <strong id="problemAnswerDisplay">02:00</strong>
+              <em id="problemAnswerStatus">문제 재생 후 자동 시작</em>
+            </div>
+          </div>
+          
           <div class="problem-now">
             <strong id="problemNowTitle">아직 재생 중인 문제가 없습니다.</strong>
             <span id="problemNowMeta">토픽과 모드를 선택한 뒤 시작하세요.</span>
