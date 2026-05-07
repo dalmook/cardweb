@@ -13,8 +13,7 @@ let opicTimerState = {
   endAt: null,
   label: "2분 답변 연습"
 };
-let activeCollection = "전체";
-let editingWordId = null;
+let activeCollection = "전체"; let editingWordId = null; let manageCategory = "전체";
 
 let firestore = null;
 let firebaseBookId = "im1-shared";
@@ -139,6 +138,18 @@ function bindEvents() {
   $("#copyToCategory").addEventListener("click", copyWordToCategory);
   $("#moveToCategory").addEventListener("click", moveWordToCategory);
   $("#deleteWordInModal").addEventListener("click", deleteWordInModal);
+  $("#manageCategory")?.addEventListener("change", (e) => {
+  manageCategory = e.target.value || "전체";
+  renderCategoryManager();
+
+  if (manageCategory !== "전체") {
+    $("#defaultCategory").value = manageCategory;
+  }
+});
+
+$("#renameCategory")?.addEventListener("click", renameSelectedCategory);
+$("#deleteCategory")?.addEventListener("click", deleteSelectedCategory);
+$("#useCategoryForAdd")?.addEventListener("click", useSelectedCategoryForAdd);
   document.addEventListener("keydown", handleShortcuts);
   bindOpicTimerEvents();
 }
@@ -153,8 +164,10 @@ function refreshAll() {
   renderCollectionOptions();
   renderStats();
   renderCategoryOptions();
+  renderManageCategoryOptions();
   refreshCardFilter();
   renderWordList();
+  renderCategoryManager();
 }
 
 function collections() {
@@ -181,7 +194,179 @@ function renderCategoryOptions() {
   const html = categories().map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
   ["#cardCategory", "#quizCategory", "#matchCategory"].forEach(sel => $(sel).innerHTML = html);
 }
+function renderManageCategoryOptions() {
+  const sel = $("#manageCategory");
+  if (!sel) return;
 
+  const opts = categories();
+  if (!opts.includes(manageCategory)) {
+    manageCategory = "전체";
+  }
+
+  sel.innerHTML = opts.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
+  sel.value = manageCategory;
+}
+
+function getCategoryRows(categoryName) {
+  return currentWords().filter(w => {
+    const cat = w.category || "기본";
+    return categoryName === "전체" || cat === categoryName;
+  });
+}
+
+function renderCategoryManager() {
+  const list = $("#categoryWordList");
+  if (!list) return;
+
+  const selected = manageCategory || "전체";
+  const rows = getCategoryRows(selected);
+
+  const summary = $("#categorySummary");
+  if (summary) {
+    summary.textContent = selected === "전체"
+      ? `전체 · ${rows.length}개`
+      : `${selected} · ${rows.length}개`;
+  }
+
+  const renameInput = $("#renameCategoryInput");
+  if (renameInput && document.activeElement !== renameInput) {
+    renameInput.value = selected === "전체" ? "" : selected;
+  }
+
+  list.innerHTML = "";
+
+  if (!rows.length) {
+    list.innerHTML = `<div class="empty-state">이 카테고리에 표시할 단어가 없습니다.</div>`;
+    return;
+  }
+
+  rows.forEach(w => {
+    const row = document.createElement("div");
+    row.className = "category-word-row";
+
+    const info = document.createElement("div");
+
+    const title = document.createElement("strong");
+    title.textContent = w.term;
+
+    const meaning = document.createElement("p");
+    meaning.textContent = w.meaning;
+
+    const meta = document.createElement("small");
+    meta.textContent = `${w.collection || "기본세트"} / ${w.category || "기본"}${w.example ? " · " + w.example : ""}`;
+
+    info.append(title, meaning, meta);
+
+    const actions = document.createElement("div");
+    actions.className = "row-actions compact";
+
+    const editBtn = document.createElement("button");
+    editBtn.className = "mini";
+    editBtn.type = "button";
+    editBtn.textContent = "수정";
+    editBtn.addEventListener("click", () => editWord(w.id));
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "mini danger";
+    deleteBtn.type = "button";
+    deleteBtn.textContent = "삭제";
+    deleteBtn.addEventListener("click", () => {
+      if (!confirm(`'${w.term}' 단어를 삭제할까요?`)) return;
+      words = words.filter(item => item.id !== w.id);
+      save();
+      refreshAll();
+      toast("단어를 삭제했어요.");
+    });
+
+    actions.append(editBtn, deleteBtn);
+    row.append(info, actions);
+    list.appendChild(row);
+  });
+}
+
+function renameSelectedCategory() {
+  const oldName = manageCategory;
+  const newName = clean($("#renameCategoryInput")?.value);
+
+  if (!oldName || oldName === "전체") {
+    return toast("이름을 바꿀 카테고리를 선택해 주세요.");
+  }
+
+  if (!newName) {
+    return toast("새 카테고리 이름을 입력해 주세요.");
+  }
+
+  if (oldName === newName) {
+    return toast("기존 이름과 같습니다.");
+  }
+
+  const targets = words.filter(w => {
+    const inCollection = activeCollection === "전체" || w.collection === activeCollection;
+    return inCollection && (w.category || "기본") === oldName;
+  });
+
+  if (!targets.length) {
+    return toast("변경할 단어가 없습니다.");
+  }
+
+  if (!confirm(`[${oldName}] 카테고리 ${targets.length}개 단어를 [${newName}]으로 변경할까요?`)) return;
+
+  targets.forEach(w => {
+    w.category = newName;
+  });
+
+  if ($("#defaultCategory")?.value === oldName) {
+    $("#defaultCategory").value = newName;
+  }
+
+  manageCategory = newName;
+  save();
+  refreshAll();
+  toast(`카테고리 이름을 '${newName}'으로 변경했어요.`);
+}
+
+function deleteSelectedCategory() {
+  const categoryName = manageCategory;
+
+  if (!categoryName || categoryName === "전체") {
+    return toast("삭제할 카테고리를 선택해 주세요.");
+  }
+
+  const targets = words.filter(w => {
+    const inCollection = activeCollection === "전체" || w.collection === activeCollection;
+    return inCollection && (w.category || "기본") === categoryName;
+  });
+
+  if (!targets.length) {
+    return toast("삭제할 단어가 없습니다.");
+  }
+
+  if (!confirm(`[${categoryName}] 카테고리의 단어 ${targets.length}개를 모두 삭제할까요?\n삭제 전 JSON 백업을 권장합니다.`)) return;
+
+  words = words.filter(w => {
+    const inCollection = activeCollection === "전체" || w.collection === activeCollection;
+    return !(inCollection && (w.category || "기본") === categoryName);
+  });
+
+  if ($("#defaultCategory")?.value === categoryName) {
+    $("#defaultCategory").value = "";
+  }
+
+  manageCategory = "전체";
+  save();
+  refreshAll();
+  toast(`[${categoryName}] 카테고리를 삭제했어요.`);
+}
+
+function useSelectedCategoryForAdd() {
+  if (!manageCategory || manageCategory === "전체") {
+    return toast("단어를 추가할 카테고리를 먼저 선택해 주세요.");
+  }
+
+  $("#defaultCategory").value = manageCategory;
+  $("#inpTerm")?.focus();
+  toast(`이제 추가되는 단어는 '${manageCategory}' 카테고리에 들어갑니다.`);
+}
 function renderStats() {
   const pool = currentWords();
   $("#statTotal").textContent = pool.length;
