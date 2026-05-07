@@ -614,30 +614,30 @@ button:focus-visible, .flashcard:focus-visible, .match-card:focus-visible {
 }
 
 .problem-controls {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 1.35fr 1.3fr .7fr .7fr .8fr .8fr;
+  gap: 8px;
   align-items: end;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  overflow: visible;
 }
 
 .problem-controls label {
-  flex: 0 0 150px;
+  min-width: 0;
   display: grid;
   gap: 6px;
   color: var(--muted);
   font-weight: 800;
+  font-size: 13px;
 }
 
-.problem-controls label:nth-child(1) {
-  flex-basis: 210px;
-}
-
-.problem-controls label:nth-child(2) {
-  flex-basis: 230px;
+.problem-controls select,
+.problem-controls input {
+  min-width: 0;
+  width: 100%;
+  padding: 10px 10px;
+  border-radius: 13px;
+  font-size: 14px;
 }
 
 .problem-actions {
@@ -794,18 +794,6 @@ button:focus-visible, .flashcard:focus-visible, .match-card:focus-visible {
 
 @media (max-width: 560px) {
   .problem-controls {
-    flex-wrap: nowrap;
-  }
-
-  .problem-controls label {
-    flex: 0 0 145px;
-  }
-
-  .problem-controls label:nth-child(1) {
-    flex-basis: 190px;
-  }
-
-  .problem-controls label:nth-child(2) {
-    flex-basis: 220px;
+    grid-template-columns: 1fr 1fr;
   }
 }
