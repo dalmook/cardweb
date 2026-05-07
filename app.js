@@ -5,6 +5,14 @@ let currentIndex = 0;
 let onlyLearning = false;
 let quizState = { items: [], index: 0, score: 0, wrong: [] };
 let matchState = { first: null, pairsLeft: 0, startedAt: null, timer: null };
+let opicTimerState = {
+  duration: 120,
+  remaining: 120,
+  running: false,
+  timer: null,
+  endAt: null,
+  label: "2분 답변 연습"
+};
 let activeCollection = "전체";
 let editingWordId = null;
 
@@ -132,6 +140,7 @@ function bindEvents() {
   $("#moveToCategory").addEventListener("click", moveWordToCategory);
   $("#deleteWordInModal").addEventListener("click", deleteWordInModal);
   document.addEventListener("keydown", handleShortcuts);
+  bindOpicTimerEvents();
 }
 
 function openTab(tabName) {
@@ -685,7 +694,174 @@ function handleShortcuts(e) {
   if (e.key === " ") { e.preventDefault(); flipCard(); }
 }
 
+function bindOpicTimerEvents() {
+  if (!$("#panel-timer")) return;
 
+  $$(".timer-preset").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const seconds = Number(btn.dataset.seconds);
+      const label = `${btn.textContent.trim()} ${seconds <= 30 ? "준비 연습" : "답변 연습"}`;
+      setOpicTimer(seconds, label);
+
+      $$(".timer-preset").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
+
+  $("#opicApplyCustom")?.addEventListener("click", applyCustomOpicTimer);
+  $("#opicCustomMinutes")?.addEventListener("keydown", e => {
+    if (e.key === "Enter") applyCustomOpicTimer();
+  });
+
+  $("#opicStartPause")?.addEventListener("click", toggleOpicTimer);
+  $("#opicReset")?.addEventListener("click", resetOpicTimer);
+
+  renderOpicTimer();
+}
+
+function setOpicTimer(seconds, label) {
+  clearInterval(opicTimerState.timer);
+
+  opicTimerState.duration = Math.max(1, Math.round(seconds));
+  opicTimerState.remaining = opicTimerState.duration;
+  opicTimerState.running = false;
+  opicTimerState.timer = null;
+  opicTimerState.endAt = null;
+  opicTimerState.label = label || "오픽 타이머";
+
+  renderOpicTimer();
+}
+
+function applyCustomOpicTimer() {
+  const minutes = Number($("#opicCustomMinutes")?.value);
+
+  if (!Number.isFinite(minutes) || minutes <= 0) {
+    return toast("사용자 지정시간을 분 단위로 입력해 주세요. 예: 1.5");
+  }
+
+  const seconds = Math.round(minutes * 60);
+  setOpicTimer(seconds, `${minutes}분 사용자 지정`);
+
+  $$(".timer-preset").forEach(b => b.classList.remove("active"));
+}
+
+function toggleOpicTimer() {
+  if (opicTimerState.running) {
+    pauseOpicTimer();
+  } else {
+    startOpicTimer();
+  }
+}
+
+function startOpicTimer() {
+  if (opicTimerState.remaining <= 0) {
+    opicTimerState.remaining = opicTimerState.duration;
+  }
+
+  opicTimerState.running = true;
+  opicTimerState.endAt = Date.now() + opicTimerState.remaining * 1000;
+
+  clearInterval(opicTimerState.timer);
+  opicTimerState.timer = setInterval(() => {
+    const left = Math.ceil((opicTimerState.endAt - Date.now()) / 1000);
+    opicTimerState.remaining = Math.max(0, left);
+    renderOpicTimer();
+
+    if (opicTimerState.remaining <= 0) {
+      finishOpicTimer();
+    }
+  }, 200);
+
+  renderOpicTimer();
+}
+
+function pauseOpicTimer() {
+  opicTimerState.running = false;
+  clearInterval(opicTimerState.timer);
+  opicTimerState.timer = null;
+  renderOpicTimer();
+}
+
+function resetOpicTimer() {
+  opicTimerState.running = false;
+  clearInterval(opicTimerState.timer);
+  opicTimerState.timer = null;
+  opicTimerState.remaining = opicTimerState.duration;
+  renderOpicTimer();
+}
+
+function finishOpicTimer() {
+  opicTimerState.running = false;
+  clearInterval(opicTimerState.timer);
+  opicTimerState.timer = null;
+  opicTimerState.remaining = 0;
+  renderOpicTimer();
+  playOpicTimerEndSound();
+  if (navigator.vibrate) navigator.vibrate([250, 120, 250]);
+  toast("시간 종료! 답변을 마무리하세요.");
+}
+
+function renderOpicTimer() {
+  const display = $("#opicTimerDisplay");
+  if (!display) return;
+
+  const remain = opicTimerState.remaining;
+  const min = String(Math.floor(remain / 60)).padStart(2, "0");
+  const sec = String(remain % 60).padStart(2, "0");
+
+  display.textContent = `${min}:${sec}`;
+  $("#opicTimerLabel").textContent = opicTimerState.label;
+
+  const hint = $("#opicTimerHint");
+  if (hint) {
+    if (remain <= 0) hint.textContent = "시간 종료! 다음 답변으로 넘어가세요.";
+    else if (remain <= 10) hint.textContent = "마무리 문장으로 정리하세요.";
+    else if (opicTimerState.running) hint.textContent = "말하는 중입니다. 멈추지 말고 계속!";
+    else hint.textContent = "시간을 선택하고 시작하세요.";
+  }
+
+  const ratio = opicTimerState.duration
+    ? (opicTimerState.duration - remain) / opicTimerState.duration
+    : 0;
+
+  const circle = $("#opicTimerCircle");
+  if (circle) {
+    circle.style.setProperty("--timer-progress", `${ratio * 360}deg`);
+    circle.classList.toggle("warning", remain > 0 && remain <= 10);
+    circle.classList.toggle("ended", remain <= 0);
+  }
+
+  const btn = $("#opicStartPause");
+  if (btn) {
+    btn.textContent = opicTimerState.running ? "일시정지" : remain <= 0 ? "다시 시작" : "시작";
+  }
+}
+
+function playOpicTimerEndSound() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+
+    const ctx = new AudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(880, ctx.currentTime);
+    osc.frequency.setValueAtTime(660, ctx.currentTime + 0.18);
+
+    gain.gain.setValueAtTime(0.001, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.03);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.5);
+  } catch (err) {
+    console.warn("타이머 종료음 재생 실패", err);
+  }
+}
 
 async function loadIm1Required() {
   try {
