@@ -1,0 +1,22 @@
+{
+  "topics": [
+    {
+      "id": "topic-01",
+      "title": "Topic 1. 자기소개",
+      "basePath": "audio/Topic 1",
+      "files": [
+        { "title": "문제 1", "src": "question01.m4a" },
+        { "title": "문제 2", "src": "question02.m4a" }
+      ]
+    },
+    {
+      "id": "topic-02",
+      "title": "Topic 2. 가족",
+      "basePath": "audio/Topic 2",
+      "files": [
+        { "title": "문제 1", "src": "question01.m4a" },
+        { "title": "문제 2", "src": "question02.m4a" }
+      ]
+    }
+  ]
+}
