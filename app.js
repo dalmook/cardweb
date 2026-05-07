@@ -1378,6 +1378,9 @@ async function playProblemQueue(queue) {
     problemAudioState.index = i;
     const item = queue[i];
 
+    resetProblemAnswerTimerDisplay();
+
+    // 1) 같은 문제를 repeat 횟수만큼 먼저 재생
     for (let r = 1; r <= repeat; r++) {
       if (problemAudioState.stopRequested) break;
 
@@ -1386,30 +1389,42 @@ async function playProblemQueue(queue) {
         `${i + 1} / ${queue.length} · 반복 ${r} / ${repeat} · 문제 재생 중`
       );
 
-      resetProblemAnswerTimerDisplay();
       await playProblemItem(item);
 
       if (problemAudioState.stopRequested) break;
 
-      const answerMs = getProblemAnswerMs();
-      if (answerMs > 0) {
+      // 같은 문제 반복 사이에도 약간의 텀을 둠
+      if (r < repeat && gapMs > 0) {
         updateProblemNow(
           `${item.topicTitle} · ${item.title}`,
-          `답변시간 ${formatProblemTime(answerMs)} 시작`
-        );
-        await runProblemAnswerTimer(answerMs);
-      }
-
-      if (problemAudioState.stopRequested) break;
-
-      const isLastPlay = i === queue.length - 1 && r === repeat;
-      if (!isLastPlay && gapMs > 0) {
-        updateProblemNow(
-          `${item.topicTitle} · ${item.title}`,
-          `다음 재생까지 ${Math.round(gapMs / 1000)}초 대기`
+          `같은 문제 다시 재생까지 ${Math.round(gapMs / 1000)}초 대기`
         );
         await waitProblemGap(gapMs);
       }
+    }
+
+    if (problemAudioState.stopRequested) break;
+
+    // 2) 반복 재생이 모두 끝난 뒤 답변 타이머 시작
+    const answerMs = getProblemAnswerMs();
+    if (answerMs > 0) {
+      updateProblemNow(
+        `${item.topicTitle} · ${item.title}`,
+        `답변시간 ${formatProblemTime(answerMs)} 시작`
+      );
+      await runProblemAnswerTimer(answerMs);
+    }
+
+    if (problemAudioState.stopRequested) break;
+
+    // 3) 다음 문제로 넘어가기 전 텀
+    const isLastQuestion = i === queue.length - 1;
+    if (!isLastQuestion && gapMs > 0) {
+      updateProblemNow(
+        `${item.topicTitle} · ${item.title}`,
+        `다음 문제까지 ${Math.round(gapMs / 1000)}초 대기`
+      );
+      await waitProblemGap(gapMs);
     }
   }
 
@@ -1426,7 +1441,6 @@ async function playProblemQueue(queue) {
   problemAudioState.answerTimerPaused = false;
   $("#problemPause").textContent = "일시정지";
 }
-
 function playProblemItem(item) {
   return new Promise(resolve => {
     const audio = new Audio();
