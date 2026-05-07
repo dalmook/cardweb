@@ -35,6 +35,7 @@
 
     <nav class="tabs" aria-label="학습 메뉴">
       <button class="tab active" data-tab="cards">카드학습</button>
+      <button class="tab" data-tab="problem-audio">문제재생</button>
       <button class="tab" data-tab="timer">타이머</button>
       <button class="tab" data-tab="quiz">퀴즈</button>      
       <button class="tab" data-tab="match">매칭게임</button>
@@ -93,6 +94,63 @@
           </label>
         </div>
         <div class="progress-line"><div id="cardProgress"></div></div>
+      </section>
+
+      <section class="panel" id="panel-problem-audio">
+        <div class="problem-player">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">OPIc Audio Practice</p>
+              <h2>문제재생</h2>
+              <p>토픽을 선택해서 문제 음성을 듣고, 반복 횟수와 간격을 조절해 연습합니다.</p>
+            </div>
+            <span id="problemAudioSummary" class="pill muted">목록 불러오는 중</span>
+          </div>
+
+          <div class="problem-controls">
+            <label>
+              토픽
+              <select id="problemTopic"></select>
+            </label>
+
+            <label>
+              재생 모드
+              <select id="problemMode">
+                <option value="topic-all">선택 토픽 전체 재생</option>
+                <option value="topic-random">선택 토픽 랜덤 재생</option>
+                <option value="all-random">전체 토픽 랜덤 재생</option>
+              </select>
+            </label>
+
+            <label>
+              랜덤 개수
+              <input id="problemCount" type="number" min="1" value="5" />
+            </label>
+
+            <label>
+              반복 횟수
+              <input id="problemRepeat" type="number" min="1" max="20" value="1" />
+            </label>
+
+            <label>
+              재생 간격(초)
+              <input id="problemGap" type="number" min="0" max="30" step="0.5" value="2" />
+            </label>
+          </div>
+
+          <div class="problem-actions">
+            <button class="primary" id="problemPlay">재생 시작</button>
+            <button id="problemPause">일시정지</button>
+            <button class="danger" id="problemStop">정지</button>
+          </div>
+
+          <div class="problem-now">
+            <strong id="problemNowTitle">아직 재생 중인 문제가 없습니다.</strong>
+            <span id="problemNowMeta">토픽과 모드를 선택한 뒤 시작하세요.</span>
+          </div>
+
+          <div id="problemAudioList" class="problem-list"></div>
+        </div>
       </section>
 
       <section class="panel" id="panel-quiz">
