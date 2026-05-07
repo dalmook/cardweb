@@ -36,6 +36,7 @@
     <nav class="tabs" aria-label="학습 메뉴">
       <button class="tab active" data-tab="cards">카드학습</button>
       <button class="tab" data-tab="quiz">퀴즈</button>
+      <button class="tab" data-tab="timer">오픽 타이머</button>
       <button class="tab" data-tab="match">매칭게임</button>
       <button class="tab" data-tab="manage">단어관리</button>
     </nav>
@@ -107,7 +108,56 @@
         </div>
         <div id="quizBox" class="quiz-box empty-state">퀴즈 시작 버튼을 누르면 문제가 생성됩니다.</div>
       </section>
+<section class="panel" id="panel-timer">
+  <div class="opic-timer">
+    <div class="timer-hero">
+      <span class="timer-lantern lantern-left">🏮</span>
+      <span class="timer-lantern lantern-right">🏮</span>
 
+      <p class="eyebrow">OPIc Speaking Timer · Vietnam Mode</p>
+      <h2>오픽 시험용 타이머</h2>
+      <p>
+        준비 30초, 답변 1~2분, 긴 연습 5~10분까지 바로 시작하세요.
+        베트남 호이안 등불 느낌으로 살짝 분위기 넣었습니다.
+      </p>
+    </div>
+
+    <div class="timer-display-wrap">
+      <div class="timer-circle" id="opicTimerCircle">
+        <span id="opicTimerLabel">2분 답변 연습</span>
+        <strong id="opicTimerDisplay">02:00</strong>
+        <em id="opicTimerHint">시간을 선택하고 시작하세요</em>
+      </div>
+    </div>
+
+    <div class="timer-presets" aria-label="오픽 타이머 빠른 선택">
+      <button class="timer-preset" data-seconds="30">30초</button>
+      <button class="timer-preset" data-seconds="60">1분</button>
+      <button class="timer-preset" data-seconds="90">1분 30초</button>
+      <button class="timer-preset active" data-seconds="120">2분</button>
+      <button class="timer-preset" data-seconds="300">5분</button>
+      <button class="timer-preset" data-seconds="600">10분</button>
+    </div>
+
+    <div class="timer-custom">
+      <label>
+        사용자 지정시간
+        <input id="opicCustomMinutes" type="number" min="0.1" step="0.1" placeholder="예: 2.5" />
+      </label>
+      <button id="opicApplyCustom">적용</button>
+    </div>
+
+    <div class="timer-actions">
+      <button class="primary" id="opicStartPause">시작</button>
+      <button id="opicReset">리셋</button>
+    </div>
+
+    <div class="timer-tip">
+      <b>추천 연습법</b>
+      <span>30초: 답변 준비 · 1~2분: 실제 답변 · 5~10분: 스크립트 암기/말하기 반복</span>
+    </div>
+  </div>
+</section>
       <section class="panel" id="panel-match">
         <div class="section-head">
           <div>
