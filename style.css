@@ -290,3 +290,238 @@ button:focus-visible, .flashcard:focus-visible, .match-card:focus-visible {
   font-weight: 700;
 }
 #ttsRate { min-width: 220px; }
+.opic-timer {
+  display: grid;
+  gap: 22px;
+}
+
+.timer-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  padding: 28px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 224, 138, .95), transparent 24%),
+    radial-gradient(circle at 86% 18%, rgba(255, 122, 89, .8), transparent 22%),
+    linear-gradient(135deg, #b91c1c 0%, #dc2626 42%, #0f766e 100%);
+  box-shadow: var(--shadow);
+}
+
+.timer-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -45% -10%;
+  height: 120px;
+  background:
+    radial-gradient(ellipse at center, rgba(255,255,255,.28), transparent 62%);
+  transform: rotate(-2deg);
+}
+
+.timer-hero h2 {
+  margin: 6px 0 8px;
+  font-size: clamp(28px, 6vw, 48px);
+}
+
+.timer-hero p {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0;
+  color: rgba(255,255,255,.9);
+}
+
+.timer-lantern {
+  position: absolute;
+  font-size: 42px;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.24));
+  animation: lanternFloat 3.2s ease-in-out infinite;
+}
+
+.lantern-left {
+  right: 92px;
+  top: 24px;
+}
+
+.lantern-right {
+  right: 28px;
+  top: 58px;
+  animation-delay: .8s;
+}
+
+@keyframes lanternFloat {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-9px) rotate(3deg); }
+}
+
+.timer-display-wrap {
+  display: grid;
+  place-items: center;
+}
+
+.timer-circle {
+  --timer-progress: 0deg;
+  width: min(360px, 86vw);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 28px;
+  background:
+    conic-gradient(#f59e0b var(--timer-progress), #e5e7eb 0deg),
+    linear-gradient(145deg, #fff7ed, #ecfeff);
+  box-shadow: 0 22px 70px rgba(15, 23, 42, .14);
+  position: relative;
+}
+
+.timer-circle::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255,255,255,.96), rgba(255,247,237,.94)),
+    linear-gradient(160deg, #fff, #fff7ed);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.75);
+}
+
+.timer-circle > * {
+  position: relative;
+  z-index: 1;
+}
+
+#opicTimerLabel {
+  align-self: end;
+  color: #b45309;
+  font-weight: 800;
+}
+
+#opicTimerDisplay {
+  font-size: clamp(54px, 16vw, 92px);
+  line-height: .95;
+  letter-spacing: -0.06em;
+  color: #172033;
+}
+
+#opicTimerHint {
+  align-self: start;
+  font-style: normal;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.timer-circle.warning {
+  animation: timerPulse .7s ease-in-out infinite alternate;
+}
+
+.timer-circle.warning #opicTimerDisplay {
+  color: #dc2626;
+}
+
+.timer-circle.ended {
+  background:
+    conic-gradient(#dc2626 360deg, #dc2626 0deg),
+    linear-gradient(145deg, #fff1f2, #fff7ed);
+}
+
+@keyframes timerPulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.025); }
+}
+
+.timer-presets {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.timer-preset {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  font-weight: 800;
+}
+
+.timer-preset.active {
+  background: linear-gradient(135deg, #f97316, #dc2626);
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(220, 38, 38, .22);
+}
+
+.timer-custom {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.timer-custom label {
+  display: grid;
+  gap: 6px;
+  min-width: 220px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.timer-custom input {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 13px 14px;
+  background: #fff;
+}
+
+.timer-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.timer-actions button {
+  min-width: 120px;
+}
+
+.timer-tip {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  border: 1px solid #d1fae5;
+  background: linear-gradient(135deg, #ecfdf5, #fffbeb);
+  border-radius: 22px;
+  padding: 14px 16px;
+  color: #065f46;
+}
+
+.timer-tip span {
+  color: #475569;
+}
+
+@media (max-width: 720px) {
+  .timer-presets {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .timer-hero {
+    padding: 24px 20px;
+  }
+
+  .timer-lantern {
+    opacity: .5;
+  }
+
+  .lantern-left {
+    right: 62px;
+  }
+}
+
+@media (max-width: 420px) {
+  .timer-presets {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .timer-actions button {
+    flex: 1;
+  }
+}
