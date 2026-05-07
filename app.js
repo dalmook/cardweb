@@ -5,6 +5,16 @@ let currentIndex = 0;
 let onlyLearning = false;
 let quizState = { items: [], index: 0, score: 0, wrong: [] };
 let matchState = { first: null, pairsLeft: 0, startedAt: null, timer: null };
+let problemAudioState = {
+  topics: [],
+  queue: [],
+  index: 0,
+  playing: false,
+  paused: false,
+  stopRequested: false,
+  audio: null,
+  gapTimer: null
+};
 let opicTimerState = {
   duration: 120,
   remaining: 120,
@@ -45,6 +55,7 @@ function toast(message) {
 
 async function init() {
   bindEvents();
+  await loadProblemAudioTopics();
   await tryInitFirebase(false);
 
   if (firestore) {
@@ -151,6 +162,7 @@ $("#renameCategory")?.addEventListener("click", renameSelectedCategory);
 $("#deleteCategory")?.addEventListener("click", deleteSelectedCategory);
 $("#useCategoryForAdd")?.addEventListener("click", useSelectedCategoryForAdd);
   document.addEventListener("keydown", handleShortcuts);
+  bindProblemAudioEvents();
   bindOpicTimerEvents();
 }
 
@@ -1164,5 +1176,300 @@ async function pushToFirebase() {
   existingIds.forEach(id => { if (!currentIds.has(id)) batch.delete(colRef.doc(id)); });
   await batch.commit();
 }
+function bindProblemAudioEvents() {
+  $("#problemTopic")?.addEventListener("change", renderProblemAudioList);
+  $("#problemMode")?.addEventListener("change", renderProblemAudioList);
+  $("#problemCount")?.addEventListener("input", renderProblemAudioList);
+  $("#problemPlay")?.addEventListener("click", startProblemAudio);
+  $("#problemPause")?.addEventListener("click", toggleProblemPause);
+  $("#problemStop")?.addEventListener("click", stopProblemAudio);
+}
 
+async function loadProblemAudioTopics() {
+  try {
+    const res = await fetch("data/audio-topics.json");
+    if (!res.ok) throw new Error(`audio-topics.json not found: ${res.status}`);
+
+    const data = await res.json();
+    const rawTopics = Array.isArray(data) ? data : data.topics || [];
+
+    problemAudioState.topics = rawTopics
+      .map((topic, topicIndex) => {
+        const basePath = clean(topic.basePath || topic.path || "");
+        const title = clean(topic.title || topic.name || `Topic ${topicIndex + 1}`);
+        const id = clean(topic.id || `topic-${topicIndex + 1}`);
+
+        const files = (topic.files || topic.items || [])
+          .map((file, fileIndex) => {
+            const isText = typeof file === "string";
+            const fileTitle = isText
+              ? `문제 ${fileIndex + 1}`
+              : clean(file.title || file.name || `문제 ${fileIndex + 1}`);
+
+            let src = isText
+              ? clean(file)
+              : clean(file.src || file.path || file.url);
+
+            if (basePath && src && !/^https?:\/\//i.test(src) && !src.includes("/")) {
+              src = `${basePath.replace(/\/$/, "")}/${src}`;
+            }
+
+            return {
+              id: `${id}-${fileIndex + 1}`,
+              topicId: id,
+              topicTitle: title,
+              title: fileTitle,
+              src
+            };
+          })
+          .filter(item => item.src);
+
+        return { id, title, basePath, files };
+      })
+      .filter(topic => topic.files.length);
+
+    renderProblemTopicOptions();
+  } catch (err) {
+    console.warn("문제 음성 목록을 불러오지 못했습니다.", err);
+    problemAudioState.topics = [];
+    renderProblemTopicOptions();
+  }
+}
+
+function renderProblemTopicOptions() {
+  const sel = $("#problemTopic");
+  if (!sel) return;
+
+  if (!problemAudioState.topics.length) {
+    sel.innerHTML = `<option value="">오디오 목록 없음</option>`;
+    $("#problemAudioSummary").textContent = "data/audio-topics.json 확인 필요";
+    renderProblemAudioList();
+    return;
+  }
+
+  sel.innerHTML = problemAudioState.topics
+    .map(topic => `<option value="${escapeHtml(topic.id)}">${escapeHtml(topic.title)}</option>`)
+    .join("");
+
+  renderProblemAudioList();
+}
+
+function getSelectedProblemTopic() {
+  const topicId = $("#problemTopic")?.value;
+  return problemAudioState.topics.find(topic => topic.id === topicId) || problemAudioState.topics[0];
+}
+
+function getAllProblemFiles() {
+  return problemAudioState.topics.flatMap(topic => topic.files);
+}
+
+function getProblemQueue() {
+  const mode = $("#problemMode")?.value || "topic-all";
+  const selectedTopic = getSelectedProblemTopic();
+
+  let pool = [];
+
+  if (mode === "all-random") {
+    pool = getAllProblemFiles();
+  } else {
+    pool = selectedTopic?.files || [];
+  }
+
+  if (!pool.length) return [];
+
+  if (mode === "topic-random" || mode === "all-random") {
+    const count = Math.max(1, Number($("#problemCount")?.value || 5));
+    return shuffle(pool).slice(0, Math.min(count, pool.length));
+  }
+
+  return [...pool];
+}
+
+function renderProblemAudioList() {
+  const list = $("#problemAudioList");
+  if (!list) return;
+
+  const topic = getSelectedProblemTopic();
+  const files = topic?.files || [];
+  const total = getAllProblemFiles().length;
+
+  $("#problemAudioSummary").textContent = problemAudioState.topics.length
+    ? `${problemAudioState.topics.length}개 토픽 · ${total}개 문제`
+    : "오디오 목록 없음";
+
+  if (!files.length) {
+    list.innerHTML = `
+      <div class="empty-state">
+        표시할 문제 음성이 없습니다.<br>
+        data/audio-topics.json 파일과 audio 폴더 경로를 확인하세요.
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = files.map((item, index) => `
+    <div class="problem-row">
+      <div>
+        <strong>${escapeHtml(index + 1)}. ${escapeHtml(item.title)}</strong>
+        <p>${escapeHtml(item.src)}</p>
+      </div>
+      <button class="mini problem-one-play" data-src="${escapeHtml(item.src)}" data-id="${escapeHtml(item.id)}">
+        재생
+      </button>
+    </div>
+  `).join("");
+
+  $$(".problem-one-play").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const item = files.find(file => file.id === btn.dataset.id);
+      if (item) playProblemQueue([item]);
+    });
+  });
+}
+
+function getProblemRepeatCount() {
+  const value = Number($("#problemRepeat")?.value || 1);
+  return Math.max(1, Math.min(20, Number.isFinite(value) ? value : 1));
+}
+
+function getProblemGapMs() {
+  const value = Number($("#problemGap")?.value || 2);
+  const seconds = Math.max(0, Math.min(30, Number.isFinite(value) ? value : 2));
+  return seconds * 1000;
+}
+
+function startProblemAudio() {
+  const queue = getProblemQueue();
+  if (!queue.length) {
+    return toast("재생할 문제 음성이 없습니다. audio-topics.json을 확인해 주세요.");
+  }
+  playProblemQueue(queue);
+}
+
+async function playProblemQueue(queue) {
+  stopProblemAudio(false);
+
+  problemAudioState.queue = queue;
+  problemAudioState.index = 0;
+  problemAudioState.playing = true;
+  problemAudioState.paused = false;
+  problemAudioState.stopRequested = false;
+
+  const repeat = getProblemRepeatCount();
+  const gapMs = getProblemGapMs();
+
+  $("#problemPause").textContent = "일시정지";
+
+  for (let i = 0; i < queue.length; i++) {
+    if (problemAudioState.stopRequested) break;
+
+    problemAudioState.index = i;
+    const item = queue[i];
+
+    for (let r = 1; r <= repeat; r++) {
+      if (problemAudioState.stopRequested) break;
+
+      updateProblemNow(
+        `${item.topicTitle} · ${item.title}`,
+        `${i + 1} / ${queue.length} · 반복 ${r} / ${repeat}`
+      );
+
+      await playProblemItem(item);
+
+      if (problemAudioState.stopRequested) break;
+
+      const isLastPlay = i === queue.length - 1 && r === repeat;
+      if (!isLastPlay && gapMs > 0) {
+        updateProblemNow(
+          `${item.topicTitle} · ${item.title}`,
+          `다음 재생까지 ${Math.round(gapMs / 1000)}초 대기`
+        );
+        await waitProblemGap(gapMs);
+      }
+    }
+  }
+
+  if (!problemAudioState.stopRequested) {
+    updateProblemNow("재생 완료", "수고했어요. 이제 들은 문제를 직접 답변해보면 좋습니다.");
+    toast("문제재생이 끝났어요.");
+  }
+
+  problemAudioState.playing = false;
+  problemAudioState.paused = false;
+  problemAudioState.audio = null;
+  $("#problemPause").textContent = "일시정지";
+}
+
+function playProblemItem(item) {
+  return new Promise(resolve => {
+    const audio = new Audio();
+    problemAudioState.audio = audio;
+
+    audio.src = item.src;
+    audio.preload = "auto";
+
+    audio.onended = resolve;
+    audio.onerror = () => {
+      console.warn("오디오 재생 실패:", item.src);
+      toast(`재생 실패: ${item.title}`);
+      resolve();
+    };
+
+    audio.play().catch(err => {
+      console.warn("오디오 play() 실패:", err);
+      toast("브라우저가 자동 재생을 막았어요. 다시 재생 버튼을 눌러보세요.");
+      resolve();
+    });
+  });
+}
+
+function waitProblemGap(ms) {
+  return new Promise(resolve => {
+    clearTimeout(problemAudioState.gapTimer);
+    problemAudioState.gapTimer = setTimeout(resolve, ms);
+  });
+}
+
+function toggleProblemPause() {
+  const audio = problemAudioState.audio;
+  if (!audio || !problemAudioState.playing) return;
+
+  if (problemAudioState.paused) {
+    audio.play();
+    problemAudioState.paused = false;
+    $("#problemPause").textContent = "일시정지";
+  } else {
+    audio.pause();
+    problemAudioState.paused = true;
+    $("#problemPause").textContent = "다시재생";
+  }
+}
+
+function stopProblemAudio(showMessage = true) {
+  problemAudioState.stopRequested = true;
+  clearTimeout(problemAudioState.gapTimer);
+
+  if (problemAudioState.audio) {
+    problemAudioState.audio.pause();
+    problemAudioState.audio.currentTime = 0;
+  }
+
+  problemAudioState.playing = false;
+  problemAudioState.paused = false;
+  problemAudioState.audio = null;
+
+  $("#problemPause") && ($("#problemPause").textContent = "일시정지");
+
+  if (showMessage) {
+    updateProblemNow("재생 정지", "다시 시작하려면 재생 시작을 누르세요.");
+  }
+}
+
+function updateProblemNow(title, meta) {
+  const titleEl = $("#problemNowTitle");
+  const metaEl = $("#problemNowMeta");
+
+  if (titleEl) titleEl.textContent = title;
+  if (metaEl) metaEl.textContent = meta;
+}
 init();
