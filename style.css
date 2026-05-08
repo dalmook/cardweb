@@ -797,3 +797,16 @@ button:focus-visible, .flashcard:focus-visible, .match-card:focus-visible {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* 단어관리 탭: 입력 영역을 카테고리 관리보다 위에 표시 */
+#panel-manage .manage-grid > article:nth-of-type(5) {
+  order: 4;
+}
+
+#panel-manage .manage-grid > article:nth-of-type(6) {
+  order: 5;
+}
+
+#panel-manage .manage-grid > article:nth-of-type(4) {
+  order: 6;
+}
