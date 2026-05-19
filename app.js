@@ -20,7 +20,11 @@ let problemAudioState = {
   answerTimerPaused: false,
   answerEndAt: null,
   answerRemainingMs: 0,
-  answerResolve: null
+  answerResolve: null,
+  examTimer: null,
+  examRunning: false,
+  examEndAt: null,
+  examRemainingMs: 40 * 60 * 1000
 };
 let opicTimerState = {
   duration: 120,
@@ -1190,11 +1194,17 @@ function bindProblemAudioEvents() {
   $("#problemAnswerMinutes")?.addEventListener("input", () => {
     resetProblemAnswerTimerDisplay();
   });
+  $("#problemExamMinutes")?.addEventListener("input", () => {
+    if (!problemAudioState.examRunning) resetProblemExamTimerDisplay();
+  });
   $("#problemPlay")?.addEventListener("click", startProblemAudio);
   $("#problemPause")?.addEventListener("click", toggleProblemPause);
   $("#problemStop")?.addEventListener("click", stopProblemAudio);
+  $("#problemExamStart")?.addEventListener("click", startProblemExamTimer);
+  $("#problemExamStop")?.addEventListener("click", stopProblemExamTimer);
 
   resetProblemAnswerTimerDisplay();
+  resetProblemExamTimerDisplay();
 }
 
 async function loadProblemAudioTopics() {
@@ -1290,7 +1300,11 @@ function getProblemQueue() {
   if (!pool.length) return [];
 
   if (mode === "topic-random" || mode === "all-random") {
-    const count = Math.max(1, Number($("#problemCount")?.value || 5));
+    const rawCount = clean($("#problemCount")?.value);
+    const parsedCount = Number(rawCount);
+    const count = rawCount && Number.isFinite(parsedCount)
+      ? Math.max(1, parsedCount)
+      : pool.length;
     return shuffle(pool).slice(0, Math.min(count, pool.length));
   }
 
@@ -1340,13 +1354,13 @@ function renderProblemAudioList() {
 }
 
 function getProblemRepeatCount() {
-  const value = Number($("#problemRepeat")?.value || 1);
-  return Math.max(1, Math.min(20, Number.isFinite(value) ? value : 1));
+  const value = Number($("#problemRepeat")?.value || 2);
+  return Math.max(1, Math.min(20, Number.isFinite(value) ? value : 2));
 }
 
 function getProblemGapMs() {
-  const value = Number($("#problemGap")?.value || 2);
-  const seconds = Math.max(0, Math.min(30, Number.isFinite(value) ? value : 2));
+  const value = Number($("#problemGap")?.value || 5);
+  const seconds = Math.max(0, Math.min(30, Number.isFinite(value) ? value : 5));
   return seconds * 1000;
 }
 
@@ -1561,6 +1575,52 @@ function resetProblemAnswerTimerDisplay() {
   updateProblemAnswerTimer(answerMs, 0, "문제 재생 후 자동 시작");
 }
 
+function getProblemExamMs() {
+  const value = Number($("#problemExamMinutes")?.value || 40);
+  const minutes = Math.max(1, Math.min(180, Number.isFinite(value) ? value : 40));
+  return minutes * 60 * 1000;
+}
+
+function resetProblemExamTimerDisplay() {
+  const examMs = getProblemExamMs();
+  problemAudioState.examRemainingMs = examMs;
+  updateProblemExamTimer(examMs, 0, "대기 중");
+}
+
+function startProblemExamTimer() {
+  clearInterval(problemAudioState.examTimer);
+
+  const examMs = getProblemExamMs();
+  problemAudioState.examRunning = true;
+  problemAudioState.examRemainingMs = examMs;
+  problemAudioState.examEndAt = Date.now() + examMs;
+  updateProblemExamTimer(examMs, 0, "진행 중");
+
+  problemAudioState.examTimer = setInterval(() => {
+    const remainingMs = Math.max(0, problemAudioState.examEndAt - Date.now());
+    const progressRate = examMs ? 1 - (remainingMs / examMs) : 1;
+
+    problemAudioState.examRemainingMs = remainingMs;
+    updateProblemExamTimer(remainingMs, progressRate, remainingMs <= 0 ? "종료" : "진행 중");
+
+    if (remainingMs <= 0) {
+      clearInterval(problemAudioState.examTimer);
+      problemAudioState.examRunning = false;
+      problemAudioState.examTimer = null;
+      toast("전체 시험시간이 끝났어요.");
+    }
+  }, 250);
+}
+
+function stopProblemExamTimer() {
+  clearInterval(problemAudioState.examTimer);
+  problemAudioState.examTimer = null;
+  problemAudioState.examRunning = false;
+  problemAudioState.examEndAt = null;
+  problemAudioState.examRemainingMs = 0;
+  updateProblemExamTimer(0, 1, "종료");
+}
+
 function updateProblemAnswerTimer(remainingMs, progressRate, status) {
   const display = $("#problemAnswerDisplay");
   const circle = $("#problemAnswerCircle");
@@ -1571,6 +1631,20 @@ function updateProblemAnswerTimer(remainingMs, progressRate, status) {
     circle.style.setProperty("--answer-progress", `${Math.min(1, Math.max(0, progressRate)) * 360}deg`);
     circle.classList.toggle("warning", remainingMs > 0 && remainingMs <= 10000);
     circle.classList.toggle("ended", remainingMs <= 0 && progressRate >= 1);
+  }
+  if (statusEl) statusEl.textContent = status;
+}
+
+function updateProblemExamTimer(remainingMs, progressRate, status) {
+  const display = $("#problemExamDisplay");
+  const circle = $("#problemExamCircle");
+  const statusEl = $("#problemExamStatus");
+
+  if (display) display.textContent = formatProblemTime(remainingMs);
+  if (circle) {
+    circle.style.setProperty("--exam-progress", `${Math.max(0, Math.min(1, progressRate)) * 360}deg`);
+    circle.classList.toggle("warning", remainingMs > 0 && remainingMs <= 5 * 60 * 1000);
+    circle.classList.toggle("ended", remainingMs <= 0 && status === "종료");
   }
   if (statusEl) statusEl.textContent = status;
 }

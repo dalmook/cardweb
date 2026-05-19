@@ -67,6 +67,35 @@
       font-weight: 800;
     }
 
+    .admin-delete-panel {
+      grid-column: 1;
+    }
+
+    .delete-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .delete-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .delete-row input {
+      width: auto;
+      flex: 0 0 auto;
+    }
+
+    .delete-row span {
+      word-break: break-all;
+    }
+
     .admin-footer {
       max-width: 1180px;
       margin: 0 auto;
@@ -155,6 +184,30 @@
         <div id="uploadResult" class="admin-result"></div>
       </section>
 
+      <section class="panel active admin-delete-panel">
+        <div class="section-head">
+          <div>
+            <h2>삭제 관리</h2>
+            <p>토픽 폴더의 음성 파일을 조회한 뒤 선택 삭제하거나, 토픽 폴더 안의 음성 파일을 모두 삭제합니다.</p>
+          </div>
+        </div>
+
+        <div class="admin-form">
+          <label>
+            삭제할 토픽 폴더명
+            <input id="deleteTopicName" type="text" placeholder="예: topic22 또는 새-문제음성" />
+          </label>
+
+          <div class="row-actions">
+            <button id="loadTopicFiles" type="button">파일 조회</button>
+            <button id="deleteSelectedFiles" class="danger" type="button">선택 파일 삭제</button>
+            <button id="deleteTopicFolder" class="danger" type="button">토픽 폴더 전체 삭제</button>
+          </div>
+
+          <div id="deleteFileList" class="delete-list empty-state">조회된 파일이 없습니다.</div>
+        </div>
+      </section>
+
       <aside class="box">
         <h2>진행 로그</h2>
         <pre id="uploadLog" class="admin-log">대기 중...</pre>
@@ -181,6 +234,11 @@
     const form = document.querySelector("#uploadForm");
     const button = document.querySelector("#uploadButton");
     const clearTokenButton = document.querySelector("#clearToken");
+    const deleteTopicInput = document.querySelector("#deleteTopicName");
+    const loadTopicFilesButton = document.querySelector("#loadTopicFiles");
+    const deleteSelectedFilesButton = document.querySelector("#deleteSelectedFiles");
+    const deleteTopicFolderButton = document.querySelector("#deleteTopicFolder");
+    const deleteFileList = document.querySelector("#deleteFileList");
     const logBox = document.querySelector("#uploadLog");
     const resultBox = document.querySelector("#uploadResult");
 
@@ -245,7 +303,7 @@
 
     async function githubRequest(path, token, options = {}) {
       const encodedPath = encodePath(path);
-      const query = options.method === "PUT" ? "" : `?ref=${encodeURIComponent(CONFIG.branch)}`;
+      const query = ["PUT", "DELETE"].includes(options.method) ? "" : `?ref=${encodeURIComponent(CONFIG.branch)}`;
       const response = await fetch(
         `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${encodedPath}${query}`,
         {
@@ -272,6 +330,27 @@
       }
 
       return data;
+    }
+
+    function getToken() {
+      const token = tokenInput.value.trim();
+      if (!token) {
+        log("GitHub token을 입력하세요.");
+        tokenInput.focus();
+        return "";
+      }
+
+      sessionStorage.setItem(TOKEN_KEY, token);
+      return token;
+    }
+
+    function getSupportedExtension(name) {
+      const dotIndex = name.lastIndexOf(".");
+      return dotIndex >= 0 ? name.slice(dotIndex).toLowerCase() : "";
+    }
+
+    function isSupportedAudioName(name) {
+      return SUPPORTED_EXTENSIONS.has(getSupportedExtension(name));
     }
 
     async function getExistingSha(path, token) {
@@ -314,25 +393,173 @@
       return true;
     }
 
+    function renderDeleteFiles(files) {
+      if (!files.length) {
+        deleteFileList.className = "delete-list empty-state";
+        deleteFileList.textContent = "조회된 음성 파일이 없습니다.";
+        return;
+      }
+
+      deleteFileList.className = "delete-list";
+      deleteFileList.innerHTML = "";
+
+      files.forEach(file => {
+        const row = document.createElement("label");
+        const checkbox = document.createElement("input");
+        const name = document.createElement("span");
+
+        row.className = "delete-row";
+        checkbox.className = "delete-file-check";
+        checkbox.type = "checkbox";
+        checkbox.dataset.path = file.path;
+        checkbox.dataset.sha = file.sha;
+        checkbox.dataset.name = file.name;
+        name.textContent = file.name;
+
+        row.append(checkbox, name);
+        deleteFileList.append(row);
+      });
+    }
+
+    async function loadTopicFiles() {
+      const token = getToken();
+      const topic = sanitizeTopicName(deleteTopicInput.value || topicInput.value);
+
+      if (!token) return;
+      if (!topic) {
+        log("조회할 토픽 폴더명을 입력하세요.");
+        deleteTopicInput.focus();
+        return;
+      }
+
+      deleteTopicInput.value = topic;
+      log(`파일 조회 중: audio/${topic}/`);
+
+      try {
+        const data = await githubRequest(`audio/${topic}`, token);
+        const files = Array.isArray(data)
+          ? data.filter(item => item.type === "file" && isSupportedAudioName(item.name))
+          : [];
+
+        renderDeleteFiles(files);
+        log(`조회 완료: ${files.length}개 음성 파일`);
+      } catch (error) {
+        if (error.status === 404) {
+          renderDeleteFiles([]);
+          log(`폴더를 찾을 수 없습니다: audio/${topic}/`);
+          return;
+        }
+
+        console.error(error);
+        log(`오류: ${error.message}`);
+      }
+    }
+
+    async function deleteGithubFile(file, token, topic) {
+      log(`삭제 중: ${file.path}`);
+      await githubRequest(file.path, token, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: `Delete audio: ${topic}/${file.name}`,
+          sha: file.sha,
+          branch: CONFIG.branch
+        })
+      });
+      log(`삭제 완료: ${file.path}`);
+    }
+
+    async function deleteSelectedFiles() {
+      const token = getToken();
+      const topic = sanitizeTopicName(deleteTopicInput.value || topicInput.value);
+      const selected = Array.from(document.querySelectorAll(".delete-file-check:checked"))
+        .map(input => ({
+          path: input.dataset.path,
+          sha: input.dataset.sha,
+          name: input.dataset.name
+        }));
+
+      if (!token) return;
+      if (!topic) {
+        log("삭제할 토픽 폴더명을 입력하세요.");
+        return;
+      }
+      if (!selected.length) {
+        log("삭제할 파일을 선택하세요.");
+        return;
+      }
+
+      deleteSelectedFilesButton.disabled = true;
+      deleteTopicFolderButton.disabled = true;
+
+      try {
+        for (const file of selected) {
+          await deleteGithubFile(file, token, topic);
+        }
+
+        showResult("GitHub Actions가 audio-topics.json을 자동 갱신합니다. 잠시 후 새로고침하세요.");
+        await loadTopicFiles();
+      } catch (error) {
+        console.error(error);
+        log(`오류: ${error.message}`);
+      } finally {
+        deleteSelectedFilesButton.disabled = false;
+        deleteTopicFolderButton.disabled = false;
+      }
+    }
+
+    async function deleteTopicFolder() {
+      const files = Array.from(document.querySelectorAll(".delete-file-check"))
+        .map(input => ({
+          path: input.dataset.path,
+          sha: input.dataset.sha,
+          name: input.dataset.name
+        }));
+      const topic = sanitizeTopicName(deleteTopicInput.value || topicInput.value);
+
+      if (!topic) {
+        log("삭제할 토픽 폴더명을 입력하세요.");
+        deleteTopicInput.focus();
+        return;
+      }
+
+      if (!files.length) {
+        log("먼저 파일 조회를 해주세요.");
+        return;
+      }
+
+      if (!confirm(`audio/${topic}/ 안의 음성 파일 ${files.length}개를 모두 삭제할까요?`)) {
+        return;
+      }
+
+      document.querySelectorAll(".delete-file-check").forEach(checkbox => {
+        checkbox.checked = true;
+      });
+
+      await deleteSelectedFiles();
+    }
+
     clearTokenButton.addEventListener("click", () => {
       tokenInput.value = "";
       sessionStorage.removeItem(TOKEN_KEY);
       log("세션에 저장된 토큰을 지웠습니다.");
     });
 
+    loadTopicFilesButton.addEventListener("click", loadTopicFiles);
+    deleteSelectedFilesButton.addEventListener("click", deleteSelectedFiles);
+    deleteTopicFolderButton.addEventListener("click", deleteTopicFolder);
+
     form.addEventListener("submit", async event => {
       event.preventDefault();
       resultBox.style.display = "none";
 
-      const token = tokenInput.value.trim();
+      const token = getToken();
       const topic = sanitizeTopicName(topicInput.value);
       const files = Array.from(fileInput.files || []);
 
-      if (!token) {
-        log("GitHub token을 입력하세요.");
-        tokenInput.focus();
-        return;
-      }
+      if (!token) return;
 
       if (!topic) {
         log("토픽 폴더명은 영문/숫자/한글/하이픈/언더바만 사용할 수 있습니다.");
