@@ -42,7 +42,29 @@ Quizlet 스타일의 개인 단어 학습용 정적 웹앱입니다. GitHub Page
 
 ## 오디오 연결
 
-`audioSrc`에 `audio/l1/word001.mp3` 같은 상대 경로를 넣으면 카드 화면의 `발음 듣기` 버튼에서 mp3를 재생합니다. 값이 비어 있으면 브라우저 TTS로 단어를 읽습니다.
+`audioSrc`에 `audio/l1/word001.mp3` 또는 `.m4a` 같은 상대 경로를 넣으면 카드 화면의 `발음 듣기` 버튼에서 음성을 재생합니다. 값이 비어 있으면 브라우저 TTS로 단어를 읽습니다.
+
+## MP3/M4A 자동 추가
+
+문제재생 탭에서 쓰는 MP3/M4A는 GitHub Pages 안에서 직접 업로드할 수 있습니다.
+
+1. 사이트 하단의 `음성 업로드` 또는 `admin.html`로 이동합니다.
+2. GitHub fine-grained personal access token을 입력합니다.
+3. 토픽 폴더명과 MP3/M4A 파일을 선택한 뒤 업로드합니다.
+4. 파일은 `audio/{토픽폴더명}/{파일명}.mp3` 또는 `.m4a` 경로로 커밋됩니다.
+5. GitHub Actions가 `tools/build_audio_topics.py`를 실행해 `data/audio-topics.json`을 자동 갱신합니다.
+
+`tools/build_audio_topics.py`는 `audio/*.mp3`와 `audio/*.m4a`를 `문제 음성` 토픽으로 묶고, `audio/토픽폴더/*.mp3`와 `audio/토픽폴더/*.m4a`는 폴더별 토픽으로 묶습니다. 기존 `data/audio-topics.json`에 있는 다른 형식의 항목은 보존해 현재 문제 음성 재생 목록이 사라지지 않게 합니다. 파일 제목은 확장자와 앞 번호(`01_`, `01-`, `01.` 등)를 제거하고 `_`, `-`를 공백으로 바꿔 생성합니다.
+
+## GitHub 토큰 권한
+
+관리자 업로드용 토큰은 GitHub에서 fine-grained personal access token으로 만들고, 권한은 최소로 제한하세요.
+
+- Repository access: `Only select repositories`에서 `dalmook/cardweb` 하나만 선택
+- Repository permissions: `Contents`를 `Read and write`로 설정
+- `Workflows: Read and write`는 API로 workflow 파일 자체를 수정할 때만 필요합니다. 일반 음성 업로드에는 필요하지 않습니다.
+
+토큰은 절대 코드, README, 커밋, 이슈에 저장하지 마세요. `admin.html`은 토큰을 JS 코드에 넣지 않고 사용자가 직접 입력하게 하며, 브라우저 `sessionStorage`에만 임시 보관합니다.
 
 ## 주의
 

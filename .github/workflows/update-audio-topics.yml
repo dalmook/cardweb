@@ -1,0 +1,42 @@
+name: Update audio topics
+
+on:
+  push:
+    paths:
+      - "audio/*.mp3"
+      - "audio/**/*.mp3"
+      - "audio/*.m4a"
+      - "audio/**/*.m4a"
+      - "tools/build_audio_topics.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-audio-topics:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Build audio topics
+        run: python tools/build_audio_topics.py
+
+      - name: Commit updated audio topics
+        run: |
+          if [ -z "$(git status --short data/audio-topics.json)" ]; then
+            echo "data/audio-topics.json is already up to date."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/audio-topics.json
+            git commit -m "Update audio topics"
+            git push
+          fi
