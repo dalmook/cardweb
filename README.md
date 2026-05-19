@@ -15,10 +15,32 @@ Quizlet 스타일의 개인 단어 학습용 정적 웹앱입니다. GitHub Page
 
 ## GitHub Pages 배포
 
-1. 이 폴더의 `index.html`, `style.css`, `app.js`, `data/words.json`를 저장소 루트에 업로드합니다.
+1. 이 저장소 전체를 `dalmook/cardweb`의 `main` 브랜치에 업로드합니다.
 2. GitHub 저장소에서 `Settings > Pages`로 이동합니다.
-3. `Deploy from a branch`를 선택하고 `main / root`를 지정합니다.
-4. 배포 URL에서 접속합니다.
+3. `Build and deployment`에서 `Deploy from a branch`를 선택합니다.
+4. Branch는 `main`, 폴더는 `/ (root)`로 지정합니다.
+5. 저장 후 표시되는 GitHub Pages URL에서 접속합니다.
+
+## 코드 업로드 후 GitHub 설정
+
+처음 한 번만 아래 설정을 확인하세요.
+
+1. `Actions` 탭에서 GitHub Actions가 활성화되어 있는지 확인합니다.
+2. `Settings > Actions > General`로 이동합니다.
+3. `Workflow permissions`에서 `Read and write permissions`를 선택합니다.
+4. `.github/workflows/update-audio-topics.yml` 파일이 `main` 브랜치에 올라갔는지 확인합니다.
+5. `tools/build_audio_topics.py` 또는 `audio/**/*.mp3`, `audio/**/*.m4a`가 변경되면 `Update audio topics` workflow가 실행됩니다.
+
+workflow 파일에는 `permissions: contents: write`가 들어 있어 `data/audio-topics.json` 변경분을 자동 커밋할 수 있습니다. 자동 커밋이 403 오류로 실패하면 `Workflow permissions` 설정이 `Read and write permissions`인지 다시 확인하세요.
+
+## 음성 업로드 후 확인 순서
+
+1. 배포된 사이트에서 `admin.html` 또는 하단의 `음성 업로드` 링크로 이동합니다.
+2. 토큰, 토픽 폴더명, MP3/M4A 파일을 입력하고 업로드합니다.
+3. 업로드가 끝나면 GitHub 저장소의 `audio/{토픽폴더명}/`에 파일 커밋이 생깁니다.
+4. `Actions` 탭에서 `Update audio topics` workflow가 성공했는지 확인합니다.
+5. workflow가 `data/audio-topics.json`을 자동 커밋한 뒤 GitHub Pages가 다시 배포될 때까지 잠시 기다립니다.
+6. 사이트를 새로고침하고 `문제재생` 탭에서 새 토픽이 보이는지 확인합니다.
 
 ## 엑셀 업로드 형식
 
