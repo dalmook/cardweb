@@ -1727,77 +1727,7 @@
           "src": "T20.10-anh làm gì để góp phần bảo vệ môi trường.m4a"
         }
       ]
-    },
-    {
-      "id": "topic-21",
-      "title": "topic21-Giao thông",
-      "basePath": "audio/topic21",
-      "files": [
-        {
-          "title": "T21.01 anh đi làm bằng phương tiện gì",
-          "src": "T21.01-anh đi làm bằng phương tiện gì.m4a"
-        },
-        {
-          "title": "T21.02 anh có biết lái xe không",
-          "src": "T21.02-anh có biết lái xe không.m4a"
-        },
-        {
-          "title": "T21.03 anh có đi xe buýt không",
-          "src": "T21.03-anh có đi xe buýt không.m4a"
-        },
-        {
-          "title": "T21.04 anh có đi tàu điện không",
-          "src": "T21.04-anh có đi tàu điện không.m4a"
-        },
-        {
-          "title": "T21.05 từ nhà anh đến công ty mất bao lâu",
-          "src": "T21.05-từ nhà anh đến công ty mất bao lâu.m4a"
-        },
-        {
-          "title": "T21.06 anh đi làm vào giờ cao điểm không",
-          "src": "T21.06-anh đi làm vào giờ cao điểm không.m4a"
-        },
-        {
-          "title": "T21.07 anh thường đi bằng gì đi làm",
-          "src": "T21.07-anh thường đi bằng gì đi làm.m4a"
-        },
-        {
-          "title": "T21.08 ở Hàn Quốc có hay bị tắc đường không",
-          "src": "T21.08-ở Hàn Quốc có hay bị tắc đường không.m4a"
-        },
-        {
-          "title": "T21.09 anh có hay đi taxi không 1",
-          "src": "T21.09-anh có hay đi taxi không 1.m4a"
-        },
-        {
-          "title": "T21.10 nếu khoảng cách gần anh sẽ đi bộ hay đi taxi",
-          "src": "T21.10-nếu khoảng cách gần anh sẽ đi bộ hay đi taxi.m4a"
-        },
-        {
-          "title": "T21.11 anh thấy đi tàu điện có thuận tiện không",
-          "src": "T21.11-anh thấy đi tàu điện có thuận tiện không.m4a"
-        },
-        {
-          "title": "T21.12 anh có thích phương tiện công cộng không",
-          "src": "T21.12-anh có thích phương tiện công cộng không.m4a"
-        },
-        {
-          "title": "T21.13 anh có xe riêng không",
-          "src": "T21.13-anh có xe riêng không.m4a"
-        },
-        {
-          "title": "T21.14 anh có lái xe đi làm không",
-          "src": "T21.14-anh có lái xe đi làm không.m4a"
-        },
-        {
-          "title": "T21.15 anh thích xe xăng hơn hay xe điện hơn",
-          "src": "T21.15-anh thích xe xăng hơn hay xe điện hơn.m4a"
-        },
-        {
-          "title": "T21.16 ở Hàn Quốc có xe tự lái không",
-          "src": "T21.16-ở Hàn Quốc có xe tự lái không.m4a"
-        }
-      ]
     }
+    
   ]
 }
