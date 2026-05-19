@@ -71,31 +71,6 @@
       grid-column: 1;
     }
 
-    .delete-list {
-      display: grid;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .delete-row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-    }
-
-    .delete-row input {
-      width: auto;
-      flex: 0 0 auto;
-    }
-
-    .delete-row span {
-      word-break: break-all;
-    }
-
     .admin-footer {
       max-width: 1180px;
       margin: 0 auto;
@@ -188,23 +163,31 @@
         <div class="section-head">
           <div>
             <h2>삭제 관리</h2>
-            <p>토픽 폴더의 음성 파일을 조회한 뒤 선택 삭제하거나, 토픽 폴더 안의 음성 파일을 모두 삭제합니다.</p>
+            <p>토픽 폴더를 조회하고, 선택한 폴더 안의 음성 파일 하나를 골라 삭제합니다.</p>
           </div>
         </div>
 
         <div class="admin-form">
           <label>
-            삭제할 토픽 폴더명
-            <input id="deleteTopicName" type="text" placeholder="예: topic22 또는 새-문제음성" />
+            토픽 폴더
+            <select id="deleteTopicSelect">
+              <option value="">토픽 목록을 조회하세요</option>
+            </select>
+          </label>
+
+          <label>
+            삭제할 음성 파일
+            <select id="deleteFileSelect" disabled>
+              <option value="">토픽 폴더를 먼저 선택하세요</option>
+            </select>
           </label>
 
           <div class="row-actions">
-            <button id="loadTopicFiles" type="button">파일 조회</button>
-            <button id="deleteSelectedFiles" class="danger" type="button">선택 파일 삭제</button>
-            <button id="deleteTopicFolder" class="danger" type="button">토픽 폴더 전체 삭제</button>
+            <button id="loadTopicFolders" type="button">토픽 목록 조회</button>
+            <button id="deleteSelectedFile" class="danger" type="button">선택 파일 삭제</button>
           </div>
 
-          <div id="deleteFileList" class="delete-list empty-state">조회된 파일이 없습니다.</div>
+          <p class="admin-note">안전을 위해 토픽 폴더 전체 삭제는 제공하지 않습니다.</p>
         </div>
       </section>
 
@@ -234,13 +217,13 @@
     const form = document.querySelector("#uploadForm");
     const button = document.querySelector("#uploadButton");
     const clearTokenButton = document.querySelector("#clearToken");
-    const deleteTopicInput = document.querySelector("#deleteTopicName");
-    const loadTopicFilesButton = document.querySelector("#loadTopicFiles");
-    const deleteSelectedFilesButton = document.querySelector("#deleteSelectedFiles");
-    const deleteTopicFolderButton = document.querySelector("#deleteTopicFolder");
-    const deleteFileList = document.querySelector("#deleteFileList");
+    const deleteTopicSelect = document.querySelector("#deleteTopicSelect");
+    const deleteFileSelect = document.querySelector("#deleteFileSelect");
+    const loadTopicFoldersButton = document.querySelector("#loadTopicFolders");
+    const deleteSelectedFileButton = document.querySelector("#deleteSelectedFile");
     const logBox = document.querySelector("#uploadLog");
     const resultBox = document.querySelector("#uploadResult");
+    let deleteFileOptions = [];
 
     tokenInput.value = sessionStorage.getItem(TOKEN_KEY) || "";
 
@@ -393,56 +376,105 @@
       return true;
     }
 
-    function renderDeleteFiles(files) {
-      if (!files.length) {
-        deleteFileList.className = "delete-list empty-state";
-        deleteFileList.textContent = "조회된 음성 파일이 없습니다.";
-        return;
-      }
+    function resetDeleteFileSelect(message = "토픽 폴더를 먼저 선택하세요") {
+      deleteFileOptions = [];
+      deleteFileSelect.innerHTML = "";
+      const option = document.createElement("option");
+      option.value = "";
+      option.textContent = message;
+      deleteFileSelect.append(option);
+      deleteFileSelect.disabled = true;
+    }
 
-      deleteFileList.className = "delete-list";
-      deleteFileList.innerHTML = "";
+    function renderDeleteTopics(topics) {
+      deleteTopicSelect.innerHTML = "";
 
-      files.forEach(file => {
-        const row = document.createElement("label");
-        const checkbox = document.createElement("input");
-        const name = document.createElement("span");
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.textContent = topics.length ? "토픽 폴더를 선택하세요" : "조회된 토픽 폴더가 없습니다";
+      deleteTopicSelect.append(placeholder);
 
-        row.className = "delete-row";
-        checkbox.className = "delete-file-check";
-        checkbox.type = "checkbox";
-        checkbox.dataset.path = file.path;
-        checkbox.dataset.sha = file.sha;
-        checkbox.dataset.name = file.name;
-        name.textContent = file.name;
-
-        row.append(checkbox, name);
-        deleteFileList.append(row);
+      topics.forEach(topic => {
+        const option = document.createElement("option");
+        option.value = topic.name;
+        option.textContent = topic.name;
+        deleteTopicSelect.append(option);
       });
+
+      resetDeleteFileSelect();
+    }
+
+    function renderDeleteFiles(files) {
+      deleteFileOptions = files;
+      deleteFileSelect.innerHTML = "";
+
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.textContent = files.length ? "삭제할 파일을 선택하세요" : "조회된 음성 파일이 없습니다";
+      deleteFileSelect.append(placeholder);
+
+      files.forEach((file, index) => {
+        const option = document.createElement("option");
+        option.value = String(index);
+        option.textContent = file.name;
+        deleteFileSelect.append(option);
+      });
+
+      deleteFileSelect.disabled = !files.length;
+    }
+
+    async function loadTopicFolders() {
+      const token = getToken();
+
+      if (!token) return;
+      log("토픽 목록 조회 중: audio/");
+
+      try {
+        const data = await githubRequest("audio", token);
+        const topics = Array.isArray(data)
+          ? data
+            .filter(item => item.type === "dir")
+            .sort((a, b) => a.name.localeCompare(b.name, "ko", { numeric: true }))
+          : [];
+
+        renderDeleteTopics(topics);
+        log(`토픽 목록 조회 완료: ${topics.length}개 폴더`);
+      } catch (error) {
+        if (error.status === 404) {
+          renderDeleteTopics([]);
+          log("audio 폴더를 찾을 수 없습니다.");
+          return;
+        }
+
+        console.error(error);
+        log(`오류: ${error.message}`);
+      }
     }
 
     async function loadTopicFiles() {
       const token = getToken();
-      const topic = sanitizeTopicName(deleteTopicInput.value || topicInput.value);
+      const topic = deleteTopicSelect.value;
 
       if (!token) return;
       if (!topic) {
-        log("조회할 토픽 폴더명을 입력하세요.");
-        deleteTopicInput.focus();
+        resetDeleteFileSelect();
+        log("토픽 폴더를 선택하세요.");
         return;
       }
 
-      deleteTopicInput.value = topic;
+      resetDeleteFileSelect("파일 조회 중...");
       log(`파일 조회 중: audio/${topic}/`);
 
       try {
         const data = await githubRequest(`audio/${topic}`, token);
         const files = Array.isArray(data)
-          ? data.filter(item => item.type === "file" && isSupportedAudioName(item.name))
+          ? data
+            .filter(item => item.type === "file" && isSupportedAudioName(item.name))
+            .sort((a, b) => a.name.localeCompare(b.name, "ko", { numeric: true }))
           : [];
 
         renderDeleteFiles(files);
-        log(`조회 완료: ${files.length}개 음성 파일`);
+        log(`파일 조회 완료: ${files.length}개 음성 파일`);
       } catch (error) {
         if (error.status === 404) {
           renderDeleteFiles([]);
@@ -471,74 +503,37 @@
       log(`삭제 완료: ${file.path}`);
     }
 
-    async function deleteSelectedFiles() {
+    async function deleteSelectedFile() {
       const token = getToken();
-      const topic = sanitizeTopicName(deleteTopicInput.value || topicInput.value);
-      const selected = Array.from(document.querySelectorAll(".delete-file-check:checked"))
-        .map(input => ({
-          path: input.dataset.path,
-          sha: input.dataset.sha,
-          name: input.dataset.name
-        }));
+      const topic = deleteTopicSelect.value;
+      const fileIndex = deleteFileSelect.value === "" ? -1 : Number(deleteFileSelect.value);
+      const file = deleteFileOptions[fileIndex];
 
       if (!token) return;
       if (!topic) {
-        log("삭제할 토픽 폴더명을 입력하세요.");
+        log("토픽 폴더를 선택하세요.");
         return;
       }
-      if (!selected.length) {
+      if (!file) {
         log("삭제할 파일을 선택하세요.");
         return;
       }
+      if (!confirm(`audio/${topic}/${file.name} 파일을 삭제할까요?`)) {
+        return;
+      }
 
-      deleteSelectedFilesButton.disabled = true;
-      deleteTopicFolderButton.disabled = true;
+      deleteSelectedFileButton.disabled = true;
 
       try {
-        for (const file of selected) {
-          await deleteGithubFile(file, token, topic);
-        }
-
+        await deleteGithubFile(file, token, topic);
         showResult("GitHub Actions가 audio-topics.json을 자동 갱신합니다. 잠시 후 새로고침하세요.");
         await loadTopicFiles();
       } catch (error) {
         console.error(error);
         log(`오류: ${error.message}`);
       } finally {
-        deleteSelectedFilesButton.disabled = false;
-        deleteTopicFolderButton.disabled = false;
+        deleteSelectedFileButton.disabled = false;
       }
-    }
-
-    async function deleteTopicFolder() {
-      const files = Array.from(document.querySelectorAll(".delete-file-check"))
-        .map(input => ({
-          path: input.dataset.path,
-          sha: input.dataset.sha,
-          name: input.dataset.name
-        }));
-      const topic = sanitizeTopicName(deleteTopicInput.value || topicInput.value);
-
-      if (!topic) {
-        log("삭제할 토픽 폴더명을 입력하세요.");
-        deleteTopicInput.focus();
-        return;
-      }
-
-      if (!files.length) {
-        log("먼저 파일 조회를 해주세요.");
-        return;
-      }
-
-      if (!confirm(`audio/${topic}/ 안의 음성 파일 ${files.length}개를 모두 삭제할까요?`)) {
-        return;
-      }
-
-      document.querySelectorAll(".delete-file-check").forEach(checkbox => {
-        checkbox.checked = true;
-      });
-
-      await deleteSelectedFiles();
     }
 
     clearTokenButton.addEventListener("click", () => {
@@ -547,9 +542,9 @@
       log("세션에 저장된 토큰을 지웠습니다.");
     });
 
-    loadTopicFilesButton.addEventListener("click", loadTopicFiles);
-    deleteSelectedFilesButton.addEventListener("click", deleteSelectedFiles);
-    deleteTopicFolderButton.addEventListener("click", deleteTopicFolder);
+    loadTopicFoldersButton.addEventListener("click", loadTopicFolders);
+    deleteTopicSelect.addEventListener("change", loadTopicFiles);
+    deleteSelectedFileButton.addEventListener("click", deleteSelectedFile);
 
     form.addEventListener("submit", async event => {
       event.preventDefault();

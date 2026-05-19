@@ -1359,8 +1359,8 @@ function getProblemRepeatCount() {
 }
 
 function getProblemGapMs() {
-  const value = Number($("#problemGap")?.value || 5);
-  const seconds = Math.max(0, Math.min(30, Number.isFinite(value) ? value : 5));
+  const value = Number($("#problemGap")?.value || 3);
+  const seconds = Math.max(0, Math.min(30, Number.isFinite(value) ? value : 3));
   return seconds * 1000;
 }
 

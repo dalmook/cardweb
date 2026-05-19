@@ -900,7 +900,159 @@ button:focus-visible, .flashcard:focus-visible, .match-card:focus-visible {
   }
 
   .problem-timers {
-    grid-template-columns: 1fr;
+    position: sticky;
+    top: 6px;
+    z-index: 20;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    margin: 0 -4px 4px;
+    padding: 8px;
+    border: 1px solid rgba(229, 231, 235, .92);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, .96);
+    box-shadow: 0 10px 30px rgba(24, 34, 66, .12);
+    backdrop-filter: blur(10px);
+  }
+
+  #panel-problem-audio {
+    padding: 12px;
+  }
+
+  .problem-player {
+    gap: 10px;
+  }
+
+  .problem-player .section-head {
+    margin-bottom: 6px;
+  }
+
+  .problem-player .section-head h2 {
+    font-size: 22px;
+  }
+
+  .problem-player .section-head p:not(.eyebrow) {
+    display: none;
+  }
+
+  .problem-controls {
+    gap: 6px;
+  }
+
+  .problem-controls label {
+    gap: 4px;
+    font-size: 11px;
+  }
+
+  .problem-controls label:nth-child(1),
+  .problem-controls label:nth-child(2) {
+    grid-column: 1 / -1;
+  }
+
+  .problem-controls select,
+  .problem-controls input {
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 13px;
+  }
+
+  .problem-actions {
+    gap: 6px;
+  }
+
+  .problem-actions button {
+    min-width: 0;
+    padding: 10px 8px;
+    border-radius: 12px;
+    font-size: 13px;
+  }
+
+  .problem-answer-circle,
+  .problem-exam-circle {
+    width: min(132px, 40vw);
+    padding: 10px;
+    box-shadow: 0 8px 22px rgba(24, 34, 66, .12);
+  }
+
+  .problem-answer-circle::before,
+  .problem-exam-circle::before {
+    inset: 7px;
+  }
+
+  .problem-answer-circle span,
+  .problem-exam-circle span {
+    font-size: 10px;
+  }
+
+  .problem-answer-circle strong,
+  .problem-exam-circle strong {
+    font-size: clamp(28px, 9vw, 38px);
+  }
+
+  .problem-answer-circle em,
+  .problem-exam-circle em {
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 10px;
+  }
+
+  .problem-exam-card {
+    gap: 6px;
+  }
+
+  .problem-exam-actions {
+    width: 100%;
+    gap: 5px;
+  }
+
+  .problem-exam-actions button {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 6px;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+
+  .problem-now {
+    gap: 4px;
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .problem-now strong {
+    font-size: 16px;
+  }
+
+  .problem-now span {
+    font-size: 12px;
+  }
+
+  .problem-row {
+    gap: 8px;
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .problem-row strong {
+    font-size: 14px;
+  }
+
+  .problem-row p {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 380px) {
+  .problem-answer-circle,
+  .problem-exam-circle {
+    width: min(118px, 39vw);
+  }
+
+  .problem-answer-circle strong,
+  .problem-exam-circle strong {
+    font-size: 28px;
   }
 }
 
