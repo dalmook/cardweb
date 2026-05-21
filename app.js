@@ -9,6 +9,7 @@ let problemAudioState = {
   topics: [],
   queue: [],
   index: 0,
+  runId: 0,
   playing: false,
   paused: false,
   stopRequested: false,
@@ -1374,6 +1375,8 @@ function startProblemAudio() {
 
 async function playProblemQueue(queue) {
   stopProblemAudio(false);
+  const runId = Date.now();
+  problemAudioState.runId = runId;
 
   problemAudioState.queue = queue;
   problemAudioState.index = 0;
@@ -1387,7 +1390,7 @@ async function playProblemQueue(queue) {
   $("#problemPause").textContent = "일시정지";
 
   for (let i = 0; i < queue.length; i++) {
-    if (problemAudioState.stopRequested) break;
+    if (problemAudioState.stopRequested || problemAudioState.runId !== runId) break;
 
     problemAudioState.index = i;
     const item = queue[i];
@@ -1396,16 +1399,16 @@ async function playProblemQueue(queue) {
 
     // 1) 같은 문제를 repeat 횟수만큼 먼저 재생
     for (let r = 1; r <= repeat; r++) {
-      if (problemAudioState.stopRequested) break;
+      if (problemAudioState.stopRequested || problemAudioState.runId !== runId) break;
 
       updateProblemNow(
         `${item.topicTitle} · ${item.title}`,
         `${i + 1} / ${queue.length} · 반복 ${r} / ${repeat} · 문제 재생 중`
       );
 
-      await playProblemItem(item);
+      await playProblemItem(item, runId);
 
-      if (problemAudioState.stopRequested) break;
+      if (problemAudioState.stopRequested || problemAudioState.runId !== runId) break;
 
       // 같은 문제 반복 사이에도 약간의 텀을 둠
       if (r < repeat && gapMs > 0) {
@@ -1413,11 +1416,11 @@ async function playProblemQueue(queue) {
           `${item.topicTitle} · ${item.title}`,
           `같은 문제 다시 재생까지 ${Math.round(gapMs / 1000)}초 대기`
         );
-        await waitProblemGap(gapMs);
+        await waitProblemGap(gapMs, runId);
       }
     }
 
-    if (problemAudioState.stopRequested) break;
+    if (problemAudioState.stopRequested || problemAudioState.runId !== runId) break;
 
     // 2) 반복 재생이 모두 끝난 뒤 답변 타이머 시작
     const answerMs = getProblemAnswerMs();
@@ -1426,10 +1429,10 @@ async function playProblemQueue(queue) {
         `${item.topicTitle} · ${item.title}`,
         `답변시간 ${formatProblemTime(answerMs)} 시작`
       );
-      await runProblemAnswerTimer(answerMs);
+      await runProblemAnswerTimer(answerMs, runId);
     }
 
-    if (problemAudioState.stopRequested) break;
+    if (problemAudioState.stopRequested || problemAudioState.runId !== runId) break;
 
     // 3) 다음 문제로 넘어가기 전 텀
     const isLastQuestion = i === queue.length - 1;
@@ -1438,11 +1441,11 @@ async function playProblemQueue(queue) {
         `${item.topicTitle} · ${item.title}`,
         `다음 문제까지 ${Math.round(gapMs / 1000)}초 대기`
       );
-      await waitProblemGap(gapMs);
+      await waitProblemGap(gapMs, runId);
     }
   }
 
-  if (!problemAudioState.stopRequested) {
+  if (!problemAudioState.stopRequested && problemAudioState.runId === runId) {
     updateProblemNow("재생 완료", "수고했어요. 이제 들은 문제를 직접 답변해보면 좋습니다.");
     updateProblemAnswerTimer(0, 1, "완료");
     toast("문제재생이 끝났어요.");
@@ -1455,22 +1458,32 @@ async function playProblemQueue(queue) {
   problemAudioState.answerTimerPaused = false;
   $("#problemPause").textContent = "일시정지";
 }
-function playProblemItem(item) {
+function playProblemItem(item, runId) {
   return new Promise(resolve => {
+    if (problemAudioState.runId !== runId) {
+      resolve();
+      return;
+    }
+
     const audio = new Audio();
     problemAudioState.audio = audio;
 
     audio.src = item.src;
     audio.preload = "auto";
 
-    audio.onended = resolve;
+    audio.onended = () => {
+      if (problemAudioState.runId !== runId) return resolve();
+      resolve();
+    };
     audio.onerror = () => {
+      if (problemAudioState.runId !== runId) return resolve();
       console.warn("오디오 재생 실패:", item.src);
       toast(`재생 실패: ${item.title}`);
       resolve();
     };
 
     audio.play().catch(err => {
+      if (problemAudioState.runId !== runId) return resolve();
       console.warn("오디오 play() 실패:", err);
       toast("브라우저가 자동 재생을 막았어요. 다시 재생 버튼을 눌러보세요.");
       resolve();
@@ -1478,11 +1491,16 @@ function playProblemItem(item) {
   });
 }
 
-function waitProblemGap(ms) {
+function waitProblemGap(ms, runId) {
   return new Promise(resolve => {
+    if (problemAudioState.runId !== runId) {
+      resolve();
+      return;
+    }
     clearTimeout(problemAudioState.gapTimer);
     problemAudioState.gapResolve = resolve;
     problemAudioState.gapTimer = setTimeout(() => {
+      if (problemAudioState.runId !== runId) return resolve();
       problemAudioState.gapResolve = null;
       resolve();
     }, ms);
